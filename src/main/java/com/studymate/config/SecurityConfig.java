@@ -22,10 +22,14 @@ public class SecurityConfig {
 						.permitAll()
 			.and()
 			.logout()
-	        .logoutUrl("/logout")
-	        ..logoutSuccessUrl("/login")
-	        .invalidateHttpSession(true)
-	        .deleteCookies("JSESSIONID");
+	        	.logoutUrl("/logout")
+	        	.logoutSuccessUrl("/login")
+	        	.invalidateHttpSession(true)
+	        	.deleteCookies("JSESSIONID")
+	        .and()
+	        .rememberMe()
+	            .key("studymate-remember-key")
+	            .tokenValiditySeconds(60 * 60 * 24 * 7);
 
 		return http.build();
 	}
