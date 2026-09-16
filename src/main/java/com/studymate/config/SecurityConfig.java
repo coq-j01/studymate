@@ -12,12 +12,20 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/login", "/join", "/css/**","/js/**", "/assets/**")
+		http.authorizeRequests().antMatchers("/login", "/join", "/css/**","/js/**", "/assets/**",
+				"/check/**")
 			.permitAll()
 			.anyRequest().authenticated()
 			.and()
 			.formLogin().loginPage("/login").loginProcessingUrl("/login")
-			.permitAll();
+						.defaultSuccessUrl("/", true).failureUrl("/login?error")
+						.permitAll()
+			.and()
+			.logout()
+	        .logoutUrl("/logout")
+	        ..logoutSuccessUrl("/login")
+	        .invalidateHttpSession(true)
+	        .deleteCookies("JSESSIONID");
 
 		return http.build();
 	}
