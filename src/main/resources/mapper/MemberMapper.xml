@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.studymate.mapper.MemberMapper">
+	<!--이메일로 회원조회-->
+	<select id="findByEmail" resultType="com.studymate.domain.Member">
+		select *
+		from member
+		where email = #{email}
+	</select>
+	
+	<!--닉네임 중복조회-->
+	<select id="findByNickname" resultType="com.studymate.domain.Member">
+		select *
+		from member
+		where nickname = #{nickname}
+	</select>
+	
+	<!--일반회원 추가, 성공여부 반환(0:실패, 1:성공)-->
+	<insert id="insertMember">
+		insert into member(
+			email,
+			password,
+			name,
+			nickname,
+			gender
+		)
+		values(
+			#{email},
+        	#{password},
+        	#{name},
+        	#{nickname},
+        	#{gender}
+		)
+	</insert>
+
+</mapper>
