@@ -160,10 +160,14 @@
 
 		</div>
 	</div>
-
+	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 	<script th:src="@{/js/member/auth.js}"></script>
+	
+	<script th:if="${param.error}">
+	    alert("이메일 또는 비밀번호가 올바르지 않습니다.");
+	</script>
 </body>
 
 </html>
