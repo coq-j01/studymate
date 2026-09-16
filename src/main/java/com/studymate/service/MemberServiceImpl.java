@@ -31,11 +31,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void join(JoinDTO joindto) {
+	public boolean join(JoinDTO joindto) {
 		if(!isNicknameDuplicate(joindto.getNickname()) && !isEmailDuplicate(joindto.getEmail())
 				&& joindto.getPassword().equals(joindto.getPasswordConfirm())) {
 			joindto.setPassword(passwordEncoder.encode(joindto.getPassword()));
-			memberMapper.insertMember(joindto);
+			int result = memberMapper.insertMember(joindto);
+			return result == 1;
 		}
+		return false;
 	}
 }
