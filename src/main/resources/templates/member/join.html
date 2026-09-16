@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>회원가입 | Study Mate</title>
+
+	<!-- Bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap icon -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+	<!-- Custom CSS -->
+	<link rel="stylesheet" th:href="@{/css/auth.css}">
+</head>
+
+<body>
+
+	<!-- 전체 바깥 배경 -->
+	<div class="auth-background">
+
+		<!-- 로그인/회원가입 프레임 -->
+		<div class="auth-page">
+
+
+			<!-- ========================================
+             LEFT
+        ========================================= -->
+			<section class="auth-left">
+
+				<div class="left-content">
+
+					<!-- 로고 -->
+					<div class="logo-box">
+
+						<img th:src="@{/assets/study_mate_logo.png}" alt="Study Mate" class="auth-logo">
+
+					</div>
+
+
+					<!-- 문구 -->
+					<div class="auth-copy">
+
+						<h1>
+							함께하면<br>
+							더 멀리 갈 수 있어요
+						</h1>
+
+						<p>
+							좋은 사람들과 꾸준히, 즐겁게<br>
+							지금, 당신의 스터디를 시작해 보세요
+						</p>
+
+					</div>
+
+				</div>
+
+
+				<!-- 사람 일러스트 -->
+				<div class="people-box">
+
+					<img th:src="@{/assets/login_people.png}" alt="Study Mate" class="people-image">
+
+				</div>
+
+			</section>
+
+
+			<!-- ========================================
+             RIGHT
+        ========================================= -->
+			<section class="auth-right">
+
+				<div class="join-form-wrap">
+
+					<h2 class="login-title">
+						회원가입
+					</h2>
+
+
+					<form th:action="@{/join}" method="post" id="joinForm">
+
+						<!-- 이메일 -->
+						<div class="row align-items-start mb-3">
+							<label for="email" class="col-4 auth-label">
+								이메일
+							</label>
+
+							<div class="col-8">
+								<input type="email" class="form-control auth-input" id="email" name="email"
+									placeholder="이메일을 입력해 주세요" required>
+
+								<div id="emailMessage" class="validation-message" aria-live="polite"></div>
+							</div>
+						</div>
+
+
+						<!-- 비밀번호 -->
+						<div class="row align-items-start mb-3">
+							<label for="password" class="col-4 auth-label">
+								비밀번호
+							</label>
+
+							<div class="col-8">
+								<div class="password-input-wrap">
+									<input type="password" class="form-control auth-input" id="password" name="password"
+										placeholder="비밀번호를 입력해 주세요" required>
+
+									<button type="button" class="password-toggle" data-target="password"
+										aria-label="비밀번호 보기">
+										<i class="bi bi-eye"></i>
+									</button>
+								</div>
+								<div id="passwordMessage" class="validation-message" aria-live="polite"></div>
+							</div>
+						</div>
+
+
+						<!-- 비밀번호 확인 -->
+						<div class="row align-items-start mb-3">
+							<label for="passwordConfirm" class="col-4 auth-label">
+								비밀번호 확인
+							</label>
+
+							<div class="col-8">
+								<div class="password-input-wrap">
+								    <input type="password"
+								           class="form-control auth-input"
+								           id="passwordConfirm"
+								           name="passwordConfirm"
+								           placeholder="비밀번호를 다시 입력해 주세요"
+								           required>
+
+								    <button type="button"
+								            class="password-toggle"
+								            data-target="passwordConfirm"
+								            aria-label="비밀번호 보기">
+								        <i class="bi bi-eye"></i>
+								    </button>
+								</div>
+								<div id="passwordConfirmMessage" class="validation-message" aria-live="polite"></div>
+							</div>
+						</div>
+
+
+						<!-- 이름 -->
+						<div class="row align-items-center mb-3">
+							<label for="name" class="col-4 auth-label">
+								이름
+							</label>
+
+							<div class="col-8">
+								<input type="text" class="form-control auth-input" id="name" name="name"
+									placeholder="이름을 입력해 주세요" required>
+							</div>
+						</div>
+
+
+						<!-- 닉네임 -->
+						<div class="row align-items-start mb-3">
+							<label for="nickname" class="col-4 auth-label">
+								닉네임
+							</label>
+
+							<div class="col-8">
+								<input type="text" class="form-control auth-input" id="nickname" name="nickname"
+									placeholder="닉네임을 입력해 주세요" required>
+
+								<div id="nicknameMessage" class="validation-message" aria-live="polite"></div>
+							</div>
+						</div>
+
+
+						<!-- 성별 -->
+						<div class="row align-items-center mb-4">
+							<span class="col-4 auth-label">
+								성별
+							</span>
+
+							<div class="col-8 d-flex gap-4">
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="gender" id="genderFemale"
+										value="F" required>
+
+									<label class="form-check-label" for="genderFemale">
+										여성
+									</label>
+								</div>
+
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="gender" id="genderMale"
+										value="M">
+
+									<label class="form-check-label" for="genderMale">
+										남성
+									</label>
+								</div>
+							</div>
+						</div>
+
+
+						<button type="submit" class="btn login-btn w-100">
+							회원가입
+						</button>
+
+					</form>
+
+
+					<!-- 로그인 페이지 이동 -->
+					<div class="join-guide">
+
+						<span>
+							이미 계정이 있으신가요?
+						</span>
+
+						<a th:href="@{/login}">
+							로그인
+						</a>
+
+					</div>
+
+				</div>
+
+			</section>
+
+		</div>
+
+	</div>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+	<script th:src="@{/js/member/join.js}"></script>
+	<script th:src="@{/js/member/auth.js}"></script>
+
+</body>
+
+</html>
