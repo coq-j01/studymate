@@ -19,6 +19,27 @@
 *.tar.gz
 *.rar
 
+# Gradle Wrapper는 Git에 포함
+!gradle/wrapper/gradle-wrapper.jar
+
+# Gradle
+.gradle/
+build/
+
+# STS / Eclipse
+bin/
+.project
+.classpath
+.settings/
+.factorypath
+
+# DB 설정 정보
+src/main/resources/application.properties
+
+# OS
+.DS_Store
+Thumbs.db
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
