@@ -13,7 +13,6 @@ const passwordMessage = document.getElementById("passwordMessage");
 const passwordConfirmMessage = document.getElementById("passwordConfirmMessage");
 const nicknameMessage = document.getElementById("nicknameMessage");
 
-
 // ==============================
 // 검증 상태
 // ==============================
@@ -53,10 +52,31 @@ async function checkEmail() {
         return;
     }
 
-    // TODO
     // 서버에 이메일 중복 확인 요청
     // Controller → Service → Mapper
+	const response = await fetch(
+		//encodeURIComponent 사용하면 특수문자가 포함되어있어도 깨지지 않음
+		`/check/email?email=${encodeURIComponent(email)}` 
+	);
+	const isDuplicate = await response.json();
+	
+	if (isDuplicate) {
 
+	    showMessage(
+	        emailMessage,
+	        "이미 사용 중인 이메일입니다.",
+	        false
+	    );
+
+	} else {
+	    showMessage(
+	        emailMessage,
+	        "사용 가능한 이메일입니다.",
+	        true
+	    );
+	}
+
+	isEmailValid = !isDuplicate;
 }
 
 
@@ -73,9 +93,30 @@ async function checkNickname() {
         return;
     }
 
-    // TODO
     // 서버에 닉네임 중복 확인 요청
+	const response = await fetch(
+			//encodeURIComponent 사용하면 특수문자가 포함되어있어도 깨지지 않음
+			`/check/nickname?nickname=${encodeURIComponent(nickname)}` 
+		);
+		const isDuplicate = await response.json();
+		
+		if (isDuplicate) {
 
+		    showMessage(
+		        nicknameMessage,
+		        "이미 사용 중인 닉네임입니다.",
+		        false
+		    );
+
+		} else {
+		    showMessage(
+		        nicknameMessage,
+		        "사용 가능한 닉네임입니다.",
+		        true
+		    );
+		}
+
+		isNicknameValid = !isDuplicate;
 }
 
 
@@ -93,9 +134,27 @@ function checkPassword() {
     }
 
     // TODO
-    // 비밀번호 규칙 결정 후 검사
-    // 예: 8자 이상, 영문 + 숫자
+    // 비밀번호 규칙 결정 후 검사 / 8자 이상
+	if (password.length>=8) {
 
+	        showMessage(
+	            passwordMessage,
+	            "사용가능한 비밀번호입니다.",
+	            true
+	        );
+
+	        isPasswordValid = true;
+
+	    } else {
+
+	        showMessage(
+	            passwordMessage,
+	            "비밀번호는 8자 이상 입력해 주세요.",
+	            false
+	        );
+
+	        isPasswordValid = false;
+	    }
 }
 
 
