@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 	<link rel="stylesheet" th:href="@{/css/common/common.css}">
+	<link rel="stylesheet" th:href="@{/css/common/category.css}">
 	<link rel="stylesheet" th:href="@{/css/common/header.css}">
 	<link rel="stylesheet" th:href="@{/css/study/main.css}">
 
@@ -27,116 +28,10 @@
 
 	<main class="main-container">
 
-
 		<!-- ========================
-         SEARCH
-    ========================= -->
-
-		<section class="search-section">
-
-			<div class="search-card">
-
-				<div class="search-content">
-
-					<div class="search-text">
-
-						<div class="search-title-wrap">
-
-							<img th:src="@{/assets/study_mate_logo.png}" class="search-small-logo" alt="StudyMate">
-
-							<h2>
-								같이 공부할<br>
-								스터디를 찾아보세요
-							</h2>
-
-						</div>
-
-						<form th:action="@{/}" method="get" class="search-form">
-
-							<input type="text" name="keyword" placeholder="스터디 이름을 검색해보세요">
-
-							<button type="submit">
-								<i class="bi bi-search"></i>
-							</button>
-
-						</form>
-
-					</div>
-
-					<div class="search-image">
-						<img th:src="@{/assets/main_people.png}" alt="스터디 이미지">
-					</div>
-
-				</div>
-
-			</div>
-
-		</section>
-
-
-
-		<!-- ========================
-         CATEGORY
-    ========================= -->
-
-		<section class="category-section">
-
-			<a th:href="@{/}" class="category-btn active">
-				전체
-			</a>
-
-			<a th:href="@{/(category='개발')}" class="category-btn">
-				개발
-			</a>
-
-			<a th:href="@{/(category='어학')}" class="category-btn">
-				어학
-			</a>
-
-			<a th:href="@{/(category='취업')}" class="category-btn">
-				취업
-			</a>
-
-			<a th:href="@{/(category='독서')}" class="category-btn">
-				독서
-			</a>
-
-			<a th:href="@{/(category='자격증')}" class="category-btn">
-				자격증
-			</a>
-
-			<a th:href="@{/(category='기타')}" class="category-btn">
-				기타
-			</a>
-
-		</section>
-
-
-
-		<!-- ========================
-         STUDY LIST HEADER
-    ========================= -->
-
-		<section class="study-section">
-
-			<div class="study-header">
-
-				<h3>
-					모집 중인 스터디
-				</h3>
-
-				<a th:href="@{/study/create}" class="btn create-study-btn">
-
-					+ 스터디 만들기
-
-				</a>
-
-			</div>
-
-			<!-- ========================
              STUDY LIST
         ========================= -->
-
+		<section class="study-section">
 			<div class="study-grid">
 
 				<a class="study-card" th:each="study : ${myStudyList}"
@@ -149,7 +44,8 @@
 					<div class="study-card-body">
 
 						<div class="study-meta">
-							<span class="category-badge" th:text="${study.categoryName}">
+							<span class="category-badge"  th:classappend="' category-' + ${study.categoryId}"
+							th:text="${study.categoryName}">
 								개발
 							</span>
 
