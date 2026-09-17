@@ -17,4 +17,7 @@ public class Study {
 	private LocalDateTime endedAt;
 	private String studyStatus;
 	private String thumbnail;
+	
+	private String leaderNickname;   // 스터디장 닉네임
+	private int currentMemberCount;  // 현재 ACTIVE 스터디원 수
 }
