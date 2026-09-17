@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 	<link rel="stylesheet" th:href="@{/css/common/common.css}">
+	<link rel="stylesheet" th:href="@{/css/common/category.css}">
 	<link rel="stylesheet" th:href="@{/css/common/header.css}">
 	<link rel="stylesheet" th:href="@{/css/study/main.css}">
 
@@ -51,10 +52,15 @@
 
 						</div>
 
-						<form th:action="@{/}" method="get" class="search-form">
+						<form th:action="@{/study/main}" method="get" class="search-form">
 
-							<input type="text" name="keyword" placeholder="스터디 이름을 검색해보세요">
+							<input type="text" name="keyword" th:value="${keyword}" placeholder="스터디 이름을 검색해보세요">
 
+							<input type="hidden"
+							           name="categoryId"
+							           th:if="${categoryId != null}"
+							           th:value="${categoryId}">
+									   
 							<button type="submit">
 								<i class="bi bi-search"></i>
 							</button>
@@ -81,31 +87,38 @@
 
 		<section class="category-section">
 
-			<a th:href="@{/}" class="category-btn active">
+			<a th:href="@{/study/main(keyword=${keyword})}" class="category-btn"
+			th:classappend="${categoryId == null} ? ' active' : ''">
 				전체
 			</a>
 
-			<a th:href="@{/(category='개발')}" class="category-btn">
+			<a th:href="@{/study/main(categoryId=1, keyword=${keyword})}" class="category-btn"
+			th:classappend="${categoryId == 1} ? ' active' : ''">
 				개발
 			</a>
 
-			<a th:href="@{/(category='어학')}" class="category-btn">
+			<a th:href="@{/study/main(categoryId=2, keyword=${keyword})}" class="category-btn"
+			th:classappend="${categoryId == 2} ? ' active' : ''">
 				어학
 			</a>
 
-			<a th:href="@{/(category='취업')}" class="category-btn">
+			<a th:href="@{/study/main(categoryId=3, keyword=${keyword})}" class="category-btn"
+			th:classappend="${categoryId == 3} ? ' active' : ''">
 				취업
 			</a>
 
-			<a th:href="@{/(category='독서')}" class="category-btn">
+			<a th:href="@{/study/main(categoryId=4, keyword=${keyword})}" class="category-btn"
+			th:classappend="${categoryId == 4} ? ' active' : ''">
 				독서
 			</a>
 
-			<a th:href="@{/(category='자격증')}" class="category-btn">
+			<a th:href="@{/study/main(categoryId=6, keyword=${keyword})}" class="category-btn"
+			th:classappend="${categoryId == 6} ? ' active' : ''">
 				자격증
 			</a>
 
-			<a th:href="@{/(category='기타')}" class="category-btn">
+			<a th:href="@{/study/main(categoryId=5, keyword=${keyword})}" class="category-btn"
+			th:classappend="${categoryId == 5} ? ' active' : ''">
 				기타
 			</a>
 
@@ -149,7 +162,8 @@
 					<div class="study-card-body">
 
 						<div class="study-meta">
-							<span class="category-badge" th:text="${study.categoryName}">
+							<span class="category-badge"  th:classappend="' category-' + ${study.categoryId}"
+							th:text="${study.categoryName}">
 								개발
 							</span>
 

@@ -1,0 +1,36 @@
+
+/* 개발 */
+.category-1 {
+    background-color: #E8EDFF;
+    color: #5B6CFF;
+}
+
+/* 어학 */
+.category-2 {
+    background-color: #E7F5FF;
+    color: #2F9BDB;
+}
+
+/* 취업 */
+.category-3 {
+    background-color: #FFF1E6;
+    color: #F08A24;
+}
+
+/* 독서 */
+.category-4 {
+    background-color: #FBEEDB;
+    color: #B7791F;
+}
+
+/* 기타 */
+.category-5 {
+    background-color: #F1F3F5;
+    color: #6C757D;
+}
+
+/* 자격증 */
+.category-6 {
+    background-color: #F6E8FF;
+    color: #A855F7;
+}
