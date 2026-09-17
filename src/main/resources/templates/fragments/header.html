@@ -1,58 +1,54 @@
 <!DOCTYPE html>
-<html lang="ko"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<header th:fragment="header" class="site-header">
 
-<body>
+	<div class="header-inner">
 
-<header th:fragment="header" class="main-header">
+		<!-- 로고 -->
+		<a th:href="@{/}" class="header-logo">
+			<img th:src="@{/assets/study_mate_text.png}" alt="StudyMate">
+		</a>
 
-    <div class="header-inner">
 
-        <!-- 로고 -->
-        <a th:href="@{/}" class="header-logo">
-            <img th:src="@{/assets/study_mate_logo.png}"
-                 alt="Study Mate">
-        </a>
+		<!-- 가운데 메뉴 -->
+		<nav class="header-nav">
 
-        <!-- 메뉴 -->
-        <nav class="header-nav">
-            <a th:href="@{/}" class="nav-link">
-                스터디 찾기
-            </a>
+			<a th:href="@{/}" id="studyFindMenu" class="nav-link">
+				스터디 찾기
+			</a>
 
-            <a th:href="@{/my-study}" class="nav-link">
-                내 스터디
-            </a>
-        </nav>
+			<a th:href="@{/study/my-study}" id="myStudyMenu" class="nav-link">
+				내 스터디
+			</a>
 
-        <!-- 사용자 영역 -->
-        <div class="header-user">
+		</nav>
 
-            <span class="user-name">
-                사용자님
-            </span>
 
-            <a th:href="@{/mypage}">
-                마이페이지
-            </a>
+		<!-- 사용자 영역 -->
+		<div class="header-user">
 
-            <!-- Spring Security Logout -->
-            <form th:action="@{/logout}"
-                  method="post"
-                  class="logout-form">
+			<span class="user-name"
+			      sec:authentication="principal.nickname">
+			    닉네임
+			</span>
 
-                <button type="submit"
-                        class="logout-btn">
-                    로그아웃
-                </button>
+			<a th:href="@{/member/mypage}" class="mypage-link">
+				마이페이지
+			</a>
 
-            </form>
+			<form th:action="@{/logout}" method="post">
+				<button type="submit" class="logout-button">
+					로그아웃
+				</button>
+			</form>
 
-        </div>
+		</div>
 
-    </div>
+	</div>
+
+	<script th:src="@{/js/common/header.js}"></script>
 
 </header>
 
-</body>
 </html>
