@@ -1,0 +1,193 @@
+body {
+    margin: 0;
+    background-color: #F8F9FC;
+    color: #222;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.main-header {
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #E8EAF3;
+}
+
+.header-inner {
+    max-width: 1200px;
+    height: 70px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+}
+
+.header-logo img {
+    width: 130px;
+}
+
+.header-nav {
+    display: flex;
+    gap: 30px;
+    margin-left: 50px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #444;
+}
+
+.header-user {
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logout-form {
+    margin: 0;
+}
+
+.logout-btn {
+    border: none;
+    background: none;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.main-container {
+    max-width: 1200px;
+    margin: 30px auto;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-card {
+    padding: 30px;
+
+    border-radius: 16px;
+
+    background-color: #EDF0FE;
+}
+
+.search-form {
+    margin-top: 20px;
+
+    display: flex;
+    gap: 10px;
+}
+
+
+/* =========================
+   CATEGORY
+========================= */
+
+.category-section {
+    margin: 20px 0;
+
+    display: flex;
+    gap: 10px;
+}
+
+.category-btn {
+    padding: 7px 14px;
+
+    border-radius: 20px;
+
+    background-color: #FFFFFF;
+
+    text-decoration: none;
+    color: #777;
+}
+
+.category-btn.active {
+    background-color: #6366F1;
+    color: white;
+}
+
+
+/* =========================
+   STUDY
+========================= */
+
+.study-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.create-study-btn {
+    background-color: #6366F1;
+    color: white;
+}
+
+
+/* 카드 */
+
+.study-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.study-card {
+    overflow: hidden;
+
+    background-color: #FFFFFF;
+
+    border: 1px solid #E8EAF3;
+    border-radius: 16px;
+}
+
+.study-thumbnail {
+    height: 180px;
+
+    background-color: #EDF0FE;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.study-card-body {
+    padding: 18px;
+}
+
+.study-tags {
+    display: flex;
+    gap: 8px;
+
+    margin-bottom: 10px;
+}
+
+.category-tag {
+    font-size: 12px;
+
+    padding: 4px 8px;
+
+    background-color: #EDF0FE;
+
+    border-radius: 10px;
+}
+
+.recruit-tag {
+    font-size: 12px;
+
+    padding: 4px 8px;
+
+    color: #22C55E;
+}
