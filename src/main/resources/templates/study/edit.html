@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>스터디 수정 | StudyMate</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/common.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/header.css}">
+
+    <!-- 생성 페이지 CSS 그대로 재사용 -->
+    <link rel="stylesheet"
+          th:href="@{/css/study/create.css}">
+
+</head>
+
+<body>
+
+<!-- 공통 헤더 -->
+<div th:replace="~{fragments/header :: header}"></div>
+
+
+<main class="create-page">
+
+
+    <!-- 제목 -->
+    <div class="create-title-area">
+
+        <a th:href="@{/study/detail/{studyId}(studyId=${study.studyId})}"
+           class="back-button">
+
+            <i class="bi bi-arrow-left"></i>
+
+        </a>
+
+        <h1>스터디 수정</h1>
+
+    </div>
+
+
+    <!-- 수정 카드 -->
+    <section class="create-card">
+
+        <form th:action="@{/study/edit/{studyId}(studyId=${study.studyId})}"
+              method="post">
+
+
+            <!-- 스터디 제목 -->
+            <div class="form-row">
+
+                <label for="title">
+                    스터디 제목
+                </label>
+
+                <input type="text"
+                       id="title"
+                       name="title"
+                       class="study-input"
+                       th:value="${study.title}"
+                       maxlength="50"
+                       placeholder="스터디 제목을 입력해 주세요"
+                       required>
+
+            </div>
+
+
+            <!-- 카테고리 -->
+            <div class="form-row">
+
+                <label for="categoryId">
+                    카테고리
+                </label>
+
+                <select id="categoryId"
+                        name="categoryId"
+                        class="study-select"
+                        required>
+
+                    <option value="1"
+                            th:selected="${study.categoryId == 1}">
+                        개발
+                    </option>
+
+                    <option value="2"
+                            th:selected="${study.categoryId == 2}">
+                        어학
+                    </option>
+
+                    <option value="3"
+                            th:selected="${study.categoryId == 3}">
+                        취업
+                    </option>
+
+                    <option value="4"
+                            th:selected="${study.categoryId == 4}">
+                        독서
+                    </option>
+
+                    <option value="5"
+                            th:selected="${study.categoryId == 5}">
+                        기타
+                    </option>
+
+                    <option value="6"
+                            th:selected="${study.categoryId == 6}">
+                        자격증
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- 모집 인원 -->
+            <div class="form-row">
+
+                <label for="maxMember">
+                    모집인원
+                </label>
+
+                <select id="maxMember"
+                        name="maxMember"
+                        class="study-select"
+                        required>
+
+                    <option value="2"
+                            th:selected="${study.maxMember == 2}">
+                        2명
+                    </option>
+
+                    <option value="3"
+                            th:selected="${study.maxMember == 3}">
+                        3명
+                    </option>
+
+                    <option value="4"
+                            th:selected="${study.maxMember == 4}">
+                        4명
+                    </option>
+
+                    <option value="5"
+                            th:selected="${study.maxMember == 5}">
+                        5명
+                    </option>
+
+                    <option value="6"
+                            th:selected="${study.maxMember == 6}">
+                        6명
+                    </option>
+
+                    <option value="7"
+                            th:selected="${study.maxMember == 7}">
+                        7명
+                    </option>
+
+                    <option value="8"
+                            th:selected="${study.maxMember == 8}">
+                        8명
+                    </option>
+
+                    <option value="9"
+                            th:selected="${study.maxMember == 9}">
+                        9명
+                    </option>
+
+                    <option value="10"
+                            th:selected="${study.maxMember == 10}">
+                        10명
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- 모집 상태 -->
+            <div class="form-row">
+
+                <label for="studyStatus">
+                    모집 상태
+                </label>
+
+                <select id="studyStatus"
+                        name="studyStatus"
+                        class="study-select"
+                        required>
+
+                    <option value="RECRUITING"
+                            th:selected="${study.studyStatus == 'RECRUITING'}">
+                        모집 중
+                    </option>
+
+                    <option value="CLOSED"
+                            th:selected="${study.studyStatus == 'CLOSED'}">
+                        모집 마감
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- 대표 이미지 -->
+            <div class="form-row thumbnail-row">
+
+                <label>
+                    대표 이미지
+                </label>
+
+
+                <div class="thumbnail-list">
+
+
+                    <label class="thumbnail-item">
+
+                        <input type="radio"
+                               name="thumbnail"
+                               value="thumbnail_1.png"
+                               th:checked="${study.thumbnail == 'thumbnail_1.png'}">
+
+                        <img th:src="@{/assets/thumbnails/thumbnail_1.png}"
+                             alt="대표 이미지 1">
+
+                    </label>
+
+
+                    <label class="thumbnail-item">
+
+                        <input type="radio"
+                               name="thumbnail"
+                               value="thumbnail_2.png"
+                               th:checked="${study.thumbnail == 'thumbnail_2.png'}">
+
+                        <img th:src="@{/assets/thumbnails/thumbnail_2.png}"
+                             alt="대표 이미지 2">
+
+                    </label>
+
+
+                    <label class="thumbnail-item">
+
+                        <input type="radio"
+                               name="thumbnail"
+                               value="thumbnail_3.png"
+                               th:checked="${study.thumbnail == 'thumbnail_3.png'}">
+
+                        <img th:src="@{/assets/thumbnails/thumbnail_3.png}"
+                             alt="대표 이미지 3">
+
+                    </label>
+
+
+                    <label class="thumbnail-item">
+
+                        <input type="radio"
+                               name="thumbnail"
+                               value="thumbnail_4.png"
+                               th:checked="${study.thumbnail == 'thumbnail_4.png'}">
+
+                        <img th:src="@{/assets/thumbnails/thumbnail_4.png}"
+                             alt="대표 이미지 4">
+
+                    </label>
+
+
+                    <label class="thumbnail-item">
+
+                        <input type="radio"
+                               name="thumbnail"
+                               value="thumbnail_5.png"
+                               th:checked="${study.thumbnail == 'thumbnail_5.png'}">
+
+                        <img th:src="@{/assets/thumbnails/thumbnail_5.png}"
+                             alt="대표 이미지 5">
+
+                    </label>
+
+
+                    <label class="thumbnail-item">
+
+                        <input type="radio"
+                               name="thumbnail"
+                               value="thumbnail_6.png"
+                               th:checked="${study.thumbnail == 'thumbnail_6.png'}">
+
+                        <img th:src="@{/assets/thumbnails/thumbnail_6.png}"
+                             alt="대표 이미지 6">
+
+                    </label>
+
+
+                    <label class="thumbnail-item">
+
+                        <input type="radio"
+                               name="thumbnail"
+                               value="thumbnail_7.png"
+                               th:checked="${study.thumbnail == 'thumbnail_7.png'}">
+
+                        <img th:src="@{/assets/thumbnails/thumbnail_7.png}"
+                             alt="대표 이미지 7">
+
+                    </label>
+
+
+                    <label class="thumbnail-item">
+
+                        <input type="radio"
+                               name="thumbnail"
+                               value="thumbnail_8.png"
+                               th:checked="${study.thumbnail == 'thumbnail_8.png'}">
+
+                        <img th:src="@{/assets/thumbnails/thumbnail_8.png}"
+                             alt="대표 이미지 8">
+
+                    </label>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- 스터디 소개 -->
+            <div class="form-row description-row">
+
+                <label for="description">
+                    스터디 소개
+                </label>
+
+
+                <div class="description-wrap">
+
+                    <textarea id="description"
+                              name="description"
+                              maxlength="500"
+                              placeholder="스터디에 대해 소개해 주세요"
+                              th:text="${study.description}"
+                              required></textarea>
+
+
+                    <div class="description-count">
+
+                        <span id="descriptionLength"
+                              th:text="${study.description != null
+                                       ? #strings.length(study.description)
+                                       : 0}">
+                            0
+                        </span>/500
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- 버튼 -->
+            <div class="button-area">
+
+                <a th:href="@{/study/detail/{studyId}(studyId=${study.studyId})}"
+                   class="cancel-button">
+
+                    취소
+
+                </a>
+
+
+                <button type="submit"
+                        class="create-button">
+
+                    수정하기
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </section>
+
+</main>
+
+
+<script>
+
+    const description =
+        document.querySelector("#description");
+
+    const descriptionLength =
+        document.querySelector("#descriptionLength");
+
+
+    description.addEventListener("input", function () {
+
+        descriptionLength.textContent =
+            description.value.length;
+
+    });
+
+</script>
+
+
+</body>
+</html>

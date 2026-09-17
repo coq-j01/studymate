@@ -32,7 +32,7 @@
 	</insert>
 	
 	<!--특정 회원의 해당 스터디 상태 조회-->
-	<select id="findStudyMember" resultType="String">
+	<select id="findStudyMemberStatus" resultType="String">
 		select member_status
 		from study_member
 		where study_id = #{studyId}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.studymate.mapper.StudyJoinRequestMapper">
+	<!--스터디에 신청한 사용자인지 확인-->
+	<select id="countJoinRequest" resultType="int">
+    select count(*)
+    from study_join_request
+    where study_id = #{studyId}
+      and member_id = #{memberId}
+	</select>
+	
+	<!--신청서 등록-->
+	<insert id="insertJoinRequest">
+    insert into study_join_request (
+        study_id,
+        member_id,
+        message
+    )
+    values (
+        #{studyId},
+        #{memberId},
+        #{message}
+    )
+    </insert>
+</mapper>

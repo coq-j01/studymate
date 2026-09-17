@@ -1,0 +1,380 @@
+.detail-page {
+    width: min(1080px, calc(100% - 48px));
+
+    margin: 0 auto;
+
+    padding: 20px 0 90px;
+}
+
+
+/* 뒤로가기 */
+
+.back-area {
+    margin-bottom: 18px;
+}
+
+.back-button {
+    color: #777777;
+
+    font-size: 28px;
+
+    text-decoration: none;
+}
+
+
+/* 카드 */
+
+.detail-card {
+    background-color: #FFFFFF;
+
+    border: 1px solid #E8EAF3;
+
+    border-radius: 16px;
+
+    padding: 48px 70px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+
+/* 상단 */
+
+.study-summary {
+    display: grid;
+
+    grid-template-columns: 320px 1fr;
+
+    gap: 30px;
+
+    align-items: start;
+}
+
+
+/* 썸네일 */
+
+.detail-thumbnail {
+    width: 320px;
+    height: 280px;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.detail-thumbnail img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* 스터디 정보 */
+
+.study-info h1 {
+    margin: 10px 0 25px;
+
+    font-size: 30px;
+    font-weight: 700;
+}
+
+
+/* Badge */
+
+.study-badges {
+    display: flex;
+
+    gap: 10px;
+}
+
+.category-badge,
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 7px 14px;
+    border-radius: 18px;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.status-badge.recruiting {
+    background-color: #EAFBF0;
+    color: #22C55E;
+}
+
+.status-badge.closed {
+    background-color: #F3F4F6;
+    color: #9CA3AF;
+}
+
+.status-badge.ended {
+    background-color: #F3F4F6;
+    color: #6B7280;
+}
+
+/* 정보 */
+
+.info-row {
+    display: grid;
+
+    grid-template-columns: 24px 90px 1fr;
+
+    align-items: center;
+
+    margin-bottom: 16px;
+
+    color: #777777;
+
+    font-size: 14px;
+}
+
+.info-row i {
+    font-size: 20px;
+}
+
+.info-label {
+    color: #999999;
+}
+
+.info-value {
+    color: #444444;
+}
+
+
+/* 버튼 */
+
+.detail-actions {
+    display: flex;
+    gap: 10px;
+
+    margin-top: 28px;
+}
+
+/* detail-actions의 직접 자식들이 남은 공간을 동일하게 차지 */
+.detail-actions > a,
+.detail-actions > button,
+.detail-actions > form {
+    flex: 1 1 0;
+}
+
+/* form 안 버튼은 form 크기만큼 꽉 채우기 */
+.detail-actions form {
+    margin: 0;
+}
+
+.detail-actions form .action-button {
+    width: 100%;
+}
+
+.action-button {
+    width: 100%;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+	border: none;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+
+/* 신청 / 입장 */
+.primary-button {
+    background-color: #6366F1;
+    color: #FFFFFF;
+
+    cursor: pointer;
+}
+
+.primary-button:hover {
+    background-color: #5558E8;
+    color: #FFFFFF;
+}
+
+
+/* 신청 완료 *//* 수정하기 */
+.pending-button,
+.edit-button {
+    background-color: #EEF0FF;
+    color: #6366F1;
+}
+
+.edit-button:hover {
+	background-color: #E4E6FF;
+	color: #5558E8;
+}
+
+/* 모집 마감 / 종료 / 신청 불가 */
+.disabled-button {
+    background-color: #F1F3F5;
+    color: #9CA3AF;
+
+    cursor: default;
+}
+
+/* 상세보기 */
+
+.study-description {
+    margin-top: 45px;
+
+    padding: 28px 30px;
+
+    border: 1px solid #E8EAF3;
+
+    border-radius: 12px;
+}
+
+.study-description h2 {
+    margin: 0 0 18px;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.study-description p {
+    margin: 0;
+
+    color: #777777;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    white-space: pre-line;
+}
+
+/* =========================
+   스터디 신청 모달
+========================= */
+
+.study-apply-modal {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+
+/* 헤더 */
+
+.apply-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 22px 26px 16px;
+
+    border-bottom: 1px solid #E8EAF3;
+}
+
+.apply-modal-header h2 {
+    margin: 0;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    color: #222222;
+}
+
+.apply-close-button {
+    border: none;
+    background: none;
+
+    padding: 0;
+
+    color: #777777;
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+
+/* 본문 */
+
+.apply-modal-body {
+    padding: 16px 26px 10px;
+}
+
+.apply-modal-body label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #333333;
+    font-size: 13px;
+}
+
+.apply-modal-body label span {
+    color: #777777;
+}
+
+.apply-modal-body textarea {
+    width: 100%;
+    height: 130px;
+
+    resize: none;
+
+    padding: 14px;
+
+    border: 1px solid #DDE0EA;
+    border-radius: 8px;
+
+    outline: none;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.apply-modal-body textarea:focus {
+    border-color: #6366F1;
+}
+
+.apply-text-count {
+    margin-top: 5px;
+
+    text-align: right;
+
+    color: #888888;
+    font-size: 11px;
+}
+
+
+/* 하단 버튼 */
+
+.apply-modal-footer {
+    display: flex;
+    gap: 28px;
+
+    padding: 10px 26px 26px;
+}
+
+.apply-cancel-button,
+.apply-submit-button {
+    flex: 1;
+
+    height: 44px;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.apply-cancel-button {
+    background-color: #F3F4F8;
+    color: #777777;
+}
+
+.apply-submit-button {
+    background-color: #6366F1;
+    color: #FFFFFF;
+}
+
+.apply-submit-button:hover {
+    background-color: #5558E8;
+}

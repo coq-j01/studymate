@@ -9,7 +9,15 @@ public interface StudyService {
 
 	int createStudy(StudyDTO studyDTO, int leaderId);
 	
-	List<Study> getStudyList();
+	List<Study> getStudyList(String keyword, Integer categoryId);
 	
 	List<Study> getMyStudyList(int memberId);
+	
+	Study getStudy(int studyId);
+	
+	String findStudyMemberStatus(int studyId, int memberId);
+	
+	void updateStudy(StudyDTO studyDTO, int memberId);
+	
+	void applyStudy(int studyId,int memberId,String message);
 }

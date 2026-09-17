@@ -2,6 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.studymate.mapper.StudyMapper">
+	<!-- 스터디 공통 조회 -->
+	<sql id="studyBaseQuery">
+		select
+		s.*,
+		c.category_id,
+		c.category_name,
+		m.nickname as leader_nickname,
+		(
+		select count(*)
+		from study_member sm_count
+		where sm_count.study_id = s.study_id
+		and sm_count.member_status = 'ACTIVE'
+		) as current_member_count
+
+		from study s
+
+		join category c
+		on s.category_id = c.category_id
+
+		join member m
+		on s.leader_id = m.member_id
+	</sql>
+
 	<!--스터디 생성, 성공여부 반환(0:실패, 1:성공)-->
 	<insert id="insertStudy" useGeneratedKeys="true"
 		keyProperty="studyDTO.studyId">
@@ -25,51 +48,24 @@
 
 	<!--스터디 목록 조회-->
 	<select id="findStudyList" resultType="com.studymate.domain.Study">
-		select
-		s.*,
-		c.category_name,
-		m.nickname as leader_nickname,
-		(
-		select count(*)
-		from study_member sm
-		where sm.study_id = s.study_id
-		and sm.member_status = 'ACTIVE'
-		) as current_member_count
-
-		from study s
-
-		join category c
-		on s.category_id = c.category_id
-
-		join member m
-		on s.leader_id = m.member_id
+		<include refid="studyBaseQuery"/>
 
 		where s.study_status = 'RECRUITING'
+		
+    	<if test="keyword != null and keyword != ''">
+        	and s.title like concat('%', #{keyword}, '%')
+    	</if>
+
+    	<if test="categoryId != null">
+        	and s.category_id = #{categoryId}
+    	</if>
 
 		order by s.created_at desc
 	</select>
 
 	<!--스터디 단건 조회-->
 	<select id="findStudyById" resultType="com.studymate.domain.Study">
-		select
-		s.*,
-		c.category_name,
-		m.nickname as leader_nickname,
-		(
-		select count(*)
-		from study_member sm
-		where sm.study_id = s.study_id
-		and sm.member_status = 'ACTIVE'
-		) as current_member_count
-
-		from study s
-
-		join category c
-		on s.category_id = c.category_id
-
-		join member m
-		on s.leader_id = m.member_id
-
+		<include refid="studyBaseQuery"/>
 		where s.study_id = #{studyId}
 	</select>
 
@@ -111,38 +107,20 @@
 	<select id="findMyStudyList"
 		resultType="com.studymate.domain.Study">
 
-		select
-		s.*,
-		c.category_name,
-		m.nickname as leader_nickname,
-		(
-		select count(*)
-		from study_member sm_count
-		where sm_count.study_id = s.study_id
-		and sm_count.member_status = 'ACTIVE'
-		) as current_member_count
+		<include refid="studyBaseQuery"/>
 
-		from study s
+	    join study_member sm
+    	  on s.study_id = sm.study_id
 
-		join study_member sm
-		on s.study_id = sm.study_id
+	    where sm.member_id = #{memberId}
+    	  and sm.member_status = 'ACTIVE'
 
-		join category c
-		on s.category_id = c.category_id
-
-		join member m
-		on s.leader_id = m.member_id
-
-		where sm.member_id = #{memberId}
-		and sm.member_status = 'ACTIVE'
-
-		order by
-		case
-		when s.study_status in ('RECRUITING', 'CLOSED') then 0
-		when s.study_status = 'ENDED' then 1
-		end,
-		s.created_at desc
-
+    	order by
+        	case
+            	when s.study_status in ('RECRUITING', 'CLOSED') then 0
+            	when s.study_status = 'ENDED' then 1
+        	end,
+        	s.created_at desc
 	</select>
 
 	<!--내스터디 갯수 조회,페이징 시 사용-->

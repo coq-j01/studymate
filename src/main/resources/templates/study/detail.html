@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>스터디 상세 | StudyMate</title>
+
+	<!-- Bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Bootstrap Icons -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+	<link rel="stylesheet" th:href="@{/css/common/common.css}">
+
+	<link rel="stylesheet" th:href="@{/css/common/category.css}">
+
+	<link rel="stylesheet" th:href="@{/css/common/header.css}">
+
+	<link rel="stylesheet" th:href="@{/css/study/detail.css}">
+
+</head>
+
+
+<body>
+
+	<!-- 공통 Header -->
+	<div th:replace="fragments/header :: header"></div>
+
+
+	<main class="detail-page">
+
+		<!-- 뒤로가기 -->
+		<div class="back-area">
+
+			<a href="/" class="back-button">
+				<i class="bi bi-arrow-left"></i>
+			</a>
+
+		</div>
+
+
+		<!-- 상세 카드 -->
+		<section class="detail-card">
+
+
+			<!-- =====================
+             상단 정보
+        ====================== -->
+			<div class="study-summary">
+
+
+				<!-- 썸네일 -->
+				<div class="detail-thumbnail">
+
+					<img th:src="@{'/assets/thumbnails/' + ${study.thumbnail}}" alt="스터디 대표 이미지">
+
+				</div>
+
+
+				<!-- 오른쪽 정보 -->
+				<div class="study-info">
+
+
+					<!-- 카테고리 + 상태 -->
+					<div class="study-badges">
+
+						<span class="category-badge" th:classappend="' category-' + ${study.categoryId}"
+							th:text="${study.categoryName}">
+							어학
+						</span>
+
+
+						<!-- 모집중 -->
+						<span class="status-badge recruiting" th:if="${study.studyStatus == 'RECRUITING'}">
+							모집 중
+						</span>
+
+
+						<!-- 모집마감 -->
+						<span class="status-badge closed" th:if="${study.studyStatus == 'CLOSED'}">
+							모집 마감
+						</span>
+
+
+						<!-- 종료 -->
+						<span class="status-badge ended" th:if="${study.studyStatus == 'ENDED'}">
+							종료
+						</span>
+
+					</div>
+
+
+					<!-- 제목 -->
+					<h1 th:text="${study.title}">
+						토익 준비 스터디
+					</h1>
+
+
+					<!-- 스터디장 -->
+					<div class="info-row">
+
+						<i class="bi bi-person-fill"></i>
+
+						<span class="info-label">
+							스터디장
+						</span>
+
+						<span class="info-value" th:text="${study.leaderNickname}">
+							스터디장
+						</span>
+
+					</div>
+
+
+					<!-- 모집 인원 -->
+					<div class="info-row">
+
+						<i class="bi bi-people-fill"></i>
+
+						<span class="info-label">
+							모집인원
+						</span>
+
+						<span class="info-value">
+
+							<span th:text="${study.currentMemberCount}">
+								3
+							</span>
+
+							/
+
+							<span th:text="${study.maxMember}">
+								5
+							</span>
+
+						</span>
+
+					</div>
+
+
+					<!-- 등록일 -->
+					<div class="info-row">
+
+						<i class="bi bi-calendar3"></i>
+
+						<span class="info-label">
+							등록일시
+						</span>
+
+						<span class="info-value" th:text="${#temporals.format(study.createdAt, 'yyyy년 M월 d일')}">
+							2026년 9월 15일
+						</span>
+
+					</div>
+
+					<!-- =====================
+                     버튼 영역
+                ====================== -->
+					<div class="detail-actions">
+
+						<!-- 종료된 스터디 -->
+						<button type="button" class="action-button disabled-button"
+							th:if="${study.studyStatus == 'ENDED'}" disabled>
+							종료된 스터디
+						</button>
+
+
+						<!-- 현재 스터디원 -->
+						<a th:if="${study.studyStatus != 'ENDED'
+				               and status == 'ACTIVE'}" th:href="@{/study/{studyId}/dashboard(studyId=${study.studyId})}"
+							class="action-button primary-button">
+							스터디 입장하기
+						</a>
+
+						<!-- 스터디장만 수정 가능 -->
+						<a th:if="${study.studyStatus != 'ENDED'
+					               and study.leaderId == #authentication.principal.memberId}"
+							th:href="@{/study/edit/{studyId}(studyId=${study.studyId})}"
+							class="action-button edit-button">
+
+							<i class="bi bi-pencil"></i>
+							수정하기
+
+						</a>
+
+
+						<!-- 모집 마감 -->
+						<button type="button" class="action-button disabled-button" th:if="${study.studyStatus == 'CLOSED'
+				                   and status != 'ACTIVE'}" disabled>
+							모집 마감
+						</button>
+
+
+						<!-- 가입 신청 중 -->
+						<button type="button" class="action-button pending-button" th:if="${study.studyStatus == 'RECRUITING'
+				                   and status == 'PENDING'}" disabled>
+							신청 완료
+						</button>
+
+
+						<!-- 탈퇴 / 강퇴 이력 -->
+						<button type="button" class="action-button disabled-button" th:if="${study.studyStatus == 'RECRUITING'
+				                   and status == 'INACTIVE'}" disabled>
+							가입 신청 불가
+						</button>
+
+
+						<!-- 아무 관계 없는 회원 -->
+						<button type="button"
+						        th:if="${study.studyStatus == 'RECRUITING'
+						               and status == null}"
+						        class="action-button primary-button"
+						        data-bs-toggle="modal"
+						        data-bs-target="#studyApplyModal">
+						    스터디 신청하기
+						</button>
+
+					</div>
+
+				</div>
+
+			</div>
+
+
+
+			<!-- =====================
+             스터디 소개
+        ====================== -->
+			<div class="study-description">
+
+				<h2>
+					스터디 소개
+				</h2>
+
+				<p th:text="${study.description}">
+					토익 준비 스터디 입니다.
+					토익 800점 이상을 목표로 하고 있습니다.
+					성실히 하실 분만 신청해 주시기 바랍니다.
+				</p>
+
+			</div>
+
+
+		</section>
+
+	</main>
+	<!-- 스터디 신청 모달 -->
+	<div class="modal fade"
+	     id="studyApplyModal"
+	     tabindex="-1"
+	     aria-labelledby="studyApplyModalLabel"
+	     aria-hidden="true">
+
+	    <div class="modal-dialog modal-dialog-centered">
+
+	        <div class="modal-content study-apply-modal">
+
+	            <form th:action="@{/study/{studyId}/apply(studyId=${study.studyId})}"
+	                  method="post">
+
+	                <!-- 헤더 -->
+	                <div class="apply-modal-header">
+
+	                    <h2 id="studyApplyModalLabel">
+	                        스터디 신청
+	                    </h2>
+
+	                    <button type="button"
+	                            class="apply-close-button"
+	                            data-bs-dismiss="modal"
+	                            aria-label="닫기">
+
+	                        <i class="bi bi-x-lg"></i>
+
+	                    </button>
+
+	                </div>
+
+
+	                <!-- 내용 -->
+	                <div class="apply-modal-body">
+
+	                    <label for="applyReason">
+	                        스터디 신청 동기와 각오를 작성해주세요
+	                        <span>(최대 500자)</span>
+	                    </label>
+
+	                    <textarea id="applyMessage"
+						          name="message"
+	                              maxlength="500"
+	                              required></textarea>
+
+	                    <div class="apply-text-count">
+	                        <span id="applyMessageLength">0</span>/500
+	                    </div>
+
+	                </div>
+
+
+	                <!-- 버튼 -->
+	                <div class="apply-modal-footer">
+
+	                    <button type="button"
+	                            class="apply-cancel-button"
+	                            data-bs-dismiss="modal">
+	                        취소
+	                    </button>
+
+	                    <button type="submit"
+	                            class="apply-submit-button">
+	                        신청하기
+	                    </button>
+
+	                </div>
+
+	            </form>
+
+	        </div>
+
+	    </div>
+
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+	</script>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/study/detail.js}"></script>
+
+</html>

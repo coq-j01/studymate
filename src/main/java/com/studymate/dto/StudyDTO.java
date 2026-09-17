@@ -10,4 +10,5 @@ public class StudyDTO {
 	private int categoryId;
 	private int maxMember;
 	private String thumbnail;
+	private String studyStatus;
 }

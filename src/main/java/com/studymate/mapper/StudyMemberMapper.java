@@ -23,7 +23,7 @@ public interface StudyMemberMapper {
 	);
 	
 	//특정 회원의 해당 스터디 상태 조회
-    String findStudyMember(
+    String findStudyMemberStatus(
             @Param("studyId") int studyId,
             @Param("memberId") int memberId
     );
