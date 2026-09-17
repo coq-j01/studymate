@@ -9,5 +9,5 @@ public class StudyMember {
 	private int studyId;
 	private int memberId;
 	private LocalDateTime joinedAt;
-	private String status;
+	private String memberStatus;
 }
