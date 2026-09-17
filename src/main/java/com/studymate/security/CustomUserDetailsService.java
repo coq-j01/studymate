@@ -1,6 +1,5 @@
 package com.studymate.security;
 
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,11 +21,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		if(member == null) {
 			throw new UsernameNotFoundException("존재하지 않는 회원입니다.");
 		}
-		return User.builder()
-				.username(member.getEmail())
-				.password(member.getPassword())
-				.roles("USER")
-				.build();
+		return new CustomUserDetails(member);
 	}
 
 }
