@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.studymate.mapper.StudyMemberMapper">
+
+	<!--스터디원 추가-->
+	<!--스터디장-->
+	<insert id="insertLeader">
+		insert into study_member(
+		study_id,
+		member_id,
+		joined_at,
+		member_status
+		)values(
+		#{studyId},
+		#{memberId},
+		current_timestamp,
+		'ACTIVE'
+		)
+	</insert>
+	<!--일반회원-->
+	<insert id="insertPendingMember">
+		insert into study_member(
+		study_id,
+		member_id,
+		member_status
+		)values(
+		#{studyId},
+		#{memberId},
+		'PENDING'
+		)
+	</insert>
+	
+	<!--특정 회원의 해당 스터디 상태 조회-->
+	<select id="findStudyMember" resultType="String">
+		select member_status
+		from study_member
+		where study_id = #{studyId}
+			and member_id = #{memberId}
+	</select>
+
+	<!--스터디원 수 조회-->
+	<select id="countStudyMembers" resultType="int">
+		select count(*)
+		from study_member
+		where study_id = #{studyId}
+		and member_status = 'ACTIVE'
+	</select>
+
+    <!--가입 신청 승인-->
+	<update id="approveStudyMember">
+		update study_member
+		set member_status = 'ACTIVE',
+		joined_at = current_timestamp
+		where study_id = #{studyId}
+		and member_id = #{memberId}
+		and member_status = 'PENDING'
+	</update>
+
+    <!--가입 신청 거절-->
+    <delete id="rejectStudyMember">
+    	delete from study_member
+    	where study_id = #{studyId}
+			and member_id = #{memberId}
+    </delete>
+    
+    <!--탈퇴 / 강퇴-->
+	<update id="inactiveStudyMember">
+		update study_member
+		set member_status = 'INACTIVE'
+		where study_id = #{studyId}
+		and member_id = #{memberId}
+	</update>
+    
+    <!--현재 스터디원 목록-->
+    <select id="findStudyMembers" resultType="com.studymate.domain.StudyMember">
+    	select *
+    	from study_member
+    	where study_id = #{studyId}
+    		and member_status = 'ACTIVE'
+    </select>
+
+    <!--가입 신청 목록-->
+    <select id="findPendingMembers" resultType="com.studymate.domain.StudyMember">
+    	select *
+    	from study_member
+    	where study_id = #{studyId}
+    		and member_status = 'PENDING'
+    </select>
+
+</mapper>
