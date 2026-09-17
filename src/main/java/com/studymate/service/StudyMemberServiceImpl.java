@@ -1,0 +1,8 @@
+package com.studymate.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class StudyMemberServiceImpl implements StudyMemberService {
+
+}
