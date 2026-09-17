@@ -1,8 +1,11 @@
 package com.studymate.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.studymate.domain.Study;
 import com.studymate.dto.StudyDTO;
 import com.studymate.mapper.StudyMapper;
 import com.studymate.mapper.StudyMemberMapper;
@@ -32,6 +35,16 @@ public class StudyServiceImpl implements StudyService {
 			throw new IllegalStateException("스터디장 등록에 실패했습니다.");
 		}
 		return studyId;
+	}
+
+	@Override
+	public List<Study> getStudyList() {
+		return studyMapper.findStudyList();
+	}
+
+	@Override
+	public List<Study> getMyStudyList(int memberId) {
+		return studyMapper.findMyStudyList(memberId);
 	}
 	
 }

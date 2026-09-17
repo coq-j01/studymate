@@ -139,7 +139,7 @@
 
 			<div class="study-grid">
 
-				<a class="study-card" th:each="study : ${studyList}"
+				<a class="study-card" th:each="study : ${myStudyList}"
 					th:href="@{/study/detail/{id}(id=${study.studyId})}">
 
 					<div class="study-thumbnail">
@@ -168,7 +168,7 @@
 						<div class="study-card-footer">
 
 							<span class="study-leader" th:classappend="${study.leaderId == #authentication.principal.memberId}
-							                      ? ' my-study-leader' : ''">
+														                      ? ' my-study-leader' : ''">
 
 								<i class="bi bi-star-fill"
 									th:if="${study.leaderId == #authentication.principal.memberId}">
@@ -176,7 +176,7 @@
 								<span th:text="${study.leaderNickname}">
 									스터디장
 								</span>
-								
+
 							</span>
 
 							<span class="member-count">
