@@ -11,6 +11,11 @@ public class StudyMember {
 	private LocalDateTime joinedAt;
 	private String memberStatus;
 	
-	private String nickName;
+	private String nickname;
 	private String gender;
+	
+	private boolean leader;
+	
+	// 최근 게시글 작성일
+    private LocalDateTime lastPostAt;
 }
