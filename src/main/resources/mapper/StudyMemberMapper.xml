@@ -28,13 +28,13 @@
 		'ACTIVE'
 		)
 	</insert>
-	
+
 	<!--특정 회원의 해당 스터디 상태 조회-->
 	<select id="findStudyMemberStatus" resultType="String">
 		select member_status
 		from study_member
 		where study_id = #{studyId}
-			and member_id = #{memberId}
+		and member_id = #{memberId}
 	</select>
 
 	<!--스터디원 수 조회-->
@@ -44,21 +44,42 @@
 		where study_id = #{studyId}
 		and member_status = 'ACTIVE'
 	</select>
-    
-    <!--탈퇴 / 강퇴-->
+
+	<!--탈퇴 / 강퇴-->
 	<update id="inactiveStudyMember">
 		update study_member
 		set member_status = 'INACTIVE'
 		where study_id = #{studyId}
 		and member_id = #{memberId}
 	</update>
-    
-    <!--현재 스터디원 목록-->
-    <select id="findStudyMembers" resultType="com.studymate.domain.StudyMember">
-    	select *
-    	from study_member
-    	where study_id = #{studyId}
-    		and member_status = 'ACTIVE'
-    </select>
+
+	<!--현재 스터디원 목록-->
+	<select id="findStudyMembers" resultType="com.studymate.domain.StudyMember">
+		select
+		sm.study_id,
+		sm.member_id,
+		sm.joined_at,
+		sm.member_status,
+		m.nickname,
+		m.gender,
+
+		case
+		when sm.member_id = s.leader_id then true
+		else false
+		end as leader
+
+		from study_member sm
+
+		join member m
+		on sm.member_id = m.member_id
+
+		join study s
+		on sm.study_id = s.study_id
+
+		where sm.study_id = #{studyId}
+		and sm.member_status = 'ACTIVE'
+
+		order by sm.joined_at asc
+	</select>
 
 </mapper>
