@@ -10,4 +10,7 @@ public class StudyMember {
 	private int memberId;
 	private LocalDateTime joinedAt;
 	private String memberStatus;
+	
+	private String nickName;
+	private String gender;
 }

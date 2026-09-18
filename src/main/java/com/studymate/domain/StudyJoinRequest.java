@@ -11,4 +11,7 @@ public class StudyJoinRequest {
 	private int memberId;
 	private String message;
 	private LocalDateTime appliedAt;
+	
+	private String nickName;
+	private String gender;
 }
