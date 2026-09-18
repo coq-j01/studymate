@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.studymate.domain.StudyJoinRequest;
+import com.studymate.domain.StudyMember;
 import com.studymate.mapper.StudyJoinRequestMapper;
 import com.studymate.mapper.StudyMapper;
 import com.studymate.mapper.StudyMemberMapper;
@@ -40,6 +41,11 @@ public class StudyMemberServiceImpl implements StudyMemberService {
 		studyMemberMapper.insertStudyMember(studyId, memberId);
 		//신청서 삭제
 		studyJoinRequestMapper.deleteJoinRequest(studyId, memberId);
+		
+		// 이번 승인으로 정원이 가득 찼다면 모집 마감
+		if (currentMemberCount + 1 >= maxMember) {
+		    studyMapper.closeStudy(studyId);
+		}
 	}
 
 	@Override
@@ -61,8 +67,26 @@ public class StudyMemberServiceImpl implements StudyMemberService {
 	}
 
 	@Override
-	public int getJoinRequestCount(int studyId) {
-		return studyJoinRequestMapper.countJoinRequest(studyId);
+	public List<StudyMember> getStudyMemberList(int studyId) {
+		return studyMemberMapper.findStudyMembers(studyId);
+	}
+
+	@Override
+	public boolean canAccessStudy(int studyId, int memberId) {
+		//study가 end가 아닌지 확인
+		if(studyMapper.getStudyStatus(studyId).equals("ENDED")) {
+			throw new IllegalStateException("종료된 스터디입니다.");
+		}
+		//접근자가 active상태인지 확인
+		if(!studyMemberMapper.findStudyMemberStatus(studyId, memberId).equals("ACTIVE")) {
+			throw new IllegalStateException("접근 불가능한 사용자입니다.");
+		}
+		return true;
+	}
+
+	@Override
+	public void inactiveMember(int studyId, int memberId) {
+		studyMemberMapper.inactiveStudyMember(studyId, memberId);
 	}
 
 }
