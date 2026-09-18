@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>인증 게시판 | StudyMate</title>
+
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/common.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/header.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/study-header.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/study/board.css}">
+
+</head>
+
+
+<body>
+
+<header th:replace="~{fragments/header :: header}"></header>
+
+
+<main class="study-page">
+
+    <header th:replace="~{fragments/study-header :: studyHeader(${study})}"></header>
+
+
+    <section class="study-board-content">
+
+        <section class="board-section">
+
+
+            <div class="section-header">
+
+                <h2>인증 게시판</h2>
+
+
+                <!-- 인증글은 모든 스터디원 작성 가능 -->
+                <a th:href="@{/study/{studyId}/board/write(studyId=${study.studyId})}"
+                   class="write-link">
+
+                    + 글쓰기
+
+                </a>
+
+            </div>
+
+
+            <div class="post-list">
+
+
+                <a class="board-item"
+                   th:each="post : ${boardList}"
+                   th:href="@{/study/{studyId}/board/{boardId}
+                            (studyId=${study.studyId},
+                             boardId=${post.boardId})}">
+
+
+                    <strong class="post-title"
+                            th:text="${post.title}">
+
+                        토익 시험 등록하고 왔습니다
+
+                    </strong>
+
+
+                    <span class="post-writer"
+                          th:text="${post.nickname}">
+
+                        정채빈
+
+                    </span>
+
+
+                    <span class="post-date"
+                          th:text="${#temporals.format(
+                                    post.createdAt,
+                                    'yyyy.MM.dd')}">
+
+                        2026.09.18
+
+                    </span>
+
+                </a>
+
+
+                <div class="empty-post"
+                     th:if="${#lists.isEmpty(boardList)}">
+
+                    등록된 인증글이 없습니다.
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </section>
+
+</main>
+
+</body>
+
+</html>

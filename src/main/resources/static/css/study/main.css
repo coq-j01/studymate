@@ -338,7 +338,7 @@
    RESPONSIVE
 ======================== */
 
-@media (max-width: 900px) {
+/*@media (max-width: 900px) {
 
     .study-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -362,4 +362,4 @@
     .search-title-wrap h2 {
         font-size: 25px;
     }
-}
+}*/

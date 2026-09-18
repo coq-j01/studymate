@@ -1,0 +1,105 @@
+.study-page {
+    width: min(1080px, calc(100% - 48px));
+    margin: 0 auto;
+    padding-bottom: 80px;
+}
+
+
+.member-section {
+    padding-top: 24px;
+}
+
+
+.member-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 22px;
+}
+
+.member-section-header h2 {
+    margin: 0;
+
+    color: #222222;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.member-count {
+    color: #555555;
+
+    font-size: 14px;
+}
+
+.member-count strong {
+    color: #6366F1;
+    font-weight: 700;
+}
+
+
+.member-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 24px 36px;
+}
+
+
+.member-card {
+    min-height: 110px;
+
+    padding: 24px 28px;
+
+    border: 1px solid #E8EAF3;
+    border-radius: 10px;
+
+    background-color: #FFFFFF;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+
+.member-name-area {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 14px;
+}
+
+
+.member-name {
+    color: #222222;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+.leader-badge {
+    padding: 3px 8px;
+
+    border-radius: 10px;
+
+    background-color: #EEF0FF;
+
+    color: #6366F1;
+
+    font-size: 10px;
+    font-weight: 500;
+}
+
+
+.member-info {
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    color: #999999;
+
+    font-size: 11px;
+}

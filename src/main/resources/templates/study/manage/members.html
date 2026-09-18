@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+
+	<title>스터디원 관리</title>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+	<!-- CSRF -->
+	<meta name="_csrf" th:content="${_csrf.token}">
+
+	<meta name="_csrf_header" th:content="${_csrf.headerName}">
+
+	<link rel="stylesheet" th:href="@{/css/common/header.css}">
+
+	<link rel="stylesheet" th:href="@{/css/common/study-manage-header.css}">
+
+	<link rel="stylesheet" th:href="@{/css/study/manage/members.css}">
+</head>
+
+<body>
+
+	<!-- 사이트 공통 헤더 -->
+	<header th:replace="~{fragments/header :: header}"></header>
+
+
+	<main class="manage-page" th:data-study-id="${studyId}">
+
+		<!-- 스터디 관리 헤더 -->
+		<header th:replace="~{fragments/study-manage-header :: manageHeader}">
+		</header>
+
+
+		<section class="manage-member-list">
+
+			<article class="manage-member-item" th:each="member : ${memberList}" th:id="'member-' + ${member.memberId}">
+
+				<div class="manage-member-content">
+
+					<div class="manage-member-info">
+
+						<strong th:text="${member.nickname}">
+							정채빈
+						</strong>
+
+						<span th:text="${member.gender == 'M' ? '남' : '여'}">
+							여
+						</span>
+
+						<span>/</span>
+
+						<span th:text="${#temporals.format(
+                                member.joinedAt,
+                                'yyyy.MM.dd')}">
+							2026.08.15
+						</span>
+
+						<span>가입</span>
+
+					</div>
+
+
+					<p class="last-post-date">
+
+						최근 게시글 작성일 :
+
+						<span th:if="${member.lastPostAt != null}" th:text="${#temporals.format(
+                                    member.lastPostAt,
+                                    'yyyy.MM.dd')}">
+							2026.09.16
+						</span>
+
+						<span th:if="${member.lastPostAt == null}">
+							작성한 게시글 없음
+						</span>
+
+					</p>
+
+				</div>
+
+				<!-- 스터디장 본인은 강퇴 버튼 없음 -->
+				<button type="button" class="kick-button" th:if="${!member.leader}"
+					th:data-member-id="${member.memberId}">
+					강퇴
+				</button>
+
+			</article>
+
+		</section>
+
+	</main>
+
+
+	<script th:src="@{/js/common/study-manage-header.js}"></script>
+	<script th:src="@{/js/study/manage/members.js}"></script>
+</body>
+
+</html>

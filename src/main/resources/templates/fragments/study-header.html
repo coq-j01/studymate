@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+
+<header th:fragment="studyHeader(study)"
+     class="study-header">
+
+    <!-- 스터디 제목 + 관리 버튼 -->
+    <div class="study-header-top">
+
+        <h1 class="study-title"
+            th:text="${study.title}">
+            토익 준비 스터디
+        </h1>
+
+
+        <!-- 스터디장에게만 표시 -->
+        <a th:if="${study.leaderId == #authentication.principal.memberId}"
+           th:href="@{/study/{studyId}/manage/requests(studyId=${study.studyId})}"
+           class="study-manage-button">
+
+            스터디 관리
+
+        </a>
+
+    </div>
+
+
+    <!-- 스터디 내부 메뉴 -->
+    <nav class="study-nav">
+
+        <a th:href="@{/study/{studyId}/home(studyId=${study.studyId})}"
+           class="study-nav-link"
+           id="studyHomeMenu">
+            홈
+        </a>
+
+        <a th:href="@{/study/{studyId}/notice(studyId=${study.studyId})}"
+           class="study-nav-link"
+           id="studyNoticeMenu">
+            공지
+        </a>
+
+        <a th:href="@{/study/{studyId}/attendance(studyId=${study.studyId})}"
+           class="study-nav-link"
+           id="studyAttendanceMenu">
+            인증
+        </a>
+
+        <a th:href="@{/study/{studyId}/members(studyId=${studyId})}"
+           class="study-nav-link"
+           id="studyMembersMenu">
+            스터디원
+        </a>
+
+    </nav>
+
+</header>
+</html>

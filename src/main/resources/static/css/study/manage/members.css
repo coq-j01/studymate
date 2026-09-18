@@ -1,0 +1,87 @@
+.manage-page {
+    width: min(1080px, calc(100% - 48px));
+    margin: 0 auto;
+    padding-bottom: 80px;
+
+}
+
+
+.manage-member-list {
+    width: 100%;
+}
+
+
+.manage-member-item {
+    min-height: 90px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    padding: 18px 16px;
+
+    border-bottom: 1px solid #EEEEF3;
+}
+
+
+.manage-member-content {
+    flex: 1;
+}
+
+
+.manage-member-info {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    margin-bottom: 9px;
+
+    color: #999999;
+
+    font-size: 12px;
+}
+
+
+.manage-member-info strong {
+    margin-right: 4px;
+
+    color: #222222;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+.last-post-date {
+    margin: 0;
+
+    color: #999999;
+
+    font-size: 12px;
+}
+
+
+.kick-button {
+    width: 58px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    border: 1px solid #FF8A8A;
+    border-radius: 8px;
+
+    background-color: #FFFFFF;
+
+    color: #FF6B6B;
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+.kick-button:hover {
+    background-color: #FFF5F5;
+}

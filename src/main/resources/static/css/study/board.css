@@ -1,0 +1,258 @@
+body {
+    background-color: #FFFFFF;
+}
+/* ===================================
+   스터디 게시판 공통
+=================================== */
+
+.study-page {
+
+    width: min(1080px, calc(100% - 48px));
+
+    margin: 0 auto;
+
+    padding-bottom: 80px;
+
+}
+
+
+/* ===================================
+   게시판 본문
+=================================== */
+
+.study-board-content {
+
+    padding-top: 24px;
+
+}
+
+
+/* ===================================
+   게시판 영역
+=================================== */
+
+.board-section {
+
+    margin-bottom: 38px;
+
+}
+
+
+/* 제목 + 글쓰기 */
+
+.section-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 22px;
+
+}
+
+
+.section-header h2 {
+
+    margin: 0;
+
+    color: #222222;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+}
+
+
+/* ===================================
+   글쓰기 버튼
+=================================== */
+
+.write-link {
+
+    padding: 7px 14px;
+
+    border-radius: 8px;
+
+    background-color: #F4F5FF;
+
+    color: #6366F1;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+}
+
+.write-link:hover {
+
+    background-color: #E9EAFF;
+
+}
+
+
+/* ===================================
+   게시글 목록
+=================================== */
+
+.post-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+}
+
+
+/* ===================================
+   공지사항
+=================================== */
+
+.notice-item {
+
+    min-height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 18px;
+
+    border: 1px solid #E8EAF3;
+
+    border-radius: 8px;
+
+    background-color: #FFFFFF;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+
+}
+
+
+.notice-item strong {
+
+    color: #222222;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+}
+
+
+.notice-item span {
+
+    color: #999999;
+
+    font-size: 11px;
+
+}
+
+
+.notice-item:hover {
+
+    background-color: #FAFAFF;
+
+}
+
+
+/* ===================================
+   인증 게시글
+=================================== */
+
+.board-item {
+
+    min-height: 42px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 100px 90px;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 0 18px;
+
+    border: 1px solid #E8EAF3;
+
+    border-radius: 8px;
+
+    background-color: #FFFFFF;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+
+}
+
+
+.board-item:hover {
+
+    background-color: #FAFAFF;
+
+}
+
+
+.post-title {
+
+    overflow: hidden;
+
+    color: #222222;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+}
+
+
+.post-writer {
+
+    color: #555555;
+
+    font-size: 12px;
+
+    text-align: center;
+
+}
+
+
+.post-date {
+
+    color: #999999;
+
+    font-size: 11px;
+
+    text-align: right;
+
+}
+
+
+/* ===================================
+   게시글이 없을 때
+=================================== */
+
+.empty-post {
+
+    min-height: 110px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #999999;
+
+    font-size: 12px;
+
+}
