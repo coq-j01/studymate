@@ -22,6 +22,8 @@ public interface StudyMapper {
 	int updateStudy(StudyDTO studyDTO);
 	//스터디 상태 종료로 업데이트, 성공여부 반환(0:실패, 1:성공)
 	int endStudy(int studyId);
+	//스터디 모집 종료
+	int closeStudy(int studyId);
 	//스터디 삭제, 성공여부 반환(0:실패, 1:성공)
 	//스터디 갯수 조회,페이징 시 사용
 	int countStudyList();
@@ -38,4 +40,6 @@ public interface StudyMapper {
 	);
 	// 스터디 최대 인원 조회
 	int findMaxMember(int studyId);
+	// 현재 모집 중인 스터디인지 확인
+	String getStudyStatus(int studyId);
 }

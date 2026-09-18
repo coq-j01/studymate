@@ -89,6 +89,13 @@
 		ended_at = current_timestamp
 		where study_id = #{studyId}
 	</update>
+	
+	<!--스터디 모집 종료-->
+	<update id="closeStudy">
+		update study
+		set study_status = 'CLOSED'
+		where study_id = #{studyId}
+	</update>
 
 	<!--스터디 삭제, 성공여부 반환(0:실패, 1:성공)-->
 	<delete id="deleteStudy">
@@ -149,6 +156,12 @@
    		select max_member
     	from study
     	where study_id = #{studyId}
+	</select>
+	<!--스터디 상태 출력-->
+	<select id="getStudyStatus" resultType="String">
+        select study_status
+        from study
+        where study_id = #{studyId}
 	</select>
 
 </mapper>
