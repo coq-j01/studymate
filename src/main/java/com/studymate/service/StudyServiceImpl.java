@@ -91,11 +91,9 @@ public class StudyServiceImpl implements StudyService {
 
 	@Override
 	public void applyStudy(int studyId, int memberId, String message) {
-		// 스터디 조회
-	    Study study = studyMapper.findStudyById(studyId);
 	    
 	 // 모집 중인지
-	    if (!"RECRUITING".equals(study.getStudyStatus()) || study == null) {
+	    if (!studyMapper.getStudyStatus(studyId).equals("RECRUITING")) {
 	        throw new IllegalStateException(
 	                "현재 모집 중인 스터디가 아닙니다."
 	        );
@@ -125,7 +123,7 @@ public class StudyServiceImpl implements StudyService {
 	    int currentMemberCount =
 	            studyMemberMapper.countStudyMembers(studyId);
 
-	    if (currentMemberCount >= study.getMaxMember()) {
+	    if (currentMemberCount >= studyMapper.findMaxMember(studyId)) {
 	        throw new IllegalStateException(
 	                "모집 인원이 가득 찼습니다."
 	        );
@@ -144,6 +142,16 @@ public class StudyServiceImpl implements StudyService {
 	                "스터디 신청에 실패했습니다."
 	        );
 	    }
+	}
+
+	@Override
+	public int getMaxMember(int studyId) {
+		return studyMapper.findMaxMember(studyId);
+	}
+
+	@Override
+	public boolean isLeader(int studyId, int memberId) {
+		return studyMapper.isStudyLeader(studyId, memberId);
 	}
 
 }

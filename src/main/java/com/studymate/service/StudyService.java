@@ -20,4 +20,8 @@ public interface StudyService {
 	void updateStudy(StudyDTO studyDTO, int memberId);
 	
 	void applyStudy(int studyId,int memberId,String message);
+	
+	int getMaxMember(int studyId);
+	
+	boolean isLeader(int studyId, int memberId);
 }
