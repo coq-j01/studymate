@@ -17,7 +17,7 @@ public interface StudyMemberMapper {
 	);
 
 	// 일반 회원 가입 신청
-	int insertPendingMember(
+	int insertStudyMember(
 	    @Param("studyId") int studyId,
 	    @Param("memberId") int memberId
 	);
@@ -30,18 +30,6 @@ public interface StudyMemberMapper {
 
 	//스터디원 수 반환
 	int countStudyMembers(int studyId);
-	
-	// 가입 신청 승인
-    int approveStudyMember(
-        @Param("studyId") int studyId,
-        @Param("memberId") int memberId
-    );
-
-    //가입 신청 거절
-    int rejectStudyMember(
-            @Param("studyId") int studyId,
-            @Param("memberId") int memberId
-    );
     
     //탈퇴 / 강퇴
     int inactiveStudyMember(
@@ -51,8 +39,5 @@ public interface StudyMemberMapper {
     
     //현재 스터디원 목록
     List<StudyMember> findStudyMembers(int studyId);
-
-    // 가입 신청 목록
-    List<StudyMember> findPendingMembers(int studyId);
     
 }
