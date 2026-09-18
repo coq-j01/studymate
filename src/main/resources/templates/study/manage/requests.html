@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>가입 신청 관리 | StudyMate</title>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+
+	<!-- CSRF -->
+	<meta name="_csrf" th:content="${_csrf.token}">
+
+	<meta name="_csrf_header" th:content="${_csrf.headerName}">
+
+
+	<link rel="stylesheet" th:href="@{/css/common/common.css}">
+
+	<link rel="stylesheet" th:href="@{/css/common/header.css}">
+
+	<link rel="stylesheet" th:href="@{/css/common/study-manage-header.css}">
+
+	<link rel="stylesheet" th:href="@{/css/study/manage/requests.css}">
+
+</head>
+
+
+<body>
+
+
+	<!-- 사이트 공통 헤더 -->
+	<header th:replace="~{fragments/header :: header}"></header>
+
+
+	<main class="manage-page" th:data-study-id="${studyId}">
+
+		<!-- 관리 전용 헤더 -->
+		<header th:replace="~{fragments/study-manage-header :: manageHeader}"></header>
+		
+
+		<!-- =========================
+             가입 신청 목록
+        ========================== -->
+		<section class="request-list">
+			<div class="request-section">
+
+
+				<div class="request-title-area">
+
+					<div>
+
+						<h3>가입 신청자</h3>
+
+						<p>
+							신청 내용을 확인한 후 승인 또는 거절해주세요.
+						</p>
+
+					</div>
+
+				</div>
+
+
+
+				<!-- 신청자가 없는 경우 -->
+				<div class="empty-request" th:if="${#lists.isEmpty(joinRequestList)}">
+
+					<i class="bi bi-person-check"></i>
+
+					<p>
+						현재 대기 중인 가입 신청이 없습니다.
+					</p>
+
+				</div>
+
+
+
+				<!-- 신청자 목록 -->
+				<div class="request-list">
+
+				    <div class="request-item"
+				         th:each="request : ${joinRequestList}"
+				         th:id="'request-' + ${request.memberId}">
+
+				        <div class="request-content">
+
+				            <div class="request-info">
+
+				                <strong th:text="${request.nickname}">
+				                    김아무개
+				                </strong>
+
+								<span th:text="${request.gender == 'M' ? '남' :
+								               request.gender == 'F' ? '여' : ''}">
+				                    남
+				                </span>
+
+				                <span>/</span>
+
+				                <span th:text="${#temporals.format(
+				                                request.appliedAt,
+				                                'yyyy.MM.dd')}">
+				                    2026.09.15
+				                </span>
+
+				                <span>신청</span>
+
+				            </div>
+
+
+				            <p class="request-message"
+				               th:text="${request.message}">
+				                토익 시험 공부 함께 하고 싶어 신청하였습니다!
+				            </p>
+
+				        </div>
+
+
+				        <div class="request-actions">
+
+				            <button type="button"
+				                    class="reject-button"
+				                    th:data-member-id="${request.memberId}">
+				                거절
+				            </button>
+
+				            <button type="button"
+				                    class="approve-button"
+				                    th:data-member-id="${request.memberId}">
+				                수락
+				            </button>
+
+				        </div>
+
+				    </div>
+
+				</div>
+			</div>
+
+		</section>
+
+	</main>
+
+	<script th:src="@{/js/study/manage/requests.js}"></script>
+	<script th:src="@{/js/common/study-manage-header.js}"></script>
+
+
+</body>
+
+</html>

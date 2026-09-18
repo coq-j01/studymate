@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+
+<header th:fragment="manageHeader"
+	        class="study-manage-header">
+
+    <div class="manage-header-title">
+
+        <a th:href="@{/study/{studyId}/home(studyId=${studyId})}"
+           class="manage-back-button">
+
+            <i class="bi bi-arrow-left"></i>
+
+        </a>
+
+        <h1>스터디 관리</h1>
+
+    </div>
+
+
+    <nav class="manage-header-nav">
+
+        <!-- 가입 신청 -->
+		<a th:href="@{/study/{studyId}/manage/requests(studyId=${studyId})}"
+		       id = "requestMenu" class="manage-menu">
+		        가입신청
+		    </a>
+
+		    <a th:href="@{/study/{studyId}/manage/members(studyId=${studyId})}"
+		       id="memberMenu" class="manage-menu">
+		        스터디원
+		    </a>
+
+		    <a th:href="@{/study/{studyId}/manage/settings(studyId=${studyId})}"
+		       id="settingMenu" class="manage-menu">
+		        스터디설정
+		    </a>
+
+    </nav>
+
+</header>
+
+</html>

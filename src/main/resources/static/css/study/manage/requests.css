@@ -1,0 +1,197 @@
+body {
+    background-color: #FFFFFF;
+}
+/* ===================================
+   가입 신청 관리
+=================================== */
+
+.manage-page {
+    width: min(1080px, calc(100% - 48px));
+    margin: 0 auto;
+    padding-bottom: 80px;
+}
+
+
+/* ===================================
+   신청 목록
+=================================== */
+
+.request-container {
+    padding-top: 24px;
+}
+
+.request-title-area {
+	
+    margin: 22px 0;
+}
+
+.request-title-area h3 {
+    margin: 0 0 7px;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    color: #222222;
+}
+
+.request-title-area p {
+    margin: 0;
+
+    color: #777777;
+
+    font-size: 13px;
+}
+
+.request-list {
+    width: 100%;
+}
+
+/* 신청자 한 명 */
+.request-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    padding: 18px 0;
+
+    border-bottom: 1px solid #EEEEF3;
+}
+
+
+/* 왼쪽 내용 */
+.request-content {
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* 닉네임 / 성별 / 신청일 */
+.request-info {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    margin-bottom: 7px;
+
+    color: #999999;
+
+    font-size: 12px;
+}
+
+
+/* 닉네임 */
+.request-info strong {
+    margin-right: 3px;
+
+    color: #222222;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+/* 신청 메시지 */
+.request-message {
+    margin: 0;
+
+    color: #777777;
+
+    font-size: 13px;
+    line-height: 1.5;
+
+    white-space: pre-line;
+    word-break: break-word;
+}
+
+
+/* ===================================
+   승인 / 거절 버튼
+=================================== */
+
+.request-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    flex-shrink: 0;
+}
+
+
+.reject-button,
+.approve-button {
+    width: 58px;
+    height: 38px;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+
+/* 거절 */
+.reject-button {
+    border: 1px solid #FF8A8A;
+
+    background-color: #FFFFFF;
+
+    color: #FF6B6B;
+}
+
+.reject-button:hover {
+    background-color: #FFF5F5;
+}
+
+
+/* 승인 */
+.approve-button {
+    border: none;
+
+    background-color: #6366F1;
+
+    color: #FFFFFF;
+}
+
+.approve-button:hover {
+    background-color: #5558E8;
+}
+
+
+/* 마지막 신청자 아래 선 제거 */
+.request-item:last-child {
+    border-bottom: none;
+}
+
+
+/* ===================================
+   신청자가 없을 때
+=================================== */
+
+.empty-request {
+    min-height: 250px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    color: #9CA3AF;
+}
+
+.empty-request i {
+    font-size: 32px;
+}
+
+.empty-request p {
+    margin: 0;
+
+    font-size: 13px;
+}
