@@ -23,7 +23,7 @@ public class StudyBoardController {
 	private final StudyMemberService studyMemberService;
 	
 	@ModelAttribute
-	public void addStudyId(
+	public void addStudy(
 	        @PathVariable int studyId,
 	        Model model) {
 
@@ -84,6 +84,7 @@ public class StudyBoardController {
 		model.addAttribute("memberList", studyMemberService.getStudyMemberList(studyId));
 		
 		model.addAttribute("maxMember", studyService.getMaxMember(studyId));
+		model.addAttribute("loginId", userDetails.getMemberId());
 		
 		return "study/board/members";
 	}
