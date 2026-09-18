@@ -64,9 +64,9 @@ public class StudyServiceImpl implements StudyService {
 			return status;
 		}
 		// 2. 가입 신청서가 있는지 확인
-		int requestCount = studyJoinRequestMapper.countJoinRequest(studyId, memberId);
+		boolean existRequest = studyJoinRequestMapper.existsJoinRequest(studyId, memberId);
 
-		if (requestCount > 0) {
+		if (existRequest) {
 			return "PENDING";
 		}
 
@@ -110,13 +110,13 @@ public class StudyServiceImpl implements StudyService {
 	    }
 	    
 	 // 이미 신청했는지
-	    int requestCount =
-	            studyJoinRequestMapper.countJoinRequest(
+	    boolean existRequest =
+	            studyJoinRequestMapper.existsJoinRequest(
 	                    studyId,
 	                    memberId
 	            );
 
-	    if (requestCount > 0) {
+	    if (existRequest) {
 	        throw new IllegalStateException(
 	                "이미 신청한 스터디입니다."
 	        );
