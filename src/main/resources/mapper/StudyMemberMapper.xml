@@ -9,17 +9,15 @@
 		insert into study_member(
 		study_id,
 		member_id,
-		joined_at,
 		member_status
 		)values(
 		#{studyId},
 		#{memberId},
-		current_timestamp,
 		'ACTIVE'
 		)
 	</insert>
 	<!--일반회원-->
-	<insert id="insertPendingMember">
+	<insert id="insertStudyMember">
 		insert into study_member(
 		study_id,
 		member_id,
@@ -27,7 +25,7 @@
 		)values(
 		#{studyId},
 		#{memberId},
-		'PENDING'
+		'ACTIVE'
 		)
 	</insert>
 	
@@ -46,23 +44,6 @@
 		where study_id = #{studyId}
 		and member_status = 'ACTIVE'
 	</select>
-
-    <!--가입 신청 승인-->
-	<update id="approveStudyMember">
-		update study_member
-		set member_status = 'ACTIVE',
-		joined_at = current_timestamp
-		where study_id = #{studyId}
-		and member_id = #{memberId}
-		and member_status = 'PENDING'
-	</update>
-
-    <!--가입 신청 거절-->
-    <delete id="rejectStudyMember">
-    	delete from study_member
-    	where study_id = #{studyId}
-			and member_id = #{memberId}
-    </delete>
     
     <!--탈퇴 / 강퇴-->
 	<update id="inactiveStudyMember">
@@ -78,14 +59,6 @@
     	from study_member
     	where study_id = #{studyId}
     		and member_status = 'ACTIVE'
-    </select>
-
-    <!--가입 신청 목록-->
-    <select id="findPendingMembers" resultType="com.studymate.domain.StudyMember">
-    	select *
-    	from study_member
-    	where study_id = #{studyId}
-    		and member_status = 'PENDING'
     </select>
 
 </mapper>
