@@ -48,16 +48,25 @@
 
 
 .member-card {
-    min-height: 110px;
+	min-height: 110px;
 
-    padding: 24px 28px;
+	    display: flex;
 
-    border: 1px solid #E8EAF3;
-    border-radius: 10px;
+	    align-items: center;
 
-    background-color: #FFFFFF;
+	    justify-content: space-between;
 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+	    gap: 20px;
+
+	    padding: 24px 28px;
+
+	    border: 1px solid #E8EAF3;
+
+	    border-radius: 10px;
+
+	    background-color: #FFFFFF;
+
+	    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
 }
 
 
@@ -102,4 +111,42 @@
     color: #999999;
 
     font-size: 11px;
+}
+
+
+/*  탈퇴 버튼  */
+.leave-study-area {
+
+    flex-shrink: 0;
+
+}
+
+
+.leave-button {
+
+    width: 58px;
+
+    height: 36px;
+
+    border: 1px solid #FF8A8A;
+
+    border-radius: 8px;
+
+    background-color: #FFFFFF;
+
+    color: #FF6B6B;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+}
+
+
+.leave-button:hover {
+
+    background-color: #FFF5F5;
+
 }

@@ -10,6 +10,11 @@
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
+	<!-- CSRF -->
+	<meta name="_csrf" th:content="${_csrf.token}">
+
+	<meta name="_csrf_header" th:content="${_csrf.headerName}">
+
 	<link rel="stylesheet" th:href="@{/css/common/header.css}">
 	<link rel="stylesheet" th:href="@{/css/common/study-header.css}">
 	<link rel="stylesheet" th:href="@{/css/study/members.css}">
@@ -46,35 +51,46 @@
 
 				<article class="member-card" th:each="member : ${memberList}">
 
-					<div class="member-name-area">
+					<div class="member-card-content">
 
-						<strong class="member-name" th:text="${member.nickname}">
-							스터디장
-						</strong>
+						<div class="member-name-area">
 
-						<!-- 스터디장 -->
-						<span class="leader-badge" th:if="${member.leader}">
-							스터디장
-						</span>
+							<strong class="member-name" th:text="${member.nickname}">
+								정채빈
+							</strong>
+
+							<span class="leader-badge" th:if="${member.leader}">
+								스터디장
+							</span>
+
+						</div>
+
+
+						<div class="member-info">
+
+							<span th:text="${member.gender == 'M' ? '남' : '여'}">
+								여
+							</span>
+
+							<span>/</span>
+
+							<span th:text="${#temporals.format(member.joinedAt, 'yyyy.MM.dd')}">
+								2026.09.18
+							</span>
+
+							<span>가입</span>
+
+						</div>
 
 					</div>
 
 
-					<div class="member-info">
+					<!-- 로그인한 본인이면서 스터디장이 아닐 때 -->
+					<div class="leave-study-area" th:if="${!member.leader && member.memberId == loginId}">
 
-						<span th:text="${member.gender == 'M' ? '남' : '여'}">
-							여
-						</span>
-
-						<span>/</span>
-
-						<span th:text="${#temporals.format(
-                                member.joinedAt,
-                                'yyyy.MM.dd')}">
-							2026.08.15
-						</span>
-
-						<span>가입</span>
+						<button type="button" id="leaveStudyButton" class="leave-button">
+							탈퇴
+						</button>
 
 					</div>
 
@@ -87,5 +103,7 @@
 	</main>
 
 </body>
+<script th:src="@{/js/common/study-header.js}"></script>
+<script th:src="@{/js/study/members.js}"></script>
 
 </html>
