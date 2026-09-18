@@ -30,4 +30,12 @@ public interface StudyMapper {
 	List<Study> findMyStudyList(int memberId);
 	//내 스터디 갯수 조회,페이징 시 사용
 	int countMyStudyList(int memberId);
+	
+	// 스터디장 여부 확인
+	boolean isStudyLeader(
+	        @Param("studyId") int studyId,
+	        @Param("memberId") int memberId
+	);
+	// 스터디 최대 인원 조회
+	int findMaxMember(int studyId);
 }

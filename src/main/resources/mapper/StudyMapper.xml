@@ -132,4 +132,23 @@
 		where sm.member_id = #{memberId}
 		and sm.member_status = 'ACTIVE'
 	</select>
+	
+	<!--스터디장 여부 확인-->
+	<select id="isStudyLeader" resultType="boolean">
+
+    select exists (
+        select 1
+        from study
+        where study_id = #{studyId}
+          and leader_id = #{memberId}
+    )
+
+	</select>
+	<!--스터디 최대 인원 확인-->
+	<select id="findMaxMember" resultType="int">
+   		select max_member
+    	from study
+    	where study_id = #{studyId}
+	</select>
+
 </mapper>
