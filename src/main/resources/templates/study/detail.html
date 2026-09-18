@@ -30,7 +30,7 @@
 <body>
 
 	<!-- 공통 Header -->
-	<div th:replace="fragments/header :: header"></div>
+	<header th:replace="~{fragments/header :: header}"></header>
 
 
 	<main class="detail-page">
@@ -173,7 +173,7 @@
 
 						<!-- 현재 스터디원 -->
 						<a th:if="${study.studyStatus != 'ENDED'
-				               and status == 'ACTIVE'}" th:href="@{/study/{studyId}/dashboard(studyId=${study.studyId})}"
+				               and status == 'ACTIVE'}" th:href="@{/study/{studyId}/home(studyId=${study.studyId})}"
 							class="action-button primary-button">
 							스터디 입장하기
 						</a>
