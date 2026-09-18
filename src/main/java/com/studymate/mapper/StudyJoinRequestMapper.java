@@ -13,9 +13,6 @@ public interface StudyJoinRequestMapper {
 	boolean existsJoinRequest(@Param("studyId") int studyId,
 		    @Param("memberId") int memberId);
 	
-	//스터디에 신청자 수 조회
-	int countJoinRequest(int studyId);
-	
 	// 신청서 등록
     int insertJoinRequest(
             @Param("studyId") int studyId,

@@ -4,17 +4,12 @@
 <mapper namespace="com.studymate.mapper.StudyJoinRequestMapper">
 	<!--스터디에 신청한 사용자인지 확인-->
 	<select id="existsJoinRequest" resultType="boolean">
-    select 1
-    from study_join_request
-    where study_id = #{studyId}
-      and member_id = #{memberId}
-	</select>
-	
-	<!--스터디 신청자 수 조회-->
-	<select id="countJoinRequest" resultType="int">
-    select count(*)
-    from study_join_request
-    where study_id = #{studyId}
+    select exists (
+        select 1
+        from study_join_request
+        where study_id = #{studyId}
+          and member_id = #{memberId}
+    )
 	</select>
 	
 	<!--신청서 등록-->
