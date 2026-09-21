@@ -39,8 +39,8 @@ public class StudyBoardController {
 
 			return "redirect:/study/detail/" + studyId;
 		}
-		model.addAttribute("recentNoticeList", studyPostService.getPostList(studyId, "NOTICE", 2));
-		model.addAttribute("recentAttendnaceList", studyPostService.getPostList(studyId, "ATTENDANCE", 2));
+		model.addAttribute("recentNoticeList", studyPostService.getPostList(studyId, "NOTICE", 3));
+		model.addAttribute("recentAttendnaceList", studyPostService.getPostList(studyId, "ATTENDANCE", 3));
 
 		return "study/board/home";
 	}
@@ -150,5 +150,10 @@ public class StudyBoardController {
 		studyPostService.updatePost(postId, userDetails.getMemberId(), studyPostDTO);
 		return "redirect:/study/" + studyId + "/board/" + postId;
 	}
-
+	@PostMapping("/board/{postId}/delete")
+	public String deleteEdit(@PathVariable int studyId, @PathVariable int postId,
+			@AuthenticationPrincipal CustomUserDetails userDetails, StudyPostDTO studyPostDTO) {
+		studyPostService.deletePost(postId, userDetails.getMemberId());
+		return "redirect:/study/" + studyId + "/home";
+	}
 }

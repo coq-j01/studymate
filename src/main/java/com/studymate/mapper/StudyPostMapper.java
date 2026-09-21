@@ -18,6 +18,8 @@ public interface StudyPostMapper {
 	
 	int updateBoard(@Param("postId") int postId, @Param("studyPostDTO") StudyPostDTO studyPostDTO);
 	
+	int deleteBoard(int postId);
+	
 	StudyPost findPostById(int postId);
 	
 	boolean isLiked(@Param("postId") int postId, @Param("memberId") int memberId);

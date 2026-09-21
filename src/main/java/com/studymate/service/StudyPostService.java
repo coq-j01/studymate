@@ -16,6 +16,9 @@ public interface StudyPostService {
 	//게시글 update
 	public int updatePost(int postId, int memberId, StudyPostDTO studyPostDTO);
 	
+	//게시글 delete
+	public int deletePost(int postId, int memberId);
+	
 	//게시글 단건 조회
 	public StudyPost findPost(int postId);
 	

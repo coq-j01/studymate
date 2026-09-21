@@ -67,4 +67,13 @@ public class StudyPostServiceImpl implements StudyPostService {
 		}
 		return studyPostMapper.updateBoard(postId, studyPostDTO);
 	}
+
+	@Override
+	public int deletePost(int postId, int memberId) {
+		StudyPost post = studyPostMapper.findPostById(postId);
+		if(post.getMemberId() != memberId) {
+			throw new IllegalStateException("게시글 삭제 권한이 없습니다.");
+		}
+		return studyPostMapper.deleteBoard(postId);
+	}
 }

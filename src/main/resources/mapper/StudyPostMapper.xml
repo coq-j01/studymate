@@ -47,6 +47,11 @@
 		where post_id = #{postId}
 	</update>
 	
+	<delete id="deleteBoard">
+		delete from study_post
+		where post_id = #{postId}
+	</delete>
+	
 	<select id="findPostById"
 		resultType="com.studymate.domain.StudyPost">
 		select p.*, m.nickname,
