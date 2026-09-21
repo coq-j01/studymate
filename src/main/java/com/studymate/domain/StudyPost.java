@@ -13,7 +13,7 @@ public class StudyPost {
 	private String title;
 	private String content;
 	private LocalDateTime createdAt;
-	private LocalDateTime updateAt;
+	private LocalDateTime updatedAt;
 	
 	private String nickname;
 	private int likeCount;

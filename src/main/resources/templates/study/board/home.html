@@ -73,7 +73,7 @@
 
                 <a class="notice-item"
                    th:each="notice : ${recentNoticeList}"
-                   th:href="@{/study/{studyId}/notice/{postId}
+                   th:href="@{/study/{studyId}/board/{postId}
                             (studyId=${study.studyId},
                              postId=${notice.postId})}">
 
@@ -81,17 +81,15 @@
                         이번주 오프라인입니다!
                     </strong>
 					
-					<!--하트 icon 들어가야함-->
-					<span th:text="${post.likeCount}">0</span>
+					<span class="like-info">
+					        <i class="bi bi-heart"></i>
+					        <span th:text="${notice.likeCount}">0</span>
+					    </span>
 
-                    <span th:text="${#temporals.format(
-                            notice.createdAt,
-                            'yyyy.MM.dd')}">
-
-                        2026.09.10
-
-                    </span>
-
+					    <span class="post-date"
+					          th:text="${#temporals.format(notice.createdAt, 'yyyy.MM.dd')}">
+					        2026.09.18
+					    </span>
                 </a>
 
 
@@ -134,7 +132,7 @@
 
                 <a class="board-item"
                    th:each="post : ${recentAttendnaceList}"
-                   th:href="@{/study/{studyId}/attendance/{postId}
+                   th:href="@{/study/{studyId}/board/{postId}
                             (studyId=${study.studyId},
                              postId=${post.postId})}">
 
@@ -153,7 +151,11 @@
                         정채빈
 
                     </span>
-
+					
+					<span class="like-info">
+					        <i class="bi bi-heart"></i>
+					        <span th:text="${post.likeCount}">0</span>
+					    </span>
 
                     <span class="post-date"
                           th:text="${#temporals.format(

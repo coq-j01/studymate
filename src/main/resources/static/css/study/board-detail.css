@@ -1,0 +1,327 @@
+body {
+    background-color: #FFFFFF;
+}
+
+
+/* ===================================
+   상세 페이지
+=================================== */
+
+.post-detail-page {
+    width: min(1080px, calc(100% - 48px));
+
+    margin: 0 auto;
+
+    padding-top: 24px;
+    padding-bottom: 80px;
+}
+
+
+/* ===================================
+   뒤로가기
+=================================== */
+
+.back-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+
+    margin-bottom: 42px;
+
+    color: #777777;
+    font-size: 24px;
+}
+
+.back-button:hover {
+    color: #6366F1;
+}
+
+
+/* ===================================
+   게시글 영역
+=================================== */
+
+.post-detail {
+    width: min(860px, 100%);
+
+    margin: 0 auto;
+}
+
+
+/* ===================================
+   게시글 헤더
+=================================== */
+
+.post-header {
+    padding: 0 16px 20px;
+
+    border-bottom: 1px solid #E8EAF3;
+}
+
+
+/* 게시글 타입 Badge */
+
+.post-type {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 64px;
+
+    margin-bottom: 10px;
+    padding: 5px 12px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* 공지 */
+
+.post-type.notice {
+    background-color: #EDF0FE;
+    color: #6366F1;
+}
+
+
+/* 인증 */
+
+.post-type.attendance {
+    background-color: #EDF0FE;
+    color: #6366F1;
+}
+
+
+/* 제목 */
+
+.post-header h1 {
+    margin: 0 0 12px;
+
+    color: #222222;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    line-height: 1.4;
+}
+
+
+/* 작성자 / 날짜 */
+
+.post-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    color: #999999;
+    font-size: 12px;
+}
+
+.post-info strong {
+    color: #444444;
+    font-weight: 600;
+}
+
+.post-info .edited {
+    margin-left: -8px;
+    color: #999999;
+}
+
+.updated-date {
+    color: #999999;
+    font-size: 12px;
+}
+
+
+/* ===================================
+   본문
+=================================== */
+
+.post-content {
+    min-height: 150px;
+
+    margin: 22px 52px 0;
+    padding: 16px 18px;
+
+    border: 1px solid #E8EAF3;
+    border-radius: 10px;
+
+    background-color: #F8F9FC;
+
+    color: #222222;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    white-space: pre-wrap;
+}
+
+
+/* ===================================
+   좋아요
+=================================== */
+
+.post-reaction {
+    display: flex;
+
+    justify-content: flex-start;
+
+    padding: 18px 52px 26px;
+}
+
+.like-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 7px 11px;
+
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+
+    background-color: #FFFFFF;
+
+    color: #9CA3AF;
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+.like-button i {
+    font-size: 14px;
+}
+
+.like-button:hover {
+    border-color: #C7C9FA;
+
+    background-color: #F8F8FF;
+
+    color: #6366F1;
+}
+
+
+/* 좋아요 누른 상태 */
+
+.like-button.liked {
+    border-color: #C7C9FA;
+
+    background-color: #F4F5FF;
+
+    color: #6366F1;
+}
+
+
+/* ===================================
+   수정 / 삭제
+=================================== */
+
+.post-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    padding: 16px 52px 0;
+
+    border-top: 1px solid #E8EAF3;
+}
+
+.author-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+/* 수정 */
+
+.edit-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 56px;
+    height: 34px;
+
+    border-radius: 8px;
+
+    background-color: #6366F1;
+
+    color: #FFFFFF;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
+}
+
+.edit-button:hover {
+    background-color: #5558E8;
+}
+
+
+/* 삭제 */
+
+.delete-button {
+    min-width: 56px;
+    height: 34px;
+
+    border: 1px solid #EF4444;
+    border-radius: 8px;
+
+    background-color: #FFFFFF;
+
+    color: #EF4444;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #FFF5F5;
+}
+
+
+/* ===================================
+   반응형
+=================================== */
+
+@media (max-width: 720px) {
+
+    .post-detail-page {
+        width: calc(100% - 32px);
+    }
+
+    .post-content {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .post-reaction {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .post-actions {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+}

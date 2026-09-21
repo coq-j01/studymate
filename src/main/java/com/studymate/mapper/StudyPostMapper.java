@@ -15,4 +15,16 @@ public interface StudyPostMapper {
 	
 	int insertBoard(@Param("studyId") int studyId, @Param("memberId") int memberId, @Param("postType") String postType,
 			@Param("studyPostDTO") StudyPostDTO studyPostDTO);
+	
+	int updateBoard(@Param("postId") int postId, @Param("studyPostDTO") StudyPostDTO studyPostDTO);
+	
+	StudyPost findPostById(int postId);
+	
+	boolean isLiked(@Param("postId") int postId, @Param("memberId") int memberId);
+	
+	//좋아요
+	int insertLiked(@Param("postId") int postId, @Param("memberId") int memberId);
+	
+	//좋아요취소
+	int deleteLiked(@Param("postId") int postId, @Param("memberId") int memberId);
 }

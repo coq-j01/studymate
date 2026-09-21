@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>게시글 상세 | StudyMate</title>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+	<link rel="stylesheet" th:href="@{/css/common/common.css}">
+
+	<link rel="stylesheet" th:href="@{/css/common/header.css}">
+
+	<link rel="stylesheet" th:href="@{/css/study/board-detail.css}">
+</head>
+
+<body>
+
+	<!-- 사이트 공통 헤더 -->
+	<header th:replace="~{fragments/header :: header}"></header>
+
+
+	<main class="post-detail-page" th:with="boardType=${post.postType == 'NOTICE' ? 'notice' : 'attendance'}">
+
+		<!-- =========================
+         뒤로가기
+    ========================== -->
+		<a class="back-button" th:href="@{/study/{studyId}/{boardType}
+                (studyId=${study.studyId},
+                 boardType=${boardType})}">
+
+			<i class="bi bi-arrow-left"></i>
+
+		</a>
+
+
+		<!-- =========================
+         게시글
+    ========================== -->
+		<article class="post-detail">
+
+			<!-- 게시글 헤더 -->
+			<header class="post-header">
+
+				<!-- 타입 -->
+				<span class="post-type" th:classappend="${post.postType == 'NOTICE'}
+                                  ? ' notice'
+                                  : ' attendance'" th:text="${post.postType == 'NOTICE'}
+                           ? '공지'
+                           : '인증'">
+					인증
+				</span>
+
+
+				<!-- 제목 -->
+				<h1 th:text="${post.title}">
+					토익 모의고사 2회차 풀이했습니다
+				</h1>
+
+
+				<!-- 작성자 / 작성일 -->
+				<div class="post-info">
+
+					<strong th:text="${post.nickname}">
+						홍길동
+					</strong>
+
+					<span th:text="${#temporals.format(
+                        post.createdAt,
+                        'yyyy.MM.dd HH:mm:ss')}">
+						2026.09.15 17:30:55
+					</span>
+
+					<!-- 수정된 글 -->
+					<!-- <span class="edited"
+                      th:if="${post.updatedAt != null}">
+                    (수정됨)
+                </span>-->
+					<span class="updated-date" th:if="${post.updatedAt != null}">
+						· 수정
+						<span th:text="${#temporals.format(
+				                post.updatedAt,
+				                'yyyy.MM.dd HH:mm')}">
+							2026.09.21 11:05
+						</span>
+					</span>
+
+				</div>
+
+			</header>
+
+
+			<!-- =========================
+             본문
+        ========================== -->
+			<section class="post-content" th:text="${post.content}">
+
+				오늘 토익 2026 2회차 모의고사 풀이하였습니다.
+				RC에서 10개 LC에서 14개를 틀려
+				내일부터 LC 공부를 더 열심히 할 계획입니다.
+
+			</section>
+
+
+			<!-- =========================
+             좋아요
+        ========================== -->
+			<div class="post-reaction">
+
+				<form th:action="@{/study/{studyId}/board/{postId}/like
+                             (studyId=${study.studyId},
+                              postId=${post.postId})}" method="post">
+
+					<button type="submit" class="like-button" th:classappend="${liked} ? ' liked' : ''">
+
+						<i th:class="${liked}
+                                 ? 'bi bi-heart-fill'
+                                 : 'bi bi-heart'">
+						</i>
+
+						<span th:text="${post.likeCount}">
+							0
+						</span>
+
+					</button>
+
+				</form>
+
+			</div>
+
+
+			<!-- =========================
+             하단 버튼
+        ========================== -->
+			<footer class="post-actions">
+
+				<!-- 작성자에게만 수정 / 삭제 표시 -->
+				<div class="author-actions" th:if="${post.memberId == #authentication.principal.memberId}">
+
+					<!-- 수정 -->
+					<a class="edit-button" th:href="@{/study/{studyId}/board/{postId}/edit
+                            (studyId=${study.studyId},
+                             postId=${post.postId})}">
+						수정
+					</a>
+
+
+					<!-- 삭제 -->
+					<form th:action="@{/study/{studyId}/board/{postId}/delete
+                                 (studyId=${study.studyId},
+                                  postId=${post.postId})}" method="post" onsubmit="return confirm('게시글을 삭제하시겠습니까?');">
+
+						<button type="submit" class="delete-button">
+							삭제
+						</button>
+
+					</form>
+
+				</div>
+
+			</footer>
+
+		</article>
+
+	</main>
+
+</body>
+
+</html>

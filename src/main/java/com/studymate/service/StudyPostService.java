@@ -12,4 +12,16 @@ public interface StudyPostService {
 	
 	//게시글 insert
 	public int insertPost(int studyId, int memberId, String postType, StudyPostDTO studyPostDTO);
+	
+	//게시글 update
+	public int updatePost(int postId, int memberId, StudyPostDTO studyPostDTO);
+	
+	//게시글 단건 조회
+	public StudyPost findPost(int postId);
+	
+	//사용자가 좋아요 눌렀는지 확인
+	public boolean isLiked(int postId, int memberId);
+	
+	//좋아요 누르기/취소
+	public int toggleLike(int postId, int memberId);
 }

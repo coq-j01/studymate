@@ -38,4 +38,33 @@ public class StudyPostServiceImpl implements StudyPostService {
 		}
 		return studyPostMapper.insertBoard(studyId, memberId, postType, studyPostDTO);
 	}
+
+	@Override
+	public StudyPost findPost(int postId) {
+	    return studyPostMapper.findPostById(postId);
+	}
+
+	@Override
+	public boolean isLiked(int postId, int memberId) {
+		return studyPostMapper.isLiked(postId, memberId);
+	}
+
+	@Override
+	public int toggleLike(int postId, int memberId) {
+		if(studyPostMapper.isLiked(postId, memberId)) {
+			//이미 좋아요 되어있음
+			return studyPostMapper.deleteLiked(postId, memberId);
+		}else {
+			return studyPostMapper.insertLiked(postId, memberId);
+		}
+	}
+
+	@Override
+	public int updatePost(int postId, int memberId, StudyPostDTO studyPostDTO) {
+		StudyPost post = studyPostMapper.findPostById(postId);
+		if(post.getMemberId() != memberId) {
+			throw new IllegalStateException("게시글 수정 권한이 없습니다.");
+		}
+		return studyPostMapper.updateBoard(postId, studyPostDTO);
+	}
 }

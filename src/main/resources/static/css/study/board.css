@@ -113,36 +113,36 @@ body {
 =================================== */
 
 .notice-item {
-
     min-height: 42px;
 
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 90px 50px 82px;
 
     align-items: center;
-
-    justify-content: space-between;
+    gap: 16px;
 
     padding: 0 18px;
 
     border: 1px solid #E8EAF3;
-
     border-radius: 8px;
 
     background-color: #FFFFFF;
-
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
-
 }
 
 
 .notice-item strong {
+    grid-column: 1 / 3;
+
+    min-width: 0;
+    overflow: hidden;
 
     color: #222222;
-
     font-size: 13px;
-
     font-weight: 600;
 
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 
@@ -161,33 +161,60 @@ body {
 
 }
 
+.notice-item .like-info {
+    grid-column: 3;
+    justify-self: center;
+}
+
+.notice-item .post-date {
+    grid-column: 4;
+    justify-self: end;
+}
+
+/* ===================================
+   좋아요 정보
+=================================== */
+
+.like-info {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 4px;
+
+    color: #9CA3AF;
+    font-size: 11px;
+
+    white-space: nowrap;
+}
+
+.like-info i {
+    font-size: 12px;
+    line-height: 1;
+}
 
 /* ===================================
    인증 게시글
 =================================== */
 
 .board-item {
-
-    min-height: 42px;
-
+	min-height: 42px;
+	
     display: grid;
-
-    grid-template-columns: 1fr 100px 90px;
+    grid-template-columns: minmax(0, 1fr) 90px 50px 82px;
 
     align-items: center;
 
-    gap: 18px;
+    gap: 16px;
 
     padding: 0 18px;
 
     border: 1px solid #E8EAF3;
-
     border-radius: 8px;
 
     background-color: #FFFFFF;
 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
-
 }
 
 
@@ -199,32 +226,33 @@ body {
 
 
 .post-title {
+    min-width: 0;
 
     overflow: hidden;
 
     color: #222222;
-
     font-size: 13px;
-
     font-weight: 600;
 
     text-overflow: ellipsis;
-
     white-space: nowrap;
-
 }
 
 
 .post-writer {
+    overflow: hidden;
 
     color: #555555;
-
     font-size: 12px;
 
     text-align: center;
-
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
+.board-item .like-info {
+    justify-self: center;
+}
 
 .post-date {
 
@@ -233,6 +261,7 @@ body {
     font-size: 11px;
 
     text-align: right;
+	white-space: nowrap;
 
 }
 

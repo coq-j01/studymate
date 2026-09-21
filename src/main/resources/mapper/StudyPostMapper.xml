@@ -38,4 +38,52 @@
 			#{studyPostDTO.content}
 		)
 	</insert>
+	
+	<update id="updateBoard">
+		update study_post
+		set title = #{studyPostDTO.title},
+			content = #{studyPostDTO.content},
+			updated_at = CURRENT_TIMESTAMP
+		where post_id = #{postId}
+	</update>
+	
+	<select id="findPostById"
+		resultType="com.studymate.domain.StudyPost">
+		select p.*, m.nickname,
+        (
+            SELECT COUNT(*)
+            FROM post_like pl
+            WHERE pl.post_id = p.post_id
+        ) AS like_count
+		from study_post p 
+		join member m 
+		on p.member_id = m.member_id 
+		where p.post_id= #{postId}
+	</select>
+
+	<select id="isLiked"
+		resultType="boolean">
+		select exists(
+			select 1
+			from post_like
+			where post_id = #{postId}
+				and member_id = #{memberId}
+		)
+	</select>
+	
+	<insert id="insertLiked">
+		insert into post_like(
+			post_id,
+			member_id
+		)values(
+			#{postId},
+			#{memberId}
+		)
+	</insert>
+	
+	<delete id="deleteLiked">
+		delete from post_like
+		where post_id = #{postId}
+			and member_id = #{memberId}
+	</delete>
 </mapper>

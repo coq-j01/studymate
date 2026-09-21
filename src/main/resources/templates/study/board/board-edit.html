@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 수정 | StudyMate</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/common.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/header.css}">
+
+    <!-- 작성 페이지 CSS 그대로 재사용 -->
+    <link rel="stylesheet"
+          th:href="@{/css/study/write.css}">
+</head>
+
+<body>
+
+<!-- 공통 헤더 -->
+<header th:replace="~{fragments/header :: header}"></header>
+
+
+<main class="write-page">
+
+    <!-- =========================
+         상단 제목
+    ========================== -->
+    <div class="write-title-area">
+
+        <a th:href="@{/study/{studyId}/board/{postId}(
+                studyId=${studyId},
+                postId=${post.postId})}"
+           class="back-button">
+
+            <i class="bi bi-arrow-left"></i>
+        </a>
+
+        <h1>게시글 수정</h1>
+
+    </div>
+
+
+    <!-- =========================
+         수정 폼
+    ========================== -->
+    <section class="write-form-area">
+
+        <form th:action="@{/study/{studyId}/board/{postId}/edit(
+                studyId=${studyId},
+                postId=${post.postId})}"
+              method="post">
+
+            <!-- 게시글 유형 -->
+            <div class="form-row">
+
+                <label class="form-label">
+                    게시글 유형
+                </label>
+
+                <div class="post-type">
+
+                    <span class="type-dot"></span>
+
+                    <span th:text="${post.postType == 'NOTICE'
+                            ? '공지사항'
+                            : '인증 게시글'}">
+                        인증 게시글
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- 제목 -->
+            <div class="form-row">
+
+                <label for="title"
+                       class="form-label">
+                    게시글 제목
+                </label>
+
+                <input type="text"
+                       id="title"
+                       name="title"
+                       maxlength="20"
+                       class="title-input"
+                       th:value="${post.title}"
+                       required>
+
+            </div>
+
+
+            <!-- 내용 -->
+            <div class="form-row content-row">
+
+                <label for="content"
+                       class="form-label">
+                    내용
+                </label>
+
+                <textarea id="content"
+                          name="content"
+                          class="content-input"
+                          required
+                          th:text="${post.content}"></textarea>
+
+            </div>
+
+
+            <!-- 버튼 -->
+            <div class="button-area">
+
+                <a th:href="@{/study/{studyId}/board/{postId}(
+                        studyId=${studyId},
+                        postId=${post.postId})}"
+                   class="cancel-button">
+                    취소
+                </a>
+
+                <button type="submit"
+                        class="submit-button">
+                    수정하기
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+</main>
+
+</body>
+</html>
