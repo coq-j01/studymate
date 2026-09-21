@@ -10,8 +10,8 @@ import com.studymate.dto.StudyPostDTO;
 
 @Mapper
 public interface StudyPostMapper {
-	List<StudyPost> findPostList( @Param("studyId") int studyId, 
-			@Param("postType") String postType, @Param("limit") Integer limit);
+	List<StudyPost> findPostList( @Param("studyId") int studyId, @Param("postType") String postType,
+			@Param("limit") int limit, @Param("offset") Integer offset);
 	
 	int insertBoard(@Param("studyId") int studyId, @Param("memberId") int memberId, @Param("postType") String postType,
 			@Param("studyPostDTO") StudyPostDTO studyPostDTO);
@@ -29,4 +29,6 @@ public interface StudyPostMapper {
 	
 	//좋아요취소
 	int deleteLiked(@Param("postId") int postId, @Param("memberId") int memberId);
+	
+	int countPost(@Param("studyId") int studyId, @Param("postType") String postType);
 }

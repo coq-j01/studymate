@@ -8,7 +8,7 @@ import com.studymate.dto.StudyPostDTO;
 public interface StudyPostService {
 	
 	//게시글 리스트 조회
-	public List<StudyPost> getPostList(int studyId, String postType, Integer limit);
+	public List<StudyPost> getPostList(int studyId, String postType, int limit, Integer offset);
 	
 	//게시글 insert
 	public int insertPost(int studyId, int memberId, String postType, StudyPostDTO studyPostDTO);
@@ -27,4 +27,7 @@ public interface StudyPostService {
 	
 	//좋아요 누르기/취소
 	public int toggleLike(int postId, int memberId);
+	
+	//포스트 전체 수 조회
+	public int countPost(int studyId, String postType);
 }

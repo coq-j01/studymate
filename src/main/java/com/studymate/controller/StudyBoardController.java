@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.studymate.domain.StudyPost;
 import com.studymate.dto.StudyPostDTO;
@@ -39,28 +40,39 @@ public class StudyBoardController {
 
 			return "redirect:/study/detail/" + studyId;
 		}
-		model.addAttribute("recentNoticeList", studyPostService.getPostList(studyId, "NOTICE", 3));
-		model.addAttribute("recentAttendnaceList", studyPostService.getPostList(studyId, "ATTENDANCE", 3));
+		model.addAttribute("recentNoticeList", studyPostService.getPostList(studyId, "NOTICE", 3, null));
+		model.addAttribute("recentAttendnaceList", studyPostService.getPostList(studyId, "ATTENDANCE", 3, null));
 
 		return "study/board/home";
 	}
 
 	@GetMapping("/notice")
-	public String notice(@PathVariable int studyId, @AuthenticationPrincipal CustomUserDetails userDetails,
+	public String notice(@PathVariable int studyId, @RequestParam(defaultValue = "1") int page,
+			@AuthenticationPrincipal CustomUserDetails userDetails,
 			Model model) {
 
 		if (!studyMemberService.canAccessStudy(studyId, userDetails.getMemberId())) {
 
 			return "redirect:/study/detail/" + studyId;
 		}
+		int pageSize = 10;
+		 // 전체 게시글 수
+	    int totalCount = studyPostService.countPost(studyId, "NOTICE");
 
-		model.addAttribute("noticeList", studyPostService.getPostList(studyId, "NOTICE", null));
+	    int totalPages = (int) Math.ceil(
+	            (double) totalCount / pageSize
+	    );
 
+		model.addAttribute("noticeList", studyPostService.getPostList(studyId, "NOTICE", pageSize, page));
+		model.addAttribute("currentPage", page);
+	    model.addAttribute("totalPages", totalPages);
+	    
 		return "study/board/notice";
 	}
 
 	@GetMapping("/attendance")
-	public String attendance(@PathVariable int studyId, @AuthenticationPrincipal CustomUserDetails userDetails,
+	public String attendance(@PathVariable int studyId,@RequestParam(defaultValue = "1") int page,
+			@AuthenticationPrincipal CustomUserDetails userDetails,
 			Model model) {
 
 		if (!studyMemberService.canAccessStudy(studyId, userDetails.getMemberId())) {
@@ -68,8 +80,18 @@ public class StudyBoardController {
 			return "redirect:/study/detail/" + studyId;
 		}
 
-		model.addAttribute("attendanceList", studyPostService.getPostList(studyId, "ATTENDANCE", null));
+		int pageSize = 10;
+		 // 전체 게시글 수
+		int totalCount = studyPostService.countPost(studyId, "ATTENDANCE");
 
+	    int totalPages = (int) Math.ceil(
+	            (double) totalCount / pageSize
+	    );
+		
+		model.addAttribute("attendanceList", studyPostService.getPostList(studyId, "ATTENDANCE", pageSize,page));
+		model.addAttribute("currentPage", page);
+	    model.addAttribute("totalPages", totalPages);
+	    
 		return "study/board/attendance";
 	}
 

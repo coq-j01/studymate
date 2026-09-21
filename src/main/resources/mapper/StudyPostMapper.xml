@@ -18,8 +18,9 @@
 		where p.study_id= #{studyId} 
 		and p.post_type = #{postType} 
 		order by p.created_at desc 
-		<if test="limit != null">
-			limit #{limit}
+		LIMIT #{limit}
+		<if test="offset != null">
+			OFFSET #{offset}
 		</if>
 	</select>
 	
@@ -91,4 +92,11 @@
 		where post_id = #{postId}
 			and member_id = #{memberId}
 	</delete>
+	
+	<select id="countPost" resultType="int">
+		select count(*)
+		from study_post
+		where study_id = #{studyId}
+			and post_type = #{postType}
+	</select>
 </mapper>

@@ -41,22 +41,38 @@ public class StudyController {
 	// 메인페이지(스터디 목록 가져오기)
 	@GetMapping("/main")
 	public String getmain(@RequestParam(required = false) String keyword,
-			@RequestParam(required = false) Integer categoryId, Model model) {
-		List<Study> studyList = studyService.getStudyList(keyword, categoryId);
+			@RequestParam(required = false) Integer categoryId,
+			@RequestParam(defaultValue = "1") int page, Model model) {
+		int size = 6;
+		
+		List<Study> studyList = studyService.getStudyList(keyword, page,size, categoryId);
 
+	    int totalCount = studyService.getStudyCount(keyword, categoryId);
+
+	    int totalPages =(int) Math.ceil((double) totalCount / size);
+	    
 		model.addAttribute("studyList", studyList);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("categoryId", categoryId);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", totalPages);
 
 		return "study/main";
 	}
 
 	// 메인페이지(스터디 목록 가져오기)
 	@GetMapping("/my-study")
-	public String getMyStudy(Model model, @AuthenticationPrincipal CustomUserDetails userDetails) {
-		List<Study> myStudyList = studyService.getMyStudyList(userDetails.getMemberId());
+	public String getMyStudy(Model model, @RequestParam(defaultValue = "1") int page, @AuthenticationPrincipal CustomUserDetails userDetails) {
+		int size = 6;
+		List<Study> myStudyList = studyService.getMyStudyList(userDetails.getMemberId(),page,size);
 
+		int totalCount = studyService.getMyStudyCount(userDetails.getMemberId());
+
+	    int totalPages =(int) Math.ceil((double) totalCount / size);
+	    
 		model.addAttribute("myStudyList", myStudyList);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", totalPages);
 
 		if (userDetails != null) {
 			model.addAttribute("loginMemberId", userDetails.getMemberId());

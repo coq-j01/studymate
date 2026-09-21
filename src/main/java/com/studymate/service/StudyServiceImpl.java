@@ -40,13 +40,15 @@ public class StudyServiceImpl implements StudyService {
 	}
 
 	@Override
-	public List<Study> getStudyList(String keyword, Integer categoryId) {
-		return studyMapper.findStudyList(keyword, categoryId);
+	public List<Study> getStudyList(String keyword, int page, int size, Integer categoryId) {
+	    int offset = (page - 1) * size;
+		return studyMapper.findStudyList(keyword, categoryId, size, offset);
 	}
 
 	@Override
-	public List<Study> getMyStudyList(int memberId) {
-		return studyMapper.findMyStudyList(memberId);
+	public List<Study> getMyStudyList(int memberId, int page, int size) {
+	    int offset = (page - 1) * size;
+		return studyMapper.findMyStudyList(memberId, size, offset);
 	}
 
 	@Override
@@ -152,6 +154,16 @@ public class StudyServiceImpl implements StudyService {
 	@Override
 	public boolean isLeader(int studyId, int memberId) {
 		return studyMapper.isStudyLeader(studyId, memberId);
+	}
+
+	@Override
+	public int getStudyCount(String keyword, Integer categoryId) {
+		return studyMapper.countStudyList(keyword, categoryId);
+	}
+
+	@Override
+	public int getMyStudyCount(int memberId) {
+		return studyMapper.countMyStudyList(memberId);
 	}
 
 }

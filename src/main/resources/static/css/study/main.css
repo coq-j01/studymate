@@ -362,6 +362,58 @@
     font-size: 15px;
 }
 
+/* ===================================
+   Pagination
+=================================== */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 36px;
+}
+
+.page-btn {
+    min-width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 10px;
+
+    border: 1px solid #E8EAF3;
+    border-radius: 8px;
+
+    background-color: #FFFFFF;
+    color: #777777;
+
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.page-btn:hover {
+    background-color: #F4F5FF;
+    border-color: #6366F1;
+    color: #6366F1;
+}
+
+.page-btn.active {
+    background-color: #6366F1;
+    border-color: #6366F1;
+    color: #FFFFFF;
+}
+
+.page-btn.disabled {
+    background-color: #FAFAFA;
+    color: #C5C7CE;
+    border-color: #E8EAF3;
+    cursor: default;
+}
+
 
 /* ========================
    RESPONSIVE

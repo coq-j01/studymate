@@ -103,6 +103,62 @@
 
 				</a>
 			</div>
+			<!-- ========================
+						     PAGINATION
+						========================= -->
+						<div class="pagination"
+						     th:if="${totalPages > 0}">
+
+						    <!-- 이전 -->
+						    <a class="page-btn page-arrow"
+						       th:if="${currentPage > 1}"
+						       th:href="@{/study/main(
+						            page=${currentPage - 1},
+						            keyword=${keyword},
+						            categoryId=${categoryId}
+						       )}">
+
+						        <i class="bi bi-chevron-left"></i>
+						    </a>
+
+						    <span class="page-btn page-arrow disabled"
+						          th:unless="${currentPage > 1}">
+						        <i class="bi bi-chevron-left"></i>
+						    </span>
+
+
+						    <!-- 페이지 번호 -->
+						    <a th:each="pageNum : ${#numbers.sequence(1, totalPages)}"
+						       class="page-btn"
+						       th:classappend="${pageNum == currentPage} ? ' active' : ''"
+						       th:href="@{/study/main(
+						            page=${pageNum},
+						            keyword=${keyword},
+						            categoryId=${categoryId}
+						       )}"
+						       th:text="${pageNum}">
+						        1
+						    </a>
+
+
+						    <!-- 다음 -->
+						    <a class="page-btn page-arrow"
+						       th:if="${currentPage < totalPages}"
+						       th:href="@{/study/main(
+						            page=${currentPage + 1},
+						            keyword=${keyword},
+						            categoryId=${categoryId}
+						       )}">
+
+						        <i class="bi bi-chevron-right"></i>
+						    </a>
+
+						    <span class="page-btn page-arrow disabled"
+						          th:unless="${currentPage < totalPages}">
+						        <i class="bi bi-chevron-right"></i>
+						    </span>
+
+						</div>
 
 		</section>
 

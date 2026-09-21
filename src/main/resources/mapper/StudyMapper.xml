@@ -61,6 +61,8 @@
     	</if>
 
 		order by s.created_at desc
+		LIMIT #{size}
+    	OFFSET #{offset}
 	</select>
 
 	<!--스터디 단건 조회-->
@@ -108,6 +110,13 @@
 		select count(*)
 		from study
 		where study_status = 'RECRUITING'
+		<if test="keyword != null and keyword != ''">
+        AND s.title LIKE CONCAT('%', #{keyword}, '%')
+    	</if>
+
+    	<if test="categoryId != null">
+        	AND s.category_id = #{categoryId}
+    	</if>
 	</select>
 
 	<!-- 내 스터디 목록 조회 -->
@@ -128,6 +137,8 @@
             	when s.study_status = 'ENDED' then 1
         	end,
         	s.created_at desc
+        LIMIT #{size}
+    	OFFSET #{offset}
 	</select>
 
 	<!--내스터디 갯수 조회,페이징 시 사용-->

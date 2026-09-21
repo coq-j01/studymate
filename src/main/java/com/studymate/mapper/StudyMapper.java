@@ -15,7 +15,8 @@ public interface StudyMapper {
 	int insertStudy(@Param("studyDTO") StudyDTO studyDTO,
 		    @Param("leaderId") int leaderId);
 	//스터디 목록 조회
-	List<Study> findStudyList(@Param("keyword") String keyword, @Param("categoryId") Integer categoryId);
+	List<Study> findStudyList(@Param("keyword") String keyword, @Param("categoryId") Integer categoryId,
+			@Param("size") int size, @Param("offset") int offset);
 	//스터디 단건 조회
 	Study findStudyById(int studyId);
 	//스터디 업데이트, 성공여부 반환(0:실패, 1:성공)
@@ -26,10 +27,10 @@ public interface StudyMapper {
 	int closeStudy(int studyId);
 	//스터디 삭제, 성공여부 반환(0:실패, 1:성공)
 	//스터디 갯수 조회,페이징 시 사용
-	int countStudyList();
+	int countStudyList(@Param("keyword") String keyword, @Param("categoryId") Integer categoryId);
 	
 	//내 스터디 목록 조회
-	List<Study> findMyStudyList(int memberId);
+	List<Study> findMyStudyList(@Param("memberId") int memberId, @Param("size") int size, @Param("offset") int offset);
 	//내 스터디 갯수 조회,페이징 시 사용
 	int countMyStudyList(int memberId);
 	

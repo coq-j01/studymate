@@ -20,8 +20,12 @@ public class StudyPostServiceImpl implements StudyPostService {
 	private final StudyMemberService studyMemberService;
 
 	@Override
-	public List<StudyPost> getPostList(int studyId, String postType, Integer limit) {
-		return studyPostMapper.findPostList(studyId, postType, limit);
+	public List<StudyPost> getPostList(int studyId, String postType, int limit, Integer page) {
+		if(page !=null) {
+			int offset = (page - 1) * limit;
+			return studyPostMapper.findPostList(studyId, postType, limit, offset);
+		}
+		return studyPostMapper.findPostList(studyId, postType, limit, null);
 	}
 
 	@Override
@@ -75,5 +79,10 @@ public class StudyPostServiceImpl implements StudyPostService {
 			throw new IllegalStateException("게시글 삭제 권한이 없습니다.");
 		}
 		return studyPostMapper.deleteBoard(postId);
+	}
+
+	@Override
+	public int countPost(int studyId, String postType) {
+		return studyPostMapper.countPost(studyId, postType);
 	}
 }
