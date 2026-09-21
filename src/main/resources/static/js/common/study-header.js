@@ -2,33 +2,43 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const path = window.location.pathname;
 
-    const requestMenu =
-        document.querySelector("#requestMenu");
+    const studyHomeMenu =
+        document.querySelector("#studyHomeMenu");
 
-    const memberMenu =
-        document.querySelector("#memberMenu");
+    const studyNoticeMenu =
+        document.querySelector("#studyNoticeMenu");
 
-    const settingMenu =
-        document.querySelector("#settingMenu");
+    const studyAttendanceMenu =
+        document.querySelector("#studyAttendanceMenu");
 
-    // 신청서
-    if (path.includes("/manage/requests")) {
+    const studyMembersMenu =
+        document.querySelector("#studyMembersMenu");
 
-        requestMenu.classList.add("7");
+    // home
+    if (path.includes("/home")) {
 
-        return;
-    }
-    // 스터디원
-    if (path.includes("/manage/members")) {
-
-        memberMenu.classList.add("active");
+        studyHomeMenu.classList.add("active");
 
         return;
     }
-    // 세팅
-    if (path.includes("/manage/settings")) {
+    // notice
+    if (path.includes("/notice")) {
 
-        settingMenu.classList.add("active");
+        studyNoticeMenu.classList.add("active");
+
+        return;
+    }
+    // attendance
+    if (path.includes("/attendance")) {
+
+        studyAttendanceMenu.classList.add("active");
+
+        return;
+    }
+    // members
+    if (path.includes("/members")) {
+
+        studyMembersMenu.classList.add("active");
 
         return;
     }
