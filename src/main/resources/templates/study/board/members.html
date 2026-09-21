@@ -5,9 +5,6 @@
 	<meta charset="UTF-8">
 
 	<title>스터디원</title>
-	<!--bootstrap-->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
 	<!-- CSRF -->
@@ -15,6 +12,7 @@
 
 	<meta name="_csrf_header" th:content="${_csrf.headerName}">
 
+	<link rel="stylesheet" th:href="@{/css/common/common.css}">
 	<link rel="stylesheet" th:href="@{/css/common/header.css}">
 	<link rel="stylesheet" th:href="@{/css/common/study-header.css}">
 	<link rel="stylesheet" th:href="@{/css/study/members.css}">
@@ -102,8 +100,8 @@
 
 	</main>
 
+	<script th:src="@{/js/common/study-header.js}"></script>
+	<script th:src="@{/js/study/members.js}"></script>
 </body>
-<script th:src="@{/js/common/study-header.js}"></script>
-<script th:src="@{/js/study/members.js}"></script>
 
 </html>
