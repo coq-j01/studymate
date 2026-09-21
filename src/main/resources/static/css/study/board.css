@@ -40,7 +40,7 @@ body {
 
 /* 제목 + 글쓰기 */
 
-.section-header {
+.board-section-header {
 
     display: flex;
 
@@ -53,7 +53,7 @@ body {
 }
 
 
-.section-header h2 {
+.board-section-header h2 {
 
     margin: 0;
 
