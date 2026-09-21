@@ -49,9 +49,24 @@
 								개발
 							</span>
 
-							<span class="recruit-badge">
-								모집중
-							</span>
+							<th:block th:switch="${study.studyStatus}">
+
+							    <span th:case="'RECRUITING'"
+							          class="status-badge recruiting">
+							        모집중
+							    </span>
+
+							    <span th:case="'CLOSED'"
+							          class="status-badge closed">
+							        모집마감
+							    </span>
+
+							    <span th:case="'ENDED'"
+							          class="status-badge ended">
+							        종료
+							    </span>
+
+							</th:block>
 						</div>
 
 						<h4 th:text="${study.title}">
