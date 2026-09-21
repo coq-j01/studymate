@@ -1,0 +1,341 @@
+/* ===================================
+   게시글 작성 페이지
+=================================== */
+
+body {
+
+    background-color: #FFFFFF;
+
+}
+
+
+.write-page {
+
+    width: 1080px;
+
+    margin: 0 auto;
+
+    padding-bottom: 80px;
+
+}
+
+
+/* ===================================
+   상단 제목
+=================================== */
+
+.write-title-area {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding-top: 24px;
+
+}
+
+
+.write-title-area h1 {
+
+    margin: 0;
+
+    color: #222222;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+}
+
+
+.back-button {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #777777;
+
+    font-size: 20px;
+
+}
+
+
+.back-button:hover {
+
+    color: #444444;
+
+}
+
+
+/* ===================================
+   작성 폼
+=================================== */
+
+.write-form-area {
+
+    width: 760px;
+
+    margin: 50px auto 0;
+
+}
+
+
+.form-row {
+
+    display: grid;
+
+    grid-template-columns: 130px 1fr;
+
+    align-items: center;
+
+    margin-bottom: 28px;
+
+}
+
+
+.content-row {
+
+    align-items: start;
+
+}
+
+
+.form-label {
+
+    padding-top: 2px;
+
+    color: #222222;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+
+.input-area {
+
+    width: 100%;
+
+}
+
+
+/* ===================================
+   게시글 유형
+=================================== */
+
+.post-type {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #777777;
+
+    font-size: 13px;
+
+}
+
+
+.type-dot {
+
+    width: 12px;
+
+    height: 12px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background-color: #6366F1;
+
+}
+
+
+/* ===================================
+   제목
+=================================== */
+
+.title-input {
+
+    width: 100%;
+
+    height: 44px;
+
+    padding: 0 16px;
+
+    border: 1px solid #E3E5EC;
+
+    border-radius: 8px;
+
+    background-color: #FFFFFF;
+
+    color: #222222;
+
+    font-size: 13px;
+
+    outline: none;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+
+}
+
+
+.title-input:focus {
+
+    border-color: #6366F1;
+
+}
+
+
+.title-input::placeholder {
+
+    color: #A0A0A0;
+
+}
+
+
+/* ===================================
+   내용
+=================================== */
+
+.content-input {
+
+    width: 100%;
+
+    height: 180px;
+
+    padding: 16px;
+
+    border: 1px solid #E3E5EC;
+
+    border-radius: 8px;
+
+    background-color: #FFFFFF;
+
+    color: #222222;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    resize: none;
+
+    outline: none;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+
+}
+
+
+.content-input:focus {
+
+    border-color: #6366F1;
+
+}
+
+
+.content-input::placeholder {
+
+    color: #A0A0A0;
+
+}
+
+
+/* ===================================
+   validation
+=================================== */
+
+.error-message {
+
+    margin: 7px 0 0;
+
+    color: #EF4444;
+
+    font-size: 11px;
+
+}
+
+
+/* ===================================
+   버튼
+=================================== */
+
+.button-area {
+
+    width: 575px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 46px;
+
+    margin: 38px auto 0;
+
+}
+
+
+.cancel-button,
+.submit-button {
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+}
+
+
+.cancel-button {
+
+    border: 1px solid #E3E5EC;
+
+    background-color: #F5F6FA;
+
+    color: #666666;
+
+}
+
+
+.cancel-button:hover {
+
+    background-color: #EEEFF4;
+
+}
+
+
+.submit-button {
+
+    border: none;
+
+    background-color: #6366F1;
+
+    color: #FFFFFF;
+
+}
+
+
+.submit-button:hover {
+
+    background-color: #5558E8;
+
+}

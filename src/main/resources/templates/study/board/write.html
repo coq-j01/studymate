@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>게시글 작성 | StudyMate</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/common.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/common/header.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/study/write.css}">
+
+</head>
+
+
+<body>
+
+<!-- 공통 헤더 -->
+<header th:replace="~{fragments/header :: header}"></header>
+
+
+<main class="write-page">
+
+
+    <!-- 제목 -->
+    <div class="write-title-area">
+
+        <a th:href="@{/study/{studyId}/attendance(studyId=${studyId})}"
+           class="back-button">
+
+            <i class="bi bi-arrow-left"></i>
+
+        </a>
+
+        <h1>게시글 작성</h1>
+
+    </div>
+
+
+    <!-- 작성 폼 -->
+    <section class="write-form-area">
+
+		<form th:action="@{/study/{studyId}/{type}/write(
+		        studyId=${studyId},
+		        type=${writeType})}"
+		      method="post">
+
+
+            <!-- 게시글 유형 -->
+            <div class="form-row">
+
+                <label class="form-label">
+                    게시글 유형
+                </label>
+
+
+                <div class="post-type">
+
+                    <span class="type-dot"></span>
+
+                    <span th:text="${postTypeName}">
+                        인증 게시글
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- 제목 -->
+            <div class="form-row">
+
+                <label for="title"
+                       class="form-label">
+
+                    게시글 제목
+
+                </label>
+
+					<input type="text"
+					               id="title"
+					               name="title"
+					               maxlength="20"
+					               placeholder="게시글 제목을 입력해 주세요"
+					               class="title-input"
+					               required>
+
+            </div>
+
+
+            <!-- 내용 -->
+            <div class="form-row content-row">
+
+                <label for="content"
+                       class="form-label">
+
+                    내용
+
+                </label>
+
+
+				<textarea id="content"
+				                  name="content"
+				                  placeholder="내용을 입력해 주세요"
+				                  class="content-input"
+				                  required></textarea>
+
+			</div>
+
+
+            <!-- 버튼 -->
+            <div class="button-area">
+
+                <a th:href="@{/study/{studyId}/{type}(studyId=${studyId}, type=${writeType})}"
+                   class="cancel-button">
+
+                    취소
+
+                </a>
+
+
+                <button type="submit"
+                        class="submit-button">
+
+                    등록하기
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </section>
+
+</main>
+
+</body>
+
+</html>
