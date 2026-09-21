@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.studymate.mapper.StudyPostMapper">
+
+
+	<select id="findPostList"
+		resultType="com.studymate.domain.StudyPost"> 
+		select p.*, m.nickname,
+        (
+            SELECT COUNT(*)
+            FROM post_like pl
+            WHERE pl.post_id = p.post_id
+        ) AS like_count
+		from study_post p 
+		join member m 
+		on p.member_id = m.member_id 
+		where p.study_id= #{studyId} 
+		and p.post_type = #{postType} 
+		order by p.created_at desc 
+		<if test="limit != null">
+			limit #{limit}
+		</if>
+	</select>
+	
+	<insert id="insertBoard">
+		insert into study_post(
+			study_id,
+			member_id,
+			post_type,
+			title,
+			content
+		)values(
+			#{studyId},
+			#{memberId},
+			#{postType},
+			#{studyPostDTO.title},
+			#{studyPostDTO.content}
+		)
+	</insert>
+</mapper>
