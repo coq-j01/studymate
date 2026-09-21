@@ -43,7 +43,7 @@
         <section class="board-section">
 
 
-            <div class="section-header">
+            <div class="board-section-header">
 
                 <h2>공지사항</h2>
 
@@ -64,9 +64,9 @@
 
                 <a class="notice-item"
                    th:each="notice : ${noticeList}"
-                   th:href="@{/study/{studyId}/notice/{boardId}
+                   th:href="@{/study/{studyId}/notice/{postId}
                             (studyId=${study.studyId},
-                             boardId=${notice.boardId})}">
+                             postId=${notice.postId})}">
 
 
                     <strong th:text="${notice.title}">
@@ -100,6 +100,6 @@
 
 </main>
 
+<script th:src="@{/js/common/study-header.js}"></script>
 </body>
-
 </html>

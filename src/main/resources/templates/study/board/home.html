@@ -52,7 +52,7 @@
 
         <section class="board-section">
 
-            <div class="section-header">
+            <div class="board-section-header">
 
                 <h2>공지사항</h2>
 
@@ -72,14 +72,17 @@
             <div class="post-list">
 
                 <a class="notice-item"
-                   th:each="notice : ${noticeList}"
-                   th:href="@{/study/{studyId}/notice/{boardId}
+                   th:each="notice : ${recentNoticeList}"
+                   th:href="@{/study/{studyId}/notice/{postId}
                             (studyId=${study.studyId},
-                             boardId=${notice.boardId})}">
+                             postId=${notice.postId})}">
 
                     <strong th:text="${notice.title}">
                         이번주 오프라인입니다!
                     </strong>
+					
+					<!--하트 icon 들어가야함-->
+					<span th:text="${post.likeCount}">0</span>
 
                     <span th:text="${#temporals.format(
                             notice.createdAt,
@@ -94,7 +97,7 @@
 
                 <!-- 공지가 없을 때 -->
                 <div class="empty-post"
-                     th:if="${#lists.isEmpty(noticeList)}">
+                     th:if="${#lists.isEmpty(recentNoticeList)}">
 
                     등록된 공지사항이 없습니다.
 
@@ -112,12 +115,12 @@
 
         <section class="board-section">
 
-            <div class="section-header">
+            <div class="board-section-header">
 
                 <h2>최근 인증글</h2>
 
 
-                <a th:href="@{/study/{studyId}/board/write(studyId=${study.studyId})}"
+                <a th:href="@{/study/{studyId}/attendance/write(studyId=${study.studyId})}"
                    class="write-link">
 
                     + 글쓰기
@@ -130,10 +133,10 @@
             <div class="post-list">
 
                 <a class="board-item"
-                   th:each="post : ${recentPostList}"
-                   th:href="@{/study/{studyId}/board/{boardId}
+                   th:each="post : ${recentAttendnaceList}"
+                   th:href="@{/study/{studyId}/attendance/{postId}
                             (studyId=${study.studyId},
-                             boardId=${post.boardId})}">
+                             postId=${post.postId})}">
 
 
                     <strong class="post-title"
@@ -165,7 +168,7 @@
 
 
                 <div class="empty-post"
-                     th:if="${#lists.isEmpty(recentPostList)}">
+                     th:if="${#lists.isEmpty(recentAttendnaceList)}">
 
                     등록된 인증글이 없습니다.
 
@@ -180,6 +183,6 @@
 
 </main>
 
+<script th:src="@{/js/common/study-header.js}"></script>
 </body>
-
 </html>

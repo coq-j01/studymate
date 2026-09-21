@@ -43,13 +43,13 @@
         <section class="board-section">
 
 
-            <div class="section-header">
+            <div class="board-section-header">
 
                 <h2>인증 게시판</h2>
 
 
                 <!-- 인증글은 모든 스터디원 작성 가능 -->
-                <a th:href="@{/study/{studyId}/board/write(studyId=${study.studyId})}"
+                <a th:href="@{/study/{studyId}/attendance/write(studyId=${study.studyId})}"
                    class="write-link">
 
                     + 글쓰기
@@ -63,10 +63,10 @@
 
 
                 <a class="board-item"
-                   th:each="post : ${boardList}"
-                   th:href="@{/study/{studyId}/board/{boardId}
+                   th:each="post : ${attendanceList}"
+                   th:href="@{/study/{studyId}/board/{postId}
                             (studyId=${study.studyId},
-                             boardId=${post.boardId})}">
+                             postId=${post.postId})}">
 
 
                     <strong class="post-title"
@@ -98,7 +98,7 @@
 
 
                 <div class="empty-post"
-                     th:if="${#lists.isEmpty(boardList)}">
+                     th:if="${#lists.isEmpty(attendanceList)}">
 
                     등록된 인증글이 없습니다.
 
@@ -112,6 +112,6 @@
 
 </main>
 
+<script th:src="@{/js/common/study-header.js}"></script>
 </body>
-
 </html>
