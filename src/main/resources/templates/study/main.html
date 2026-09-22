@@ -46,7 +46,7 @@
 							<img th:src="@{/assets/study_mate_logo.png}" class="search-small-logo" alt="StudyMate">
 
 							<h2>
-								같이 공부할<br>
+		 						같이 공부할<br>
 								스터디를 찾아보세요
 							</h2>
 
@@ -156,7 +156,7 @@
 					th:href="@{/study/detail/{id}(id=${study.studyId})}">
 
 					<div class="study-thumbnail">
-						<img th:src="@{'/assets/thumbnails/' + ${study.thumbnail}}">
+						<img th:src="${study.thumbnailUrl}">
 					</div>
 
 					<div class="study-card-body">

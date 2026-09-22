@@ -38,6 +38,9 @@ public class StudyManageController {
 	@GetMapping("/requests")
 	public String requests(@PathVariable int studyId, @AuthenticationPrincipal CustomUserDetails userDetails,
 			Model model) {
+		if (!studyMemberService.canAccessStudy(studyId, userDetails.getMemberId())) {
+			return "redirect:/study/main";
+		}
 		if (!isLeader(studyId, userDetails.getMemberId())) {
 			return "redirect:/study/" + studyId + "/home";
 		}
@@ -94,6 +97,9 @@ public class StudyManageController {
 	public String getMembers(@PathVariable int studyId, @AuthenticationPrincipal CustomUserDetails userDetails,
 			Model model) {
 		model.addAttribute("memberList", studyMemberService.getStudyMemberList(studyId));
+		if (!studyMemberService.canAccessStudy(studyId, userDetails.getMemberId())) {
+			return "redirect:/study/main";
+		}
 		if (!isLeader(studyId, userDetails.getMemberId())) {
 			return "redirect:/study/" + studyId + "/home";
 		}
@@ -102,7 +108,42 @@ public class StudyManageController {
 		return "study/manage/members";
 	}
 
-	/*
-	 * @GetMapping("/settings") public String settings(...) { ... }
-	 */
+	@GetMapping("/settings")
+	public String settings(@PathVariable int studyId, @AuthenticationPrincipal CustomUserDetails userDetails) {
+		if (!studyMemberService.canAccessStudy(studyId, userDetails.getMemberId())) {
+			return "redirect:/study/main";
+		}
+		if (!isLeader(studyId, userDetails.getMemberId())) {
+			return "redirect:/study/" + studyId + "/home";
+		}
+		return "study/manage/settings";
+	}
+
+	@PostMapping("/settings/end")
+	public String endStudy(@PathVariable int studyId, @AuthenticationPrincipal CustomUserDetails userDetails) {
+		// 스터디 종료 처리
+	    studyService.endStudy(studyId, userDetails.getMemberId());
+		return "redirect:/study/main";
+	}
+	@PostMapping("/settings/delete")
+	public ResponseEntity<String> deleteStudy(@PathVariable int studyId, @AuthenticationPrincipal CustomUserDetails userDetails) {
+		// 스터디 종료 처리
+		 try {
+
+		        studyService.deleteStudy(
+		            studyId,
+		            userDetails.getMemberId()
+		        );
+
+		        return ResponseEntity.ok(
+		            "스터디가 삭제되었습니다."
+		        );
+
+		    } catch (IllegalStateException e) {
+
+		        return ResponseEntity
+		            .badRequest()
+		            .body(e.getMessage());
+		    }
+	}
 }

@@ -1,0 +1,108 @@
+.manage-page {
+    width: min(1080px, calc(100% - 48px));
+    margin: 0 auto;
+    padding-bottom: 80px;
+}
+
+
+/* ===================================
+   STUDY SETTING
+=================================== */
+
+.study-setting {
+    width: 100%;
+    padding-top: 44px;
+}
+
+
+/* ===================================
+   SETTING ITEM
+=================================== */
+
+.setting-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    margin-bottom: 72px;
+}
+
+
+/* 제목 */
+.setting-item h2 {
+    margin: 0 0 8px;
+
+    color: #222222;
+
+    font-size: 22px;
+    font-weight: 700;
+}
+
+
+/* 설명 */
+.setting-item p {
+    margin: 0 0 18px;
+
+    color: #888888;
+
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+
+/* ===================================
+   BUTTON
+=================================== */
+
+.setting-button {
+    width: 170px;
+    height: 36px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease;
+}
+
+
+/* ===================================
+   STUDY END
+=================================== */
+
+.end-study-button {
+    border: 1px solid #FF8A8A;
+
+    background-color: #FFFFFF;
+
+    color: #FF5A5F;
+}
+
+.end-study-button:hover {
+    background-color: #FFF5F5;
+}
+
+
+/* ===================================
+   STUDY DELETE
+=================================== */
+
+.delete-study-button {
+    border: 1px solid #FF4D55;
+
+    background-color: #FF4D55;
+
+    color: #FFFFFF;
+}
+
+.delete-study-button:hover {
+    background-color: #F23F47;
+
+    border-color: #F23F47;
+}

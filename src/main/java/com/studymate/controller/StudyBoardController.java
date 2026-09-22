@@ -37,8 +37,7 @@ public class StudyBoardController {
 	public String home(@PathVariable int studyId, @AuthenticationPrincipal CustomUserDetails userDetails, Model model) {
 
 		if (!studyMemberService.canAccessStudy(studyId, userDetails.getMemberId())) {
-
-			return "redirect:/study/detail/" + studyId;
+			return "redirect:/study/main";
 		}
 		model.addAttribute("recentNoticeList", studyPostService.getPostList(studyId, "NOTICE", 3, null));
 		model.addAttribute("recentAttendnaceList", studyPostService.getPostList(studyId, "ATTENDANCE", 3, null));
@@ -53,7 +52,7 @@ public class StudyBoardController {
 
 		if (!studyMemberService.canAccessStudy(studyId, userDetails.getMemberId())) {
 
-			return "redirect:/study/detail/" + studyId;
+			return "redirect:/study/main";
 		}
 		int pageSize = 10;
 		 // 전체 게시글 수
@@ -77,7 +76,7 @@ public class StudyBoardController {
 
 		if (!studyMemberService.canAccessStudy(studyId, userDetails.getMemberId())) {
 
-			return "redirect:/study/detail/" + studyId;
+			return "redirect:/study/main";
 		}
 
 		int pageSize = 10;
@@ -98,6 +97,10 @@ public class StudyBoardController {
 	@GetMapping("/members")
 	public String getMembers(@PathVariable int studyId, @AuthenticationPrincipal CustomUserDetails userDetails,
 			Model model) {
+		if (!studyMemberService.canAccessStudy(studyId, userDetails.getMemberId())) {
+
+			return "redirect:/study/main";
+		}
 
 		model.addAttribute("memberList", studyMemberService.getStudyMemberList(studyId));
 
@@ -112,7 +115,7 @@ public class StudyBoardController {
 			@AuthenticationPrincipal CustomUserDetails userDetails, Model model) {
 		if (!studyMemberService.canAccessStudy(studyId, userDetails.getMemberId())) {
 
-			return "redirect:/study/detail/" + studyId;
+			return "redirect:/study/main";
 		}
 
 		// 공지는 스터디장만 작성 가능
@@ -135,9 +138,13 @@ public class StudyBoardController {
 	}
 
 	@GetMapping("/board/{postId}")
-	public String postDetail(@PathVariable int postId,
+	public String postDetail(@PathVariable int studyId, @PathVariable int postId,
 			@AuthenticationPrincipal CustomUserDetails userDetails,
 	                         Model model) {
+		if (!studyMemberService.canAccessStudy(studyId, userDetails.getMemberId())) {
+
+			return "redirect:/study/main";
+		}
 
 	    StudyPost post = studyPostService.findPost(postId);
 
@@ -160,6 +167,9 @@ public class StudyBoardController {
 	public String getEdit(@PathVariable int studyId, @PathVariable int postId,
 			Model model, @AuthenticationPrincipal CustomUserDetails userDetails) {
 		StudyPost post = studyPostService.findPost(postId);
+		if (!studyMemberService.canAccessStudy(studyId, userDetails.getMemberId())) {
+			return "redirect:/study/main";
+		}
 		if(post.getMemberId() != userDetails.getMemberId()) {
 			return "redirect:/study/" + studyId + "/board/" + postId;
 		}

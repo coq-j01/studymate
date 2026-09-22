@@ -26,8 +26,12 @@ public interface StudyMapper {
 	//스터디 모집 종료
 	int closeStudy(int studyId);
 	//스터디 삭제, 성공여부 반환(0:실패, 1:성공)
+	int deleteStudy(int studyId);
 	//스터디 갯수 조회,페이징 시 사용
 	int countStudyList(@Param("keyword") String keyword, @Param("categoryId") Integer categoryId);
+	//thumbnail조회
+	String getThumbnail(int studyId);
+	
 	
 	//내 스터디 목록 조회
 	List<Study> findMyStudyList(@Param("memberId") int memberId, @Param("size") int size, @Param("offset") int offset);

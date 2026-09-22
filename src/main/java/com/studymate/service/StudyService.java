@@ -2,12 +2,14 @@ package com.studymate.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.studymate.domain.Study;
 import com.studymate.dto.StudyDTO;
 
 public interface StudyService {
 
-	int createStudy(StudyDTO studyDTO, int leaderId);
+	int createStudy(StudyDTO studyDTO, MultipartFile thumbnailFile, int leaderId);
 	
 	List<Study> getStudyList(String keyword, int page, int size, Integer categoryId);
 	
@@ -17,7 +19,7 @@ public interface StudyService {
 	
 	String findStudyMemberStatus(int studyId, int memberId);
 	
-	void updateStudy(StudyDTO studyDTO, int memberId);
+	void updateStudy(StudyDTO studyDTO, MultipartFile thumbnailFile , int memberId);
 	
 	void applyStudy(int studyId,int memberId,String message);
 	
@@ -27,4 +29,7 @@ public interface StudyService {
 	
 	int getStudyCount(String keyword, Integer categoryId);
 	int getMyStudyCount(int memberId);
+	
+	int endStudy(int studyId, int memberId);
+	int deleteStudy(int studyId, int memberId);
 }

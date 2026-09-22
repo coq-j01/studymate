@@ -29,7 +29,7 @@ public class StudyDTO {
 	@Min(value = 2)
     @Max(value = 10)
 	private int maxMember;
-	@NotBlank
+	
 	private String thumbnail;
 	private String studyStatus;
 }

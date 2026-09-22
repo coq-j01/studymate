@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.studymate.domain.Study;
 import com.studymate.dto.StudyDTO;
 import com.studymate.security.CustomUserDetails;
+import com.studymate.service.S3FileService;
 import com.studymate.service.StudyService;
 
 import lombok.RequiredArgsConstructor;
@@ -23,7 +25,6 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/study")
 public class StudyController {
 	private final StudyService studyService;
-
 	// create페이지로 이동
 	@GetMapping("/create")
 	public String create() {
@@ -32,9 +33,9 @@ public class StudyController {
 
 	// 스터디 생성
 	@PostMapping("/create")
-	public String postCreate(StudyDTO studyDTO, @AuthenticationPrincipal CustomUserDetails userDetails) {
-		int studyId = studyService.createStudy(studyDTO, userDetails.getMemberId());
-		/* return "redirect:/study/" + studyId; */
+	public String postCreate(StudyDTO studyDTO, @AuthenticationPrincipal CustomUserDetails userDetails,
+			@RequestParam(value = "thumbnailFile", required = false) MultipartFile thumbnailFile) { //required = false는 thumbnailFile가 필수 아니라는 의미
+		studyService.createStudy(studyDTO, thumbnailFile, userDetails.getMemberId());
 		return "redirect:/study/main";
 	}
 
@@ -46,7 +47,7 @@ public class StudyController {
 		int size = 6;
 		
 		List<Study> studyList = studyService.getStudyList(keyword, page,size, categoryId);
-
+		
 	    int totalCount = studyService.getStudyCount(keyword, categoryId);
 
 	    int totalPages =(int) Math.ceil((double) totalCount / size);
@@ -107,12 +108,14 @@ public class StudyController {
 	public String postEdit(
 	        @PathVariable int studyId,
 	        StudyDTO studyDTO,
+	        @RequestParam(value = "thumbnailFile", required = false) MultipartFile thumbnailFile,
 	        @AuthenticationPrincipal CustomUserDetails userDetails) {
 
 	    studyDTO.setStudyId(studyId);
 
 	    studyService.updateStudy(
 	            studyDTO,
+	            thumbnailFile,
 	            userDetails.getMemberId()
 	    );
 

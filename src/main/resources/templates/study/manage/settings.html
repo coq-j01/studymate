@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>스터디 설정 | StudyMate</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- CSRF -->
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+
+    <link rel="stylesheet" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" th:href="@{/css/common/study-manage-header.css}">
+    <link rel="stylesheet" th:href="@{/css/study/manage/settings.css}">
+</head>
+
+<body>
+
+    <!-- 사이트 공통 헤더 -->
+    <header th:replace="~{fragments/header :: header}"></header>
+
+
+    <main class="manage-page"
+          th:data-study-id="${studyId}">
+
+        <!-- 스터디 관리 헤더 -->
+        <header th:replace="~{fragments/study-manage-header :: manageHeader}">
+        </header>
+
+
+        <!-- 스터디 설정 -->
+        <section class="study-setting">
+
+            <!-- ========================
+                 스터디 종료
+            ========================= -->
+            <div class="setting-item">
+
+                <h2>스터디 종료</h2>
+
+                <p>
+                    스터디 활동을 종료합니다.<br>
+                    종료 후에는 다시 활동 상태로 변경할 수 없습니다.
+                </p>
+
+                <button type="button" id="end-study-button"
+                        class="setting-button end-study-button">
+                    스터디 종료하기
+                </button>
+
+            </div>
+
+
+            <!-- ========================
+                 스터디 삭제
+            ========================= -->
+            <div class="setting-item">
+
+                <h2>스터디 삭제</h2>
+
+                <p>
+                    참여자가 없는 스터디만 삭제할 수 있습니다.<br>
+                    삭제된 스터디는 복구할 수 없습니다.
+                </p>
+
+                <button type="button" id="delete-study-button"
+                        class="setting-button delete-study-button">
+                    스터디 삭제하기
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script th:src="@{/js/common/study-manage-header.js}"></script>
+    <script th:src="@{/js/study/manage/settings.js}"></script>
+
+</body>
+</html>

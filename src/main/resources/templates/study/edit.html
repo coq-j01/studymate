@@ -57,7 +57,7 @@
     <section class="create-card">
 
         <form th:action="@{/study/edit/{studyId}(studyId=${study.studyId})}"
-              method="post">
+              method="post" enctype="multipart/form-data">
 
 
             <!-- 스터디 제목 -->
@@ -215,124 +215,33 @@
             </div>
 
 
-            <!-- 대표 이미지 -->
-            <div class="form-row thumbnail-row">
+			<!-- 대표 이미지 -->
+			<div class="form-row thumbnail-row">
 
-                <label>
-                    대표 이미지
-                </label>
+			    <label for="thumbnailFile">
+			        대표 이미지
+			    </label>
 
+			    <div class="thumbnail-upload">
 
-                <div class="thumbnail-list">
+			        <!-- 현재 대표 이미지 -->
+			        <img th:src="${study.thumbnailUrl}"
+			             alt="현재 대표 이미지"
+			             id="thumbnailPreview">
 
+			        <!-- 새 이미지 선택 -->
+			        <input type="file"
+			               id="thumbnailFile"
+			               name="thumbnailFile"
+			               accept="image/png,image/jpeg,image/webp">
 
-                    <label class="thumbnail-item">
+			        <p>
+			            이미지를 선택하지 않으면 기존 대표 이미지가 유지됩니다.
+			        </p>
 
-                        <input type="radio"
-                               name="thumbnail"
-                               value="thumbnail_1.png"
-                               th:checked="${study.thumbnail == 'thumbnail_1.png'}">
+			    </div>
 
-                        <img th:src="@{/assets/thumbnails/thumbnail_1.png}"
-                             alt="대표 이미지 1">
-
-                    </label>
-
-
-                    <label class="thumbnail-item">
-
-                        <input type="radio"
-                               name="thumbnail"
-                               value="thumbnail_2.png"
-                               th:checked="${study.thumbnail == 'thumbnail_2.png'}">
-
-                        <img th:src="@{/assets/thumbnails/thumbnail_2.png}"
-                             alt="대표 이미지 2">
-
-                    </label>
-
-
-                    <label class="thumbnail-item">
-
-                        <input type="radio"
-                               name="thumbnail"
-                               value="thumbnail_3.png"
-                               th:checked="${study.thumbnail == 'thumbnail_3.png'}">
-
-                        <img th:src="@{/assets/thumbnails/thumbnail_3.png}"
-                             alt="대표 이미지 3">
-
-                    </label>
-
-
-                    <label class="thumbnail-item">
-
-                        <input type="radio"
-                               name="thumbnail"
-                               value="thumbnail_4.png"
-                               th:checked="${study.thumbnail == 'thumbnail_4.png'}">
-
-                        <img th:src="@{/assets/thumbnails/thumbnail_4.png}"
-                             alt="대표 이미지 4">
-
-                    </label>
-
-
-                    <label class="thumbnail-item">
-
-                        <input type="radio"
-                               name="thumbnail"
-                               value="thumbnail_5.png"
-                               th:checked="${study.thumbnail == 'thumbnail_5.png'}">
-
-                        <img th:src="@{/assets/thumbnails/thumbnail_5.png}"
-                             alt="대표 이미지 5">
-
-                    </label>
-
-
-                    <label class="thumbnail-item">
-
-                        <input type="radio"
-                               name="thumbnail"
-                               value="thumbnail_6.png"
-                               th:checked="${study.thumbnail == 'thumbnail_6.png'}">
-
-                        <img th:src="@{/assets/thumbnails/thumbnail_6.png}"
-                             alt="대표 이미지 6">
-
-                    </label>
-
-
-                    <label class="thumbnail-item">
-
-                        <input type="radio"
-                               name="thumbnail"
-                               value="thumbnail_7.png"
-                               th:checked="${study.thumbnail == 'thumbnail_7.png'}">
-
-                        <img th:src="@{/assets/thumbnails/thumbnail_7.png}"
-                             alt="대표 이미지 7">
-
-                    </label>
-
-
-                    <label class="thumbnail-item">
-
-                        <input type="radio"
-                               name="thumbnail"
-                               value="thumbnail_8.png"
-                               th:checked="${study.thumbnail == 'thumbnail_8.png'}">
-
-                        <img th:src="@{/assets/thumbnails/thumbnail_8.png}"
-                             alt="대표 이미지 8">
-
-                    </label>
-
-
-                </div>
-
-            </div>
+			</div>
 
 
             <!-- 스터디 소개 -->

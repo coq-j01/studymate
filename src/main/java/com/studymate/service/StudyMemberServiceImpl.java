@@ -74,12 +74,12 @@ public class StudyMemberServiceImpl implements StudyMemberService {
 	@Override
 	public boolean canAccessStudy(int studyId, int memberId) {
 		//study가 end가 아닌지 확인
-		if(studyMapper.getStudyStatus(studyId).equals("ENDED")) {
-			throw new IllegalStateException("종료된 스터디입니다.");
+		if("ENDED".equals(studyMapper.getStudyStatus(studyId))) {
+			return false;
 		}
 		//접근자가 active상태인지 확인
-		if(!studyMemberMapper.findStudyMemberStatus(studyId, memberId).equals("ACTIVE")) {
-			throw new IllegalStateException("접근 불가능한 사용자입니다.");
+		if(!"ACTIVE".equals(studyMemberMapper.findStudyMemberStatus(studyId, memberId))) {
+			return false;
 		}
 		return true;
 	}

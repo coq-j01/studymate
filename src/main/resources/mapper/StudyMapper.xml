@@ -87,8 +87,8 @@
 	<!--스터디 상태 종료로 업데이트, 성공여부 반환(0:실패, 1:성공)-->
 	<update id="endStudy">
 		update study
-		set study_status = 'ENDED'
-		ended_at = current_timestamp
+		set study_status = 'ENDED',
+			ended_at = current_timestamp
 		where study_id = #{studyId}
 	</update>
 	
@@ -108,7 +108,7 @@
 	<!--스터디 갯수 조회,페이징 시 사용-->
 	<select id="countStudyList" resultType="int">
 		select count(*)
-		from study
+		from study s
 		where study_status = 'RECRUITING'
 		<if test="keyword != null and keyword != ''">
         AND s.title LIKE CONCAT('%', #{keyword}, '%')
@@ -149,6 +149,12 @@
 		on s.study_id = sm.study_id
 		where sm.member_id = #{memberId}
 		and sm.member_status = 'ACTIVE'
+	</select>
+	
+	<select id="getThumbnail" resultType="String">
+		select thumbnail
+		from study
+		where study_id = #{studyId}
 	</select>
 	
 	<!--스터디장 여부 확인-->

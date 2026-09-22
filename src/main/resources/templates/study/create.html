@@ -1,18 +1,15 @@
 <!DOCTYPE html>
-<html lang="ko"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>스터디 생성 | StudyMate</title>
+	<title>스터디 생성 | StudyMate</title>
 
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
 
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
 	<link rel="stylesheet" th:href="@{/css/common/common.css}">
 	<link rel="stylesheet" th:href="@{/css/common/header.css}">
@@ -21,248 +18,166 @@
 
 <body>
 
-<!-- 공통 헤더 -->
-<header th:replace="~{fragments/header :: header}"></header>
+	<!-- 공통 헤더 -->
+	<header th:replace="~{fragments/header :: header}"></header>
 
-<main class="create-page">
+	<main class="create-page">
 
-    <!-- 제목 -->
-    <div class="create-title-area">
+		<!-- 제목 -->
+		<div class="create-title-area">
 
-        <a th:href="@{/}"
-           class="back-button">
-            <i class="bi bi-arrow-left"></i>
-        </a>
+			<a th:href="@{/}" class="back-button">
+				<i class="bi bi-arrow-left"></i>
+			</a>
 
-        <h1>스터디 생성</h1>
+			<h1>스터디 생성</h1>
 
-    </div>
+		</div>
 
 
-    <!-- 생성 카드 -->
-    <section class="create-card">
+		<!-- 생성 카드 -->
+		<section class="create-card">
 
-        <form th:action="@{/study/create}"
-              method="post">
+			<form th:action="@{/study/create}" method="post"  enctype="multipart/form-data">
 
-            <!-- 스터디 제목 -->
-            <div class="form-row">
+				<!-- 스터디 제목 -->
+				<div class="form-row">
 
-                <label for="title">
-                    스터디 제목
-                </label>
+					<label for="title">
+						스터디 제목
+					</label>
 
-                <input type="text"
-                       id="title"
-                       name="title"
-                       class="study-input"
-                       placeholder="스터디 제목을 입력해 주세요"
-                       required>
+					<input type="text" id="title" name="title" class="study-input" placeholder="스터디 제목을 입력해 주세요"
+						required>
 
-            </div>
+				</div>
 
 
-            <!-- 카테고리 -->
-            <div class="form-row">
+				<!-- 카테고리 -->
+				<div class="form-row">
 
-                <label for="categoryId">
-                    카테고리
-                </label>
+					<label for="categoryId">
+						카테고리
+					</label>
 
-                <select id="categoryId"
-                        name="categoryId"
-                        class="study-select"
-                        required>
+					<select id="categoryId" name="categoryId" class="study-select" required>
 
-                    <option value="" selected disabled>
-                        카테고리를 선택해 주세요
-                    </option>
+						<option value="" selected disabled>
+							카테고리를 선택해 주세요
+						</option>
 
-                    <option value="1">개발</option>
-                    <option value="2">어학</option>
-                    <option value="3">취업</option>
-                    <option value="4">독서</option>
-                    <option value="5">기타</option>
-                    <option value="6">자격증</option>
+						<option value="1">개발</option>
+						<option value="2">어학</option>
+						<option value="3">취업</option>
+						<option value="4">독서</option>
+						<option value="5">기타</option>
+						<option value="6">자격증</option>
 
-                </select>
+					</select>
 
-            </div>
+				</div>
 
 
-            <!-- 모집 인원 -->
-            <div class="form-row">
+				<!-- 모집 인원 -->
+				<div class="form-row">
 
-                <label for="maxMember">
-                    모집인원
-                </label>
+					<label for="maxMember">
+						모집인원
+					</label>
 
-                <select id="maxMember"
-                        name="maxMember"
-                        class="study-select"
-                        required>
+					<select id="maxMember" name="maxMember" class="study-select" required>
 
-                    <option value="" selected disabled>
-                        모집인원을 선택해 주세요
-                    </option>
+						<option value="" selected disabled>
+							모집인원을 선택해 주세요
+						</option>
 
-                    <option value="2">2명</option>
-                    <option value="3">3명</option>
-                    <option value="4">4명</option>
-                    <option value="5">5명</option>
-                    <option value="6">6명</option>
-                    <option value="7">7명</option>
-                    <option value="8">8명</option>
-                    <option value="9">9명</option>
-                    <option value="10">10명</option>
+						<option value="2">2명</option>
+						<option value="3">3명</option>
+						<option value="4">4명</option>
+						<option value="5">5명</option>
+						<option value="6">6명</option>
+						<option value="7">7명</option>
+						<option value="8">8명</option>
+						<option value="9">9명</option>
+						<option value="10">10명</option>
 
-                </select>
+					</select>
 
-            </div>
+				</div>
 
 
-			<!-- 대표 이미지 -->
-			<div class="form-row thumbnail-row">
+				<!-- 대표 이미지 -->
+				<div class="form-row thumbnail-row">
 
-			    <label>
-			        대표 이미지
-			    </label>
+				    <label for="thumbnailFile">
+				        대표 이미지
+				    </label>
 
-			    <div class="thumbnail-list">
+				    <div class="thumbnail-upload">
+				        <input type="file"
+				               id="thumbnailFile"
+				               name="thumbnailFile"
+				               accept="image/jpeg,image/png,image/webp">
 
-			        <label class="thumbnail-item">
-			            <input type="radio"
-			                   name="thumbnail"
-			                   value="thumbnail_1.png"
-			                   checked>
+				        <p class="thumbnail-help">
+				            이미지를 선택하지 않으면 기본 이미지가 랜덤으로 적용됩니다.
+				        </p>
+				    </div>
 
-			            <img th:src="@{/assets/thumbnails/thumbnail_1.png}"
-			                 alt="대표 이미지 1">
-			        </label>
+				</div>
 
-			        <label class="thumbnail-item">
-			            <input type="radio"
-			                   name="thumbnail"
-			                   value="thumbnail_2.png">
 
-			            <img th:src="@{/assets/thumbnails/thumbnail_2.png}"
-			                 alt="대표 이미지 2">
-			        </label>
+				<!-- 스터디 소개 -->
+				<div class="form-row description-row">
 
-			        <label class="thumbnail-item">
-			            <input type="radio"
-			                   name="thumbnail"
-			                   value="thumbnail_3.png">
+					<label for="description">
+						스터디 소개
+					</label>
 
-			            <img th:src="@{/assets/thumbnails/thumbnail_3.png}"
-			                 alt="대표 이미지 3">
-			        </label>
+					<div class="description-wrap">
 
-			        <label class="thumbnail-item">
-			            <input type="radio"
-			                   name="thumbnail"
-			                   value="thumbnail_4.png">
+						<textarea id="description" name="description" maxlength="500" placeholder="스터디에 대해 소개해 주세요"
+							required></textarea>
 
-			            <img th:src="@{/assets/thumbnails/thumbnail_4.png}"
-			                 alt="대표 이미지 4">
-			        </label>
+						<div class="description-count">
+							<span id="descriptionLength">0</span>/500
+						</div>
 
-			        <label class="thumbnail-item">
-			            <input type="radio"
-			                   name="thumbnail"
-			                   value="thumbnail_5.png">
+					</div>
 
-			            <img th:src="@{/assets/thumbnails/thumbnail_5.png}"
-			                 alt="대표 이미지 5">
-			        </label>
+				</div>
 
-			        <label class="thumbnail-item">
-			            <input type="radio"
-			                   name="thumbnail"
-			                   value="thumbnail_6.png">
 
-			            <img th:src="@{/assets/thumbnails/thumbnail_6.png}"
-			                 alt="대표 이미지 6">
-			        </label>
+				<!-- 버튼 -->
+				<div class="button-area">
 
-			        <label class="thumbnail-item">
-			            <input type="radio"
-			                   name="thumbnail"
-			                   value="thumbnail_7.png">
+					<a th:href="@{/}" class="cancel-button">
+						취소
+					</a>
 
-			            <img th:src="@{/assets/thumbnails/thumbnail_7.png}"
-			                 alt="대표 이미지 7">
-			        </label>
+					<button type="submit" class="create-button">
+						등록하기
+					</button>
 
-			        <label class="thumbnail-item">
-			            <input type="radio"
-			                   name="thumbnail"
-			                   value="thumbnail_8.png">
+				</div>
 
-			            <img th:src="@{/assets/thumbnails/thumbnail_8.png}"
-			                 alt="대표 이미지 8">
-			        </label>
+			</form>
 
-			    </div>
+		</section>
 
-			</div>
+	</main>
 
 
-            <!-- 스터디 소개 -->
-            <div class="form-row description-row">
+	<script>
+		const description = document.querySelector("#description");
+		const descriptionLength =
+			document.querySelector("#descriptionLength");
 
-                <label for="description">
-                    스터디 소개
-                </label>
-
-                <div class="description-wrap">
-
-                    <textarea id="description"
-                              name="description"
-                              maxlength="500"
-                              placeholder="스터디에 대해 소개해 주세요"
-                              required></textarea>
-
-                    <div class="description-count">
-                        <span id="descriptionLength">0</span>/500
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- 버튼 -->
-            <div class="button-area">
-
-                <a th:href="@{/}"
-                   class="cancel-button">
-                    취소
-                </a>
-
-                <button type="submit"
-                        class="create-button">
-                    등록하기
-                </button>
-
-            </div>
-
-        </form>
-
-    </section>
-
-</main>
-
-
-<script>
-    const description = document.querySelector("#description");
-    const descriptionLength =
-        document.querySelector("#descriptionLength");
-
-    description.addEventListener("input", function () {
-        descriptionLength.textContent = description.value.length;
-    });
-</script>
+		description.addEventListener("input", function () {
+			descriptionLength.textContent = description.value.length;
+		});
+	</script>
 
 </body>
+
 </html>

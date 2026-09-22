@@ -20,4 +20,6 @@ public class Study {
 	
 	private String leaderNickname;   // 스터디장 닉네임
 	private int currentMemberCount;  // 현재 ACTIVE 스터디원 수
+	
+	private String thumbnailUrl; //S3에서 가져오는 화면 출력용 url
 }
