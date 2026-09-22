@@ -8,37 +8,70 @@
 		from member
 		where email = #{email}
 	</select>
-	
+
 	<!--닉네임 중복조회-->
 	<select id="findByNickname" resultType="com.studymate.domain.Member">
 		select *
 		from member
 		where nickname = #{nickname}
 	</select>
-	
+
 	<!--일반회원 추가, 성공여부 반환(0:실패, 1:성공)-->
 	<insert id="insertMember">
 		insert into member(
-			email,
-			password,
-			name,
-			nickname,
-			gender
+		email,
+		password,
+		name,
+		nickname,
+		gender
 		)
 		values(
-			#{email},
-        	#{password},
-        	#{name},
-        	#{nickname},
-        	#{gender}
+		#{email},
+		#{password},
+		#{name},
+		#{nickname},
+		#{gender}
 		)
 	</insert>
-	
+
+	<!--소셜 로그인 회원 추가-->
+	<insert id="insertSocialMember"
+		useGeneratedKeys="true"
+		keyProperty="memberId">
+
+		INSERT INTO member (
+		email,
+		name,
+		nickname,
+		gender,
+		provider,
+		provider_id
+		)
+		VALUES (
+		#{email},
+		#{name},
+		#{nickname},
+		#{gender},
+		#{provider},
+		#{providerId}
+		)
+
+	</insert>
+
 	<!--회원 이메일 조회-->
 	<select id="findEmailById" resultType="String">
 		select email
 		from member
 		where member_id = #{memberId}
+	</select>
+
+	<!--소셜로그인 확인-->
+	<select id="findByProviderAndProviderId"
+		resultType="com.studymate.domain.Member">
+		select *
+		from member
+		where provider = #{provider}
+		and provider_id = #{providerId}
 	</select>
 
 </mapper>

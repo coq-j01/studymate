@@ -129,8 +129,11 @@
 
 					<!-- Google -->
 					<div class="text-center">
+						<a th:href="@{/oauth2/authorization/google}">
+						    Google 로그인
+						</a>
 
-						<a href="#" class="google-btn">
+						<!--<a href="#" class="google-btn">
 
 							<span class="google-icon">G</span>
 
@@ -138,7 +141,7 @@
 								Sign in with Google
 							</span>
 
-						</a>
+						</a>-->
 
 					</div>
 
@@ -167,6 +170,9 @@
 	
 	<script th:if="${param.error}">
 	    alert("이메일 또는 비밀번호가 올바르지 않습니다.");
+	</script>
+	<script th:if="${param.socialError}">
+	    alert("이미 일반 회원가입된 이메일입니다.");
 	</script>
 </body>
 

@@ -3,7 +3,9 @@ package com.studymate.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.studymate.domain.Member;
 import com.studymate.dto.JoinDTO;
+import com.studymate.dto.SocialJoinDTO;
 import com.studymate.mapper.MemberMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -44,5 +46,14 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String getEmail(int memberId) {
 		return memberMapper.findEmailById(memberId);
+	}
+	
+	public int joinSocialMember(Member member) {
+	    return memberMapper.insertSocialMember(member);
+	}
+
+	@Override
+	public Member findSocialLogin(String provider, String providerId) {
+		return memberMapper.findByProviderAndProviderId(provider, providerId);
 	}
 }
