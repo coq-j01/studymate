@@ -235,5 +235,15 @@ public class StudyServiceImpl implements StudyService {
 	            + randomNumber
 	            + ".png";
 	}
+
+	@Override
+	public int getLeaderId(int studyId) {
+		return studyMapper.findLeader(studyId);
+	}
+
+	@Override
+	public String getTitle(int studyId) {
+		return studyMapper.findStudyTitle(studyId);
+	}
 	
 }

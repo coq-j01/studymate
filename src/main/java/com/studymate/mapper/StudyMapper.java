@@ -43,6 +43,11 @@ public interface StudyMapper {
 	        @Param("studyId") int studyId,
 	        @Param("memberId") int memberId
 	);
+	//스터디장 조회
+	int findLeader(int StudyId);
+	//스터디 제목 조회
+	String findStudyTitle(int StudyId);
+	
 	// 스터디 최대 인원 조회
 	int findMaxMember(int studyId);
 	// 현재 모집 중인 스터디인지 확인

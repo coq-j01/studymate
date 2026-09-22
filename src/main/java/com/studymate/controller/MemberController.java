@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.studymate.dto.JoinDTO;
+import com.studymate.service.EmailService;
 import com.studymate.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberController {
 	private final MemberService memberService;
+	
 	//login페이지 이동
 	@GetMapping("/login")
 	public String login() {

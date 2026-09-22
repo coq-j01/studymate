@@ -16,4 +16,7 @@ public interface MemberMapper {
 	
 	//회원 추가, 성공여부 반환(0:실패, 1:성공)
 	int insertMember(JoinDTO joinDTO);
+	
+	//회원 이메일 조회
+	String findEmailById(int memberId);
 }

@@ -1,5 +1,6 @@
 package com.studymate.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.studymate.security.CustomUserDetails;
+import com.studymate.service.EmailService;
+import com.studymate.service.MemberService;
 import com.studymate.service.StudyMemberService;
 import com.studymate.service.StudyService;
 
@@ -23,6 +26,11 @@ import lombok.RequiredArgsConstructor;
 public class StudyManageController {
 	private final StudyMemberService studyMemberService;
 	private final StudyService studyService;
+	private final EmailService emailService;
+	private final MemberService memberService;
+	
+	@Value("${app.base-url}")
+	private String baseUrl; 
 
 	@ModelAttribute
 	public void addStudyId(@PathVariable int studyId, Model model) {
@@ -55,6 +63,21 @@ public class StudyManageController {
 		try {
 
 			studyMemberService.approveJoinRequest(studyId, memberId, userDetails.getMemberId());
+			
+			String title = studyService.getTitle(studyId);
+			
+			try {
+			    emailService.sendEmail(
+			        memberService.getEmail(memberId),
+			        "[StudyMate] " + title + " 가입 신청이 승인되었습니다.",
+			        title + " 가입 신청이 승인되었습니다.\n"
+			            + "이제 스터디에 참여하실 수 있습니다.",
+			        baseUrl + "/study/" + studyId + "/home"
+			    );
+
+			} catch (Exception e) {
+			    System.out.println("승인 메일 발송 실패: " + e.getMessage());
+			}
 
 			return ResponseEntity.ok("가입 신청을 수락했습니다.");
 
@@ -71,6 +94,18 @@ public class StudyManageController {
 		try {
 
 			studyMemberService.rejectJoinRequest(studyId, memberId, userDetails.getMemberId());
+			
+			String title = studyService.getTitle(studyId);
+			try {
+			emailService.sendEmail(
+				    memberService.getEmail(memberId),
+				    "[StudyMate] " + title + " 가입 신청 결과 안내",
+				    title + " 스터디 가입 신청이 승인되지 않았습니다.",
+				    null
+				);
+			}catch (Exception e) {
+			    System.out.println("거절 메일 발송 실패: " + e.getMessage());
+			}
 
 			return ResponseEntity.ok("가입 신청을 거절했습니다.");
 

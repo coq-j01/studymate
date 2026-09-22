@@ -2,6 +2,7 @@ package com.studymate.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.studymate.domain.Study;
 import com.studymate.dto.StudyDTO;
 import com.studymate.security.CustomUserDetails;
-import com.studymate.service.S3FileService;
+import com.studymate.service.EmailService;
+import com.studymate.service.MemberService;
 import com.studymate.service.StudyService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,13 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/study")
 public class StudyController {
 	private final StudyService studyService;
+	private final MemberService memberService; 
+	
+	private final EmailService emailService;
+	
+	@Value("${app.base-url}")
+	private String baseUrl;
+	
 	// create페이지로 이동
 	@GetMapping("/create")
 	public String create() {
@@ -127,6 +136,15 @@ public class StudyController {
 	        @RequestParam String message,
 	        @AuthenticationPrincipal CustomUserDetails userDetails) {
 		studyService.applyStudy(studyId, userDetails.getMemberId(), message);
+		int leaderId = studyService.getLeaderId(studyId);
+		String title = studyService.getTitle(studyId);
+		
+		emailService.sendEmail(
+				memberService.getEmail(leaderId),
+				"[StudyMate] " + title + " 가입 신청이 도착했습니다.",
+	            userDetails.getNickname()+"님이 "+title+"에 가입 신청을 하셨습니다.",
+	            baseUrl +  "/study/" + studyId + "/home"   
+	    );
 		
 		return "redirect:/study/detail/" + studyId;
 	}

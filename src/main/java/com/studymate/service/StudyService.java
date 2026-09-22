@@ -32,4 +32,8 @@ public interface StudyService {
 	
 	int endStudy(int studyId, int memberId);
 	int deleteStudy(int studyId, int memberId);
+	
+	int getLeaderId(int studyId);
+	
+	String getTitle(int studyId);
 }

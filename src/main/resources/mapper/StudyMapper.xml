@@ -180,5 +180,19 @@
         from study
         where study_id = #{studyId}
 	</select>
+	
+	<!--스터디장 조회-->
+	<select id="findLeader" resultType="int">
+		select leader_id
+		from study
+		where study_id = #{studyId}
+	</select>
+	
+	<!--스터디 이름-->
+	<select id="findStudyTitle" resultType="String">
+		select title
+		from study
+		where study_id = #{studyId}
+	</select>
 
 </mapper>

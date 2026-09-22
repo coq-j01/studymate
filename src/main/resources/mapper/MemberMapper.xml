@@ -33,5 +33,12 @@
         	#{gender}
 		)
 	</insert>
+	
+	<!--회원 이메일 조회-->
+	<select id="findEmailById" resultType="String">
+		select email
+		from member
+		where member_id = #{memberId}
+	</select>
 
 </mapper>

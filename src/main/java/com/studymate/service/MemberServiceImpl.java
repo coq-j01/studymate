@@ -40,4 +40,9 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return false;
 	}
+
+	@Override
+	public String getEmail(int memberId) {
+		return memberMapper.findEmailById(memberId);
+	}
 }
