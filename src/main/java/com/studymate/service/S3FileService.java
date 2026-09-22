@@ -24,6 +24,9 @@ public class S3FileService {
 
     @Value("${aws.s3.bucket}")
     private String bucket;
+    
+    @Value("${app.s3.enabled:false}")
+    private boolean s3Enabled;
 
     public S3FileService(S3Client s3Client, S3Presigner s3Presigner) {
         this.s3Client = s3Client;
@@ -31,7 +34,9 @@ public class S3FileService {
     }
 
     public String uploadImage(MultipartFile file) {
-
+    	if (!s3Enabled) {
+            return null;
+        }
         // 1. 파일 검증
     	if(file == null || file.isEmpty()) {
     		throw new IllegalArgumentException("업로드할 이미지가 없습니다.");
@@ -90,6 +95,9 @@ public class S3FileService {
     	return objectKey;
     }
     public String getImageUrl(String objectKey) {
+    	 if (!s3Enabled) {
+    		 return "http://localhost:8080/assets/thumbnail_1.png";
+    	    }
     	//조회하고 싶은 파일
     	GetObjectRequest getObjectRequest =
                 GetObjectRequest.builder()
@@ -111,6 +119,9 @@ public class S3FileService {
         return presignedRequest.url().toString();
     }
     public void deleteImage(String objectKey) {
+    	if (!s3Enabled) {
+            return;
+        }
     	if (objectKey == null || objectKey.isBlank()) {
             return;
         }
