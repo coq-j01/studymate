@@ -150,6 +150,11 @@
     color: #777;
 }
 
+#thumbnailPreview {
+    max-width: 220px;
+    height: auto;
+}
+
 
 /* =========================
    스터디 소개

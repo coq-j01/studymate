@@ -13,7 +13,7 @@ public class StudyDTO {
 	private int studyId;
 	
 	@NotBlank
-	@Size(max = 100)
+	@Size(max = 50)
 	private String title;
 	
 	@NotBlank
