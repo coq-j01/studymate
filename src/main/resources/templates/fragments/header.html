@@ -33,10 +33,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 			    닉네임
 			</span>
 
-			<a th:href="@{/member/mypage}" class="mypage-link">
-				마이페이지
-			</a>
-
 			<form th:action="@{/logout}" method="post">
 				<button type="submit" class="logout-button">
 					로그아웃
