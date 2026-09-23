@@ -15,7 +15,4 @@ public class StudyMember {
 	private String gender;
 	
 	private boolean leader;
-	
-	// 최근 게시글 작성일
-    private LocalDateTime lastPostAt;
 }

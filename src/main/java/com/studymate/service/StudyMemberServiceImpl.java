@@ -1,5 +1,9 @@
 package com.studymate.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -7,9 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.studymate.domain.StudyJoinRequest;
 import com.studymate.domain.StudyMember;
+import com.studymate.dto.StudyMemberStatsDTO;
 import com.studymate.mapper.StudyJoinRequestMapper;
 import com.studymate.mapper.StudyMapper;
 import com.studymate.mapper.StudyMemberMapper;
+import com.studymate.mapper.StudyPostMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,6 +25,7 @@ public class StudyMemberServiceImpl implements StudyMemberService {
 	private final StudyMapper studyMapper;
 	private final StudyMemberMapper studyMemberMapper;
 	private final StudyJoinRequestMapper studyJoinRequestMapper;
+	private final StudyPostMapper studyPostMapper;
 
 	@Override
 	@Transactional
@@ -87,6 +94,39 @@ public class StudyMemberServiceImpl implements StudyMemberService {
 	@Override
 	public void inactiveMember(int studyId, int memberId) {
 		studyMemberMapper.inactiveStudyMember(studyId, memberId);
+	}
+
+	@Override
+	public List<StudyMemberStatsDTO> getStudyMemberStatsList(int studyId) {
+		List<StudyMember> memberList =
+	            studyMemberMapper.findStudyMembers(studyId);
+
+	    List<StudyMemberStatsDTO> result = new ArrayList<>();
+
+	    for (StudyMember member : memberList) {
+
+	        StudyMemberStatsDTO dto = new StudyMemberStatsDTO();
+
+	        LocalDateTime joinedAt = member.getJoinedAt();
+	        dto.setMemberId(member.getMemberId());
+	        dto.setNickname(member.getNickname());
+	        dto.setGender(member.getGender());
+	        dto.setJoinedAt(joinedAt);
+	        dto.setLeader(member.isLeader());
+
+	        dto.setLastPostAt(studyPostMapper.findLastPostAt(studyId, member.getMemberId()));
+	        int certificationDays = studyPostMapper.countPostByDate(studyId, member.getMemberId());
+	        long totalDays = ChronoUnit.DAYS.between(
+	                joinedAt.toLocalDate(),
+	                LocalDate.now()) + 1;
+	        int certificationRate = (int) Math.round(
+	                (double) certificationDays / totalDays * 100 );
+	        dto.setCertificationRate(certificationRate);
+	        		
+	        result.add(dto);
+	    }
+
+	    return result;
 	}
 
 }

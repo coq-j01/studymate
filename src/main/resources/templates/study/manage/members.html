@@ -66,7 +66,7 @@
 
 					<p class="last-post-date">
 
-						최근 게시글 작성일 :
+						최근 활동일 :
 
 						<span th:if="${member.lastPostAt != null}" th:text="${#temporals.format(
                                     member.lastPostAt,
@@ -75,6 +75,19 @@
 						</span>
 
 						<span th:if="${member.lastPostAt == null}">
+							작성한 게시글 없음
+						</span>
+
+					</p>
+					<p class="last-post-date">
+
+						인증 참여율 :
+
+						<span th:if="${member.certificationRate != null}" th:text="${member.certificationRate + '%'}">
+							100%
+						</span>
+
+						<span th:if="${member.certificationRate == null}">
 							작성한 게시글 없음
 						</span>
 

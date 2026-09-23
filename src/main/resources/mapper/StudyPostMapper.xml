@@ -5,98 +5,104 @@
 
 
 	<select id="findPostList"
-		resultType="com.studymate.domain.StudyPost"> 
-		select p.*, m.nickname,
-        (
-            SELECT COUNT(*)
-            FROM post_like pl
-            WHERE pl.post_id = p.post_id
-        ) AS like_count
-		from study_post p 
-		join member m 
-		on p.member_id = m.member_id 
-		where p.study_id= #{studyId} 
-		and p.post_type = #{postType} 
-		order by p.created_at desc 
-		LIMIT #{limit}
-		<if test="offset != null">
+		resultType="com.studymate.domain.StudyPost"> select p.*, m.nickname, (
+		SELECT COUNT(*) FROM post_like pl WHERE pl.post_id = p.post_id ) AS
+		like_count from study_post p join member m on p.member_id = m.member_id
+		where p.study_id= #{studyId} and p.post_type = #{postType} order by
+		p.created_at desc LIMIT #{limit} <if test="offset != null">
 			OFFSET #{offset}
 		</if>
 	</select>
-	
+
 	<insert id="insertBoard">
 		insert into study_post(
-			study_id,
-			member_id,
-			post_type,
-			title,
-			content
+		study_id,
+		member_id,
+		post_type,
+		title,
+		content
 		)values(
-			#{studyId},
-			#{memberId},
-			#{postType},
-			#{studyPostDTO.title},
-			#{studyPostDTO.content}
+		#{studyId},
+		#{memberId},
+		#{postType},
+		#{studyPostDTO.title},
+		#{studyPostDTO.content}
 		)
 	</insert>
-	
+
 	<update id="updateBoard">
 		update study_post
 		set title = #{studyPostDTO.title},
-			content = #{studyPostDTO.content},
-			updated_at = CURRENT_TIMESTAMP
+		content = #{studyPostDTO.content},
+		updated_at = CURRENT_TIMESTAMP
 		where post_id = #{postId}
 	</update>
-	
+
 	<delete id="deleteBoard">
 		delete from study_post
 		where post_id = #{postId}
 	</delete>
-	
+
 	<select id="findPostById"
 		resultType="com.studymate.domain.StudyPost">
 		select p.*, m.nickname,
-        (
-            SELECT COUNT(*)
-            FROM post_like pl
-            WHERE pl.post_id = p.post_id
-        ) AS like_count
-		from study_post p 
-		join member m 
-		on p.member_id = m.member_id 
+		(
+		SELECT COUNT(*)
+		FROM post_like pl
+		WHERE pl.post_id = p.post_id
+		) AS like_count
+		from study_post p
+		join member m
+		on p.member_id = m.member_id
 		where p.post_id= #{postId}
 	</select>
 
 	<select id="isLiked"
 		resultType="boolean">
 		select exists(
-			select 1
-			from post_like
-			where post_id = #{postId}
-				and member_id = #{memberId}
+		select 1
+		from post_like
+		where post_id = #{postId}
+		and member_id = #{memberId}
 		)
 	</select>
-	
+
 	<insert id="insertLiked">
 		insert into post_like(
-			post_id,
-			member_id
+		post_id,
+		member_id
 		)values(
-			#{postId},
-			#{memberId}
+		#{postId},
+		#{memberId}
 		)
 	</insert>
-	
+
 	<delete id="deleteLiked">
 		delete from post_like
 		where post_id = #{postId}
-			and member_id = #{memberId}
+		and member_id = #{memberId}
 	</delete>
-	
+
 	<select id="countPost" resultType="int">
 		select count(*)
 		from study_post
 		where study_id = #{studyId}
-			and post_type = #{postType}
+		and post_type = #{postType}
+	</select>
+
+	<select id="countPostByDate" resultType="int">
+		SELECT COUNT(DISTINCT DATE(created_at))
+		FROM study_post
+		WHERE study_id = #{studyId}
+		AND member_id = #{memberId}
+		AND post_type = 'ATTENDANCE'
+	</select>
+	
+	
+	<select id="findLastPostAt" resultType="java.time.LocalDateTime">
+		select MAX(created_at)
+		from study_post
+		WHERE study_id = #{studyId}
+		AND member_id = #{memberId}
 	</select>
 </mapper>

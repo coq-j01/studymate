@@ -131,14 +131,13 @@ public class StudyManageController {
 	@GetMapping("/members")
 	public String getMembers(@PathVariable int studyId, @AuthenticationPrincipal CustomUserDetails userDetails,
 			Model model) {
-		model.addAttribute("memberList", studyMemberService.getStudyMemberList(studyId));
 		if (!studyMemberService.canAccessStudy(studyId, userDetails.getMemberId())) {
 			return "redirect:/study/main";
 		}
 		if (!isLeader(studyId, userDetails.getMemberId())) {
 			return "redirect:/study/" + studyId + "/home";
 		}
-		model.addAttribute("memberList", studyMemberService.getStudyMemberList(studyId));
+		model.addAttribute("memberList", studyMemberService.getStudyMemberStatsList(studyId));
 
 		return "study/manage/members";
 	}
