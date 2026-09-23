@@ -188,9 +188,5 @@ public class StudyBoardController {
 		studyPostService.deletePost(postId, userDetails.getMemberId());
 		return "redirect:/study/" + studyId + "/home";
 	}
-	
-	@GetMapping("/chat")
-	public String chat() {
-		return "study/board/chat";
-	}
+
 }

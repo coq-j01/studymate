@@ -30,7 +30,8 @@
 
 	<main id="chatPage"
 	      class="study-page"
-	      th:data-study-id="${studyId}">
+	      th:data-study-id="${studyId}"
+		  th:data-member-id="${#authentication.principal.memberId}">
 
         <!-- 스터디 공통 헤더 -->
         <header th:replace="~{fragments/study-header :: studyHeader(${study})}">
@@ -39,39 +40,15 @@
         <!-- 채팅 페이지 내용 -->
         <section class="chat-content">
 
-            <h1 class="chat-title">
+            <h2>
                 스터디채팅
-            </h1>
+            </h2>
 
             <div class="chat-panel">
 
                 <!-- 메시지 출력 영역 -->
                 <section id="chatMessages"
                          class="chat-messages">
-
-                    <!-- 날짜 구분 -->
-                    <div class="chat-date-divider">
-                        <span>오늘</span>
-                    </div>
-
-                    <!--
-                        실제 메시지는 JS에서 아래 형태로 추가 예정
-
-                        상대방:
-                        <div class="chat-message other">
-                            <span class="chat-nickname">정채빈</span>
-                            <div class="chat-bubble">
-                                오늘까지 다들 인증해주세요
-                            </div>
-                        </div>
-
-                        내 메시지:
-                        <div class="chat-message mine">
-                            <div class="chat-bubble">
-                                네
-                            </div>
-                        </div>
-                    -->
 
                 </section>
 
@@ -109,7 +86,9 @@
         </section>
 
     </main>
-
+	<script th:inline="javascript">
+	    const initialChatList = /*[[${chatList}]]*/ [];
+	</script>
     <script th:src="@{/js/study/chat.js}"></script>
 	<script th:src="@{/js/common/study-header.js}"></script>
 </body>

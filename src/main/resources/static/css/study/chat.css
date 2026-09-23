@@ -12,13 +12,25 @@ body {
     padding-bottom: 50px;
 }
 
-.chat-title {
+.chat-content h2 {
+
+    margin: 0;
+
+    color: #222222;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+}
+
+/*.chat-title {
     margin: 0 0 24px;
 
     color: #222222;
     font-size: 24px;
     font-weight: 700;
-}
+}*/
 
 
 /* ==============================
@@ -116,6 +128,19 @@ body {
     margin-bottom: 18px;
 }
 
+.chat-message-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.chat-time {
+    flex-shrink: 0;
+    margin-bottom: 2px;
+    color: #9CA3AF;
+    font-size: 10px;
+}
+
 
 /* ==============================
    상대방 메시지
@@ -135,7 +160,7 @@ body {
 }
 
 .chat-message.other .chat-bubble {
-    max-width: 70%;
+    max-width: 300px;
 
     padding: 10px 13px;
 
@@ -154,6 +179,12 @@ body {
     word-break: break-word;
 }
 
+/* 내 메시지일 경우
+   시간 - 말풍선 순서로 보이게 */
+.chat-message.mine .chat-message-row {
+    flex-direction: row-reverse;
+}
+
 
 /* ==============================
    내 메시지
@@ -164,7 +195,7 @@ body {
 }
 
 .chat-message.mine .chat-bubble {
-    max-width: 70%;
+    max-width: 300px;
 
     padding: 10px 13px;
 

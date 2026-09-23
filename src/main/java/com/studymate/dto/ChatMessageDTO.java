@@ -11,5 +11,5 @@ public class ChatMessageDTO {
     private int memberId;
     private String nickname;
     private String message;
-    private LocalDateTime sentAt;
+    private LocalDateTime sendAt;
 }
