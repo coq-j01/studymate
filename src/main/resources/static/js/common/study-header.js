@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const studyMembersMenu =
         document.querySelector("#studyMembersMenu");
 
+    const studyChatMenu = document.querySelector("#studyChatMenu");
+
     // home
     if (path.includes("/home")) {
 
@@ -39,6 +41,14 @@ document.addEventListener("DOMContentLoaded", function() {
     if (path.includes("/members")) {
 
         studyMembersMenu.classList.add("active");
+
+        return;
+    }
+
+    // chat
+    if (path.includes("/chat")) {
+
+        studyChatMenu.classList.add("active");
 
         return;
     }

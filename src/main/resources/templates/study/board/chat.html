@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>스터디 채팅</title>
+
+    <!-- 공통 CSS -->
+    <link rel="stylesheet" th:href="@{/css/common/common.css}">
+    <link rel="stylesheet" th:href="@{/css/common/header.css}">
+    <link rel="stylesheet" th:href="@{/css/common/study-header.css}">
+
+    <!-- 채팅 CSS -->
+    <link rel="stylesheet" th:href="@{/css/study/chat.css}">
+
+    <!-- SockJS -->
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+
+    <!-- STOMP -->
+    <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+</head>
+
+<body>
+
+    <!-- 사이트 공통 헤더 -->
+    <header th:replace="~{fragments/header :: header}">
+    </header>
+
+	<main id="chatPage"
+	      class="study-page"
+	      th:data-study-id="${studyId}">
+
+        <!-- 스터디 공통 헤더 -->
+        <header th:replace="~{fragments/study-header :: studyHeader(${study})}">
+        </header>
+
+        <!-- 채팅 페이지 내용 -->
+        <section class="chat-content">
+
+            <h1 class="chat-title">
+                스터디채팅
+            </h1>
+
+            <div class="chat-panel">
+
+                <!-- 메시지 출력 영역 -->
+                <section id="chatMessages"
+                         class="chat-messages">
+
+                    <!-- 날짜 구분 -->
+                    <div class="chat-date-divider">
+                        <span>오늘</span>
+                    </div>
+
+                    <!--
+                        실제 메시지는 JS에서 아래 형태로 추가 예정
+
+                        상대방:
+                        <div class="chat-message other">
+                            <span class="chat-nickname">정채빈</span>
+                            <div class="chat-bubble">
+                                오늘까지 다들 인증해주세요
+                            </div>
+                        </div>
+
+                        내 메시지:
+                        <div class="chat-message mine">
+                            <div class="chat-bubble">
+                                네
+                            </div>
+                        </div>
+                    -->
+
+                </section>
+
+
+                <!-- 메시지 입력 영역 -->
+                <section class="chat-input-area">
+
+                    <input type="text"
+                           id="chatInput"
+                           class="chat-input"
+                           placeholder="메시지를 입력하세요"
+                           autocomplete="off">
+
+                    <button type="button"
+                            id="sendButton"
+                            class="chat-send-button"
+                            aria-label="메시지 전송">
+
+                        <svg viewBox="0 0 24 24"
+                             aria-hidden="true">
+
+                            <path d="M21.7 2.3a1 1 0 0 0-1.05-.23L2.8 9.2a1 1 0 0 0 .08 1.89l7.43 2.48
+                                     2.48 7.43a1 1 0 0 0 .91.68h.04a1 1 0 0 0 .92-.6L21.93 3.35
+                                     a1 1 0 0 0-.23-1.05ZM13.77 18.03l-1.72-5.16
+                                     4.67-4.67-1.41-1.41-4.67 4.67-5.16-1.72
+                                     13.55-5.42-5.26 13.71Z"/>
+                        </svg>
+
+                    </button>
+
+                </section>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script th:src="@{/js/study/chat.js}"></script>
+	<script th:src="@{/js/common/study-header.js}"></script>
+</body>
+</html>
