@@ -57,40 +57,40 @@ body {
 /* =========================================================
    전체 페이지
    ========================================================= */
-   .auth-background {
-       width: 100%;
-       min-height: 100vh;
-	   min-width : 850px;
+.auth-background {
+	width: 100%;
+	min-height: 100vh;
+	min-width: 850px;
 
-       display: flex;
-       justify-content: center;
-       align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-       padding: 36px;
+	padding: 36px;
 
-       background-color: #F4F5F9;
-   }
-   
-   .auth-page {
-       width: 100%;
-       max-width: 1200px;
+	background-color: #F4F5F9;
+}
 
-       height: min(760px, calc(100vh - 72px));
-       min-height: 650px;
+.auth-page {
+	width: 100%;
+	max-width: 1200px;
 
-       display: flex;
+	height: min(760px, calc(100vh - 72px));
+	min-height: 650px;
 
-       margin: 0;
+	display: flex;
 
-       background-color: var(--page-bg);
+	margin: 0;
 
-       border: 1px solid #E8EAF3;
-       border-radius: 18px;
+	background-color: var(--page-bg);
 
-       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+	border: 1px solid #E8EAF3;
+	border-radius: 18px;
 
-       overflow: hidden;
-   }
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+
+	overflow: hidden;
+}
 
 
 /* =========================================================
@@ -98,26 +98,26 @@ body {
    ========================================================= */
 
 .auth-left {
-    position: relative;
+	position: relative;
 
-    flex: 0 0 var(--left-width);
-    width: var(--left-width);
-    max-width: var(--left-width);
+	flex: 0 0 var(--left-width);
+	width: var(--left-width);
+	max-width: var(--left-width);
 
-    height: 100%;
-    min-height: 100%;
+	height: 100%;
+	min-height: 100%;
 
-    background-color: var(--left-bg);
+	background-color: var(--left-bg);
 
-    overflow: hidden;
+	overflow: hidden;
 }
 
 
 /* 위쪽 큰 곡선 */
 .auth-left::before {
-    content: "";
+	content: "";
 
-    position: absolute;
+	position: absolute;
 
 	top: -20%;
 	right: -74%;
@@ -134,20 +134,20 @@ body {
 
 /* 아래쪽 곡선 */
 .auth-left::after {
-    content: "";
+	content: "";
 
-    position: absolute;
+	position: absolute;
 
-    bottom: -25%;
-    right: -50%;
+	bottom: -25%;
+	right: -50%;
 
-    width: 56%;
-    height: 78%;
+	width: 56%;
+	height: 78%;
 
-    border-radius: 50%;
-    background-color: #F8F9FC;
+	border-radius: 50%;
+	background-color: #F8F9FC;
 
-    z-index: 1;
+	z-index: 1;
 }
 
 
@@ -251,21 +251,21 @@ body {
    RIGHT
    ========================================================= */
 
-   .auth-right {
-       flex: 1;
+.auth-right {
+	flex: 1;
 
-       min-width: 0;
-       height: 100%;
-       min-height: 100%;
+	min-width: 0;
+	height: 100%;
+	min-height: 100%;
 
-       display: flex;
-       justify-content: center;
-       align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-       padding: 40px 5%;
+	padding: 40px 5%;
 
-       background-color: var(--page-bg);
-   }
+	background-color: var(--page-bg);
+}
 
 
 /* =========================================================
@@ -469,53 +469,18 @@ body {
    OAuth2 구현 전 임시 디자인
    ========================================================= */
 
-.google-btn {
-	display: inline-flex;
+   .google-login-link {
+       display: flex;
+       justify-content: center;
+       width: 100%;
+   }
 
-	min-width: 190px;
-	height: 46px;
-
-	padding: 0 20px;
-
-	align-items: center;
-	justify-content: center;
-
-	gap: 10px;
-
-	border: 1px solid var(--input-border);
-	border-radius: 10px;
-
-	background-color: #FFFFFF;
-
-	color: var(--text-main);
-
-	font-size: 14px;
-	font-weight: 600;
-
-	text-decoration: none;
-
-	box-shadow:
-		0 2px 8px rgba(0, 0, 0, 0.05);
-
-	transition:
-		background-color 0.15s ease,
-		border-color 0.15s ease;
-}
-
-.google-btn:hover {
-	background-color: #F5F6FA;
-
-	border-color: #D9DCE6;
-
-	color: var(--text-main);
-}
-
-.google-icon {
-	font-size: 18px;
-	font-weight: 700;
-
-	color: #4285F4;
-}
+   .google-login-img {
+       display: block;
+       height: 56px;
+       width: auto;
+       margin: 0 auto;
+   }
 
 
 /* =========================================================
@@ -553,30 +518,30 @@ body {
    ========================================================= */
 
 .password-input-wrap {
-    position: relative;
+	position: relative;
 }
 
 .password-input-wrap .auth-input {
-    padding-right: 45px;
+	padding-right: 45px;
 }
 
 .password-toggle {
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    transform: translateY(-50%);
+	position: absolute;
+	top: 50%;
+	right: 15px;
+	transform: translateY(-50%);
 
-    border: none;
-    background: transparent;
-    padding: 0;
+	border: none;
+	background: transparent;
+	padding: 0;
 
-    color: #9CA3AF;
-    font-size: 18px;
-    cursor: pointer;
+	color: #9CA3AF;
+	font-size: 18px;
+	cursor: pointer;
 }
 
 .password-toggle:hover {
-    color: #6366F1;
+	color: #6366F1;
 }
 
 /* =========================================================
@@ -597,10 +562,10 @@ body {
 }
 
 .join-form-wrap .auth-label {
-    height: 48px;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
+	height: 48px;
+	display: flex;
+	align-items: center;
+	white-space: nowrap;
 }
 
 
@@ -623,21 +588,21 @@ body {
    ========================================================= */
 
 
-   .validation-message {
-       margin-top: 5px;
-       font-size: 12px;
-   }
+.validation-message {
+	margin-top: 5px;
+	font-size: 12px;
+}
 
-   .validation-message:empty {
-       display: none;
-   }
+.validation-message:empty {
+	display: none;
+}
 
 .validation-message.success {
-    color: #22C55E;
+	color: #22C55E;
 }
 
 .validation-message.error {
-    color: #EF4444;
+	color: #EF4444;
 }
 
 /* =========================================================

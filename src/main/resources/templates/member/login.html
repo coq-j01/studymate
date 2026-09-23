@@ -128,23 +128,12 @@
 
 
 					<!-- Google -->
-					<div class="text-center">
-						<a th:href="@{/oauth2/authorization/google}">
-						    Google 로그인
-						</a>
-
-						<!--<a href="#" class="google-btn">
-
-							<span class="google-icon">G</span>
-
-							<span>
-								Sign in with Google
-							</span>
-
-						</a>-->
-
-					</div>
-
+					<a th:href="@{/oauth2/authorization/google}"
+					   class="google-login-link">
+					    <img th:src="@{/assets/google_signin_neutral.png}"
+					         alt="Sign in with Google"
+					         class="google-login-img">
+					</a>
 
 					<!-- 회원가입 -->
 					<div class="join-guide">

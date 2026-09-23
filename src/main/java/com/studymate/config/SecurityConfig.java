@@ -8,16 +8,13 @@ import org.springframework.security.web.SecurityFilterChain;
 import com.studymate.security.CustomOAuth2UserService;
 import com.studymate.security.OAuth2LoginSuccessHandler;
 
+import lombok.RequiredArgsConstructor;
+
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
 	private final CustomOAuth2UserService customOAuth2UserService;
 	private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
-	
-	public SecurityConfig(CustomOAuth2UserService customOAuth2UserService,
-	        OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler) {
-	    this.customOAuth2UserService = customOAuth2UserService;
-	    this.oAuth2LoginSuccessHandler = oAuth2LoginSuccessHandler;
-	}
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
