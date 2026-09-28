@@ -10,4 +10,5 @@ public interface MemberService {
 	String getEmail(int memberId);
 	int joinSocialMember(Member member);
 	Member findSocialLogin(String provider, String providerId); 
+	Member findByEmail(String email);
 }

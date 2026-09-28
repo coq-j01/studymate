@@ -28,9 +28,9 @@ public class StudyManageController {
 	private final StudyService studyService;
 	private final EmailService emailService;
 	private final MemberService memberService;
-	
+
 	@Value("${app.base-url}")
-	private String baseUrl; 
+	private String baseUrl;
 
 	@ModelAttribute
 	public void addStudyId(@PathVariable int studyId, Model model) {
@@ -63,21 +63,11 @@ public class StudyManageController {
 		try {
 
 			studyMemberService.approveJoinRequest(studyId, memberId, userDetails.getMemberId());
-			
-			String title = studyService.getTitle(studyId);
-			
-			try {
-			    emailService.sendEmail(
-			        memberService.getEmail(memberId),
-			        "[StudyMate] " + title + " 가입 신청이 승인되었습니다.",
-			        title + " 가입 신청이 승인되었습니다.\n"
-			            + "이제 스터디에 참여하실 수 있습니다.",
-			        baseUrl + "/study/" + studyId + "/home"
-			    );
 
-			} catch (Exception e) {
-			    System.out.println("승인 메일 발송 실패: " + e.getMessage());
-			}
+			String title = studyService.getTitle(studyId);
+
+			emailService.sendEmail(memberService.getEmail(memberId), "[StudyMate] " + title + " 가입 신청이 승인되었습니다.",
+					title + " 가입 신청이 승인되었습니다.\n" + "이제 스터디에 참여하실 수 있습니다.", baseUrl + "/study/" + studyId + "/home");
 
 			return ResponseEntity.ok("가입 신청을 수락했습니다.");
 
@@ -94,18 +84,10 @@ public class StudyManageController {
 		try {
 
 			studyMemberService.rejectJoinRequest(studyId, memberId, userDetails.getMemberId());
-			
+
 			String title = studyService.getTitle(studyId);
-			try {
-			emailService.sendEmail(
-				    memberService.getEmail(memberId),
-				    "[StudyMate] " + title + " 가입 신청 결과 안내",
-				    title + " 스터디 가입 신청이 승인되지 않았습니다.",
-				    null
-				);
-			}catch (Exception e) {
-			    System.out.println("거절 메일 발송 실패: " + e.getMessage());
-			}
+			emailService.sendEmail(memberService.getEmail(memberId), "[StudyMate] " + title + " 가입 신청 결과 안내",
+					title + " 스터디 가입 신청이 승인되지 않았습니다.", null);
 
 			return ResponseEntity.ok("가입 신청을 거절했습니다.");
 
@@ -156,28 +138,23 @@ public class StudyManageController {
 	@PostMapping("/settings/end")
 	public String endStudy(@PathVariable int studyId, @AuthenticationPrincipal CustomUserDetails userDetails) {
 		// 스터디 종료 처리
-	    studyService.endStudy(studyId, userDetails.getMemberId());
+		studyService.endStudy(studyId, userDetails.getMemberId());
 		return "redirect:/study/main";
 	}
+
 	@PostMapping("/settings/delete")
-	public ResponseEntity<String> deleteStudy(@PathVariable int studyId, @AuthenticationPrincipal CustomUserDetails userDetails) {
+	public ResponseEntity<String> deleteStudy(@PathVariable int studyId,
+			@AuthenticationPrincipal CustomUserDetails userDetails) {
 		// 스터디 종료 처리
-		 try {
+		try {
 
-		        studyService.deleteStudy(
-		            studyId,
-		            userDetails.getMemberId()
-		        );
+			studyService.deleteStudy(studyId, userDetails.getMemberId());
 
-		        return ResponseEntity.ok(
-		            "스터디가 삭제되었습니다."
-		        );
+			return ResponseEntity.ok("스터디가 삭제되었습니다.");
 
-		    } catch (IllegalStateException e) {
+		} catch (IllegalStateException e) {
 
-		        return ResponseEntity
-		            .badRequest()
-		            .body(e.getMessage());
-		    }
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
 	}
 }

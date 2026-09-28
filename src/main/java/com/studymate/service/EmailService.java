@@ -2,9 +2,13 @@ package com.studymate.service;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class EmailService {
 
     private final JavaMailSender mailSender;
@@ -12,9 +16,9 @@ public class EmailService {
     public EmailService(JavaMailSender mailSender) {
         this.mailSender = mailSender;
     }
-
+    @Async
     public void sendEmail(String to, String subject, String text, String link) {
-
+    	try {
         SimpleMailMessage message = new SimpleMailMessage();
 
         message.setTo(to);
@@ -29,5 +33,13 @@ public class EmailService {
 
         message.setText(content);
         mailSender.send(message);
+    	}catch(Exception e) {
+    		log.error(
+                    "이메일 발송 실패 - to: {}, subject: {}",
+                    to,
+                    subject,
+                    e
+                );
+    	}
     }
 }

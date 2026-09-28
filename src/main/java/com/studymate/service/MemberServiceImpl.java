@@ -56,4 +56,9 @@ public class MemberServiceImpl implements MemberService {
 	public Member findSocialLogin(String provider, String providerId) {
 		return memberMapper.findByProviderAndProviderId(provider, providerId);
 	}
+
+	@Override
+	public Member findByEmail(String email) {
+		return memberMapper.findByEmail(email);
+	}
 }

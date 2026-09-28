@@ -6,18 +6,18 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.studymate.domain.Member;
-import com.studymate.mapper.MemberMapper;
+import com.studymate.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
-	private final MemberMapper memberMapper;
+	private final MemberService memberService;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Member member = memberMapper.findByEmail(username);
+		Member member = memberService.findByEmail(username);
 		if(member == null) {
 			throw new UsernameNotFoundException("존재하지 않는 회원입니다.");
 		}
