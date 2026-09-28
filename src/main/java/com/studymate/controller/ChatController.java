@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class ChatContoller {
+public class ChatController {
 	private final ChatService chatService;
 	private final StudyService studyService;
 	private final StudyMemberService studyMemberService;
