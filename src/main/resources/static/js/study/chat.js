@@ -58,38 +58,48 @@ function sendMessage() {
 
 
 function renderMessage(message) {
-	const currentDate = formatDate(message.sendAt);
-	if (lastDate !== currentDate) {
-	        renderDateDivider(currentDate);
-	        lastDate = currentDate;
-	    }
+    const currentDate = formatDate(message.sendAt);
+    if (lastDate !== currentDate) {
+        renderDateDivider(currentDate);
+        lastDate = currentDate;
+    }
 
     const messageDiv = document.createElement("div");
     const time = formatTime(message.sendAt);
+    const isMine = memberId === message.memberId;
 
-    if (memberId === message.memberId) {
-        messageDiv.classList.add("chat-message", "mine");
-        messageDiv.innerHTML = `
-				<div class="chat-message-row">
-					<div class="chat-bubble">
-						 ${message.message}
-					</div>
-					<span class="chat-time">${time}</span>
-				</div>
-		    `;
-    } else {
-        messageDiv.classList.add("chat-message", "other");
-        messageDiv.innerHTML = `
-		        <span class="chat-nickname">${message.nickname}</span>
-				<div class="chat-message-row">
-				     <div class="chat-bubble">
-				          ${message.message}
-				     </div>
-				     <span class="chat-time">${time}</span>
-				</div>
-		    `;
+    messageDiv.classList.add(
+        "chat-message",
+        isMine ? "mine" : "other"
+    );
+    // 상대방 메시지만 닉네임 표시
+    if (!isMine) {
+
+        const nickname = document.createElement("span");
+
+        nickname.classList.add("chat-nickname");
+        nickname.textContent = message.nickname;
+
+        messageDiv.appendChild(nickname);
     }
 
+    const messageRow = document.createElement("div");
+    messageRow.classList.add("chat-message-row");
+
+    const bubble = document.createElement("div");
+    bubble.classList.add("chat-bubble");
+
+    // 사용자 입력값은 innerHTML 대신 textContent
+    bubble.textContent = message.message;
+
+    const timeSpan = document.createElement("span");
+    timeSpan.classList.add("chat-time");
+    timeSpan.textContent = time;
+
+    messageRow.appendChild(bubble);
+    messageRow.appendChild(timeSpan);
+
+    messageDiv.appendChild(messageRow);
 
     chatMessages.appendChild(messageDiv);
 
